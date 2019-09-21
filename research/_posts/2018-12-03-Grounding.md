@@ -1,4 +1,5 @@
 ---
+layout: post
 title: Revisiting Image-Language Embeddings for Open-ended Phrase Detection
 image: /assets/img/blog/wade-lambert.jpg
 description: >

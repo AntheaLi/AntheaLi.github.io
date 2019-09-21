@@ -4,13 +4,12 @@ image: /assets/img/blog/hydejack-8.png
 
 # cv
 
-The "Best Jekyll Theme by a Mile".
 {:.lead}
 
-![Screenshot](assets/resume1.png){:.lead srcset="/assets/resume1.png 1920w, /assets/resume1.png 960w, /assets/resume1.png 480w" data-width="1920"}
+![w3m Screenshot](assets/resume1.png){:data-width="1920" data-height="2340"}
 
 
-![Screenshot](assets/resume2.png)
+![w3m Screenshot](assets/resume2.png){:data-width="1920" data-height="2340"}
 
 
 <!-- <!-- Hydejack's cover page on a variety of screens.

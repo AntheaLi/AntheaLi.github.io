@@ -13,6 +13,7 @@ I have multiple years of experiences working with 3D environments in visual effe
 
 Feel free to reach out
 
-###email:
+### email:
+
 anthea.lee3@gmail.com
 

@@ -49,10 +49,10 @@ author:
 menu:
   - title:             About
     url:               /about/
-  - title:             Projects
-    url:               /proj/
   - title:             Research
     url:               /research/
+  - title:             Experiences
+    url:               /experiences/
   - title:             CV
     url:               /cv/
 

@@ -1,484 +1,1127 @@
-## [3.4.2](https://github.com/mmistakes/minimal-mistakes/releases/tag/3.4.2)
+# CHANGELOG
+
+## v8.5.2
+August 31 2019
+{:.heading.post-date}
+
+* Fixed breaking builds due to name collision when upgrading to 8.5
+  This is caused when using both `_plugins/jekyll-replace-imgs` and the new `jekyll-replace-img` ruby gem.
+  I recommend deleting `_plugins/jekyll-replace-imgs` when using the `jekyll-replace-img` gem.
+  Note that this is an optional plugin.
+* Fixed `nomodule` script loading for Safari 10.1
+* Fixed [#176](https://github.com/hydecorp/hydejack/issues/176)
+
+## v8.5.1
+Aug 1 2019
+{:.heading.post-date}
+
+* Fixed minification bug
+
+## v8.5.0
+Aug 1 2019
+{:.heading.post-date}
+
+### Changed
+* [PRO] The theme now matches the operating system's dark mode.
+* Scrolling down on a page with an open drawer will now close the drawer
+* Reloading a cover page after the drawer has been closed will now open the page with the drawer closed
+* Removed JavaScript-based web font swapping in favor of using `font-display: swap`
+* Darkened font color in dark mode to reduce contrast
+* Updated KaTeX to the latest version
+* Increased the durations of various animations slightly
+* Now using [`jekyll-replace-img`](https://github.com/qwtel/jekyll-replace-img) instead of custom code in `_plugins` folder
+* Added a separate, smaller JavaScript bundle for modern browsers
+
+### Added
+* Added support for figure captions on code blocks
+* Added `keybase` to social media icons
+* [PRO] There's now a forward button when using the theme as a PWA
+
+### Fixed
+* Fixed print layout when dark mode is enabled
+* Using `CSSTransformValue` correctly
+* Fixed a minor style bug for dates
+* Fixed a bug where light mode would flash when loading a page in dark mode
+* Minimal support for IE11
+
+## v8.4.0
+Mar 9 2019
+{:.heading.post-date}
+
+* Added support for `noindex` property in the front matter
+* Fixed ordering of selected projects/post in welcome layout
+* Updated dependencies
+
+## v8.3.0
+Feb 18 2019
+{:.heading.post-date}
+
+This version adds new options to increase production build speed. Read [this post](hydejack/_posts/2019-02-18-improving-site-build-speed.md) for details.
+
+### Added
+* Added `no_page_style` config option to increase site build speed.
+* Added `menu` config option to increase site build speed.
+* Copying math will now add the LaTeX source to the clipboard.
+
+### Changed
+* Upgraded KaTeX to version 0.10.0.
+
+## v8.2.0
+Feb 1 2019
+{:.heading.post-date}
+
+* Added support for custom `related_posts`
+* Removed footer from print layout
+* Increased photo size in print resume
+* Improved `welcome` layout generation performance
+* Fixed a bug that prevented scrolling to headlines with non-ascii characters (Thanks [@ForelaxX](https://github.com/ForelaxX))
+
+
+## v8.1.1
+Sep 1 2018
+{:.heading.post-date}
+
+### Fixes
+* Fixed an issue that prevented the drawer from working on iOS 10.
+* Changing the page via push state will now also update the `link[rel=canonical]` tag.
+* Changing the page via push state will now also update the `meta[name=description]` tag.
+* Fixed an issue that prevented the JS from building on Netlify.
+
+## v8.1.0
+Aug 18 2018
+{:.heading.post-date}
+
+This release adds Dark Mode for Hydejack PRO customers.
+
+### Breaking
+* Removed cookie banner from free version
+* Removed offline support from free version
+
+In an attempt to make the PRO offering more appealing, I'm removing features that arguably should have never been included in the free version.
+As software licenses go, nobody is stopping you from using the old code, but updates will no longer be included.
 
-### Enhancements
+### Changed
+* The cookies banners is now showing at the bottom of the page and its background color is no longer transparent to increase visibility
+* Changed the default syntax theme from "GitHub" to "Atom One Light"
+* Adapted `figure` CSS class to accommodate different children, not just `img`s
+* `video` tags now have a `max-width` of 100%
+* Increased margin before headings to `5rem`, up from 4
+* Increased margin of `hr` elements.
+* Cookies banner can now be enabled without using Google Analytics
+* Clicking the cookie banner "Okay" button will now fire a `hy--cookies-ok` event on `document`, so that custom analytics solutions can plug in.
+* All Google Analytics code has been removed from Hydejack's core and moved to `_includes/body/analytics.js`.
+* All Disqus code has been removed from Hydejack's core and moved to `_includes/comments.html` and `_includes/my-comments.html`.
+* Using CSS Custom Properties instead of SASS variables for certain properties to enable style customization using only CSS.
+* Added shadow to sidebar
+* Navbar is longer positioned `fixed`
 
-- Improve UX of static comment forms. [#448](https://github.com/mmistakes/minimal-mistakes/issues/448)
+### Added
+* [PRO] Added Dark Mode
+* `border` CSS class
 
-## [3.4.1](https://github.com/mmistakes/minimal-mistakes/releases/tag/3.4.1)
 
-### Enhancements
+## v8.0.0
+Jul 16 2018
+{:.heading.post-date}
 
-- Add `staticman.filename` configuration with UNIX timestamp for sorting data files. example ~> `comment-1470943149`.
+So far Hydejack has been a decent Jekyll theme, but with v8 it really starts stand out among the competition: Beautiful and unique landing pages, lazy-loading images, and experimental offline support are just the most prominent new features.
 
-### Bug Fixes
+### Breaking
+* The expected format for sidebar images has changed.
+  A sidebar image should now be a full-screen ~16:10 image.
 
-- Don't add `<a>` to author name if URL is blank.
+  Comment: The sidebar can now be fully extended on desktop, which generally requires a large landscape image to fill the entire window.
+  To save bandwidth, you can blur the image on the left and right edges and save it as JPG.
 
-## [3.4.0](https://github.com/mmistakes/minimal-mistakes/releases/tag/3.4.0)
+* The `about` and `welcome` layout no longer prepend the content with the author information.
+  Instead, the author info can be shown by adding the `<!--author-->` marker to the top of the file. You can also place it anywhere else.
 
-### Enhancements
+  Comment: Showing the author description on the top of the `welcome` and `about` layouts felt like an imposition and was a left-over from when I was developing Hydejack primarily for myself.
 
-- Support static-based commenting via [Staticman](https://staticman.net/) for sites hosted with GitHub Pages. [#424](https://github.com/mmistakes/minimal-mistakes/issues/424)
+* [PRO] The `welcome` layout no longer adds recent posts and projects to the bottom of the page. Instead, they have to be explicitly set using the `<!--posts-->` and `<!--projects-->` markers. The `content_separator` front matter opton is now ignored.
 
-## [3.3.7](https://github.com/mmistakes/minimal-mistakes/releases/tag/3.3.7)
+  Comment: The old behavior felt arbitrary, and `<!--more-->` wasn't a good name to be replaced with recent projects ands posts.
 
-### Bug Fixes
+* Setting the accent color and sidebar image for an entire category/tag/author is no longer possible.
+  To achieve a similar effect, use [Front Matter defaults][ffd] instead.
 
-- Re-enabled Jekyll plugins in `_config.yml` in case they aren't autoloaded in `Gemfile`. [#417](https://github.com/mmistakes/minimal-mistakes/issues/417)
+  E.g. to set the accent color and image for every post in the `hydejack` folder, use:
 
-### Enhancements
+  ~~~yml
+  defaults:
+    - scope:
+        path:         hydejack
+      values:
+        accent_color: rgb(38,139,210)
+        accent_image: /assets/img/hydejack-bg.jpg
+  ~~~
 
-- Fallback to `site.github.url` for use in `{{ base_path }}` when `site.url` is `nil`.
-- Replace Sass and Autoprefixer `npm` build scripts with [Jekyll's built-in asset support](https://jekyllrb.com/docs/assets/). [#333](https://github.com/mmistakes/minimal-mistakes/issues/333)
+  Comment: The code to find the color for a given page was complicated and slow (potentially iterating all categories/tags to find the right one).
 
-### Maintenance
+### Changed
+
+* The drawer now responds to mouse inputs.
+* The default heading font is now less bold. To restore the old behavior, edit (create if it's missing) `_sass/my-variables.scss` and add `$font-weight-heading: 700;`.
+* Hydejack now uses lazy-loading hy-img tags instead of regular `img` tags.
+  To revert to using regular images, set `hydejack.no_img` in the config file to `true`.
+* Cookie consent is now stored as a cookie (instead of `LocalStorage`) and expires after 1 year.
+* Scrolling to a fragment link is now smooth.
+* Font loading now works differently, and will be cancelled on slow connections.
+* The sidebar content is now centered.
+* The sidebar will now show the site's logo, which can be set in the config file under the `logo` key.
+* [PRO] Updated embedded Bootstrap to v4.
+* [PRO] Project cards now throw a shadow instead of having a border.
+
+### Added
+* Pages can now have the `cover` key in the front matter.
+  When set to `true`, the sidebar will be opened when visiting the page directly.
+  E.g. <https://hydejack.com/>{:.no-push-state}
+
+* Added a `_plugin` that automatically replaces `<img>` tags with lazy-loading `<hy-img>` tags. If you don't want images to load lazily, delete or rename the `_plugins` folder.
+  Note that this plugin will never run when building the site on GitHub Pages.
+
+  To get the most out of this plugin, it is recommended to provide the width and height of the image, e.g.
+
+  ~~~md
+  ![Some image](assets/img/some-img.png){:data-width="800" data-height="600"}
+  ~~~
+
+  This will cause hy-img to render a placeholder of 800 by 600 `px`, preventing the document height from changing after the image has finished loading.
+
+* Added experimental offline support via Service Workers. Use with care!
+  For details, [read the docs](docs/advanced.md#enabling-offline-support).
+
+* Added the `figure` CSS class, which allows images to have nicer-looking captions. E.g.
+
+  ~~~md
+  ![An image with a caption](https://placehold.it/800x50){:.lead}
+  A caption to an image.
+  {:.figure}
+  ~~~
+
+* Clicking on a footnote will give its corresponding text a subtle highlight.
+
+* [PRO] Projects can now have an optional `end_date` field in the front matter.
+  The `date` is treated as the start date in this case.
+
+### Fixes
+* The back button now works in combination with fragment links.
+
+[ffd]: https://jekyllrb.com/docs/configuration/#front-matter-defaults
+
+## v7.5.1
+Apr 2 2018
+{:.heading.post-date}
+
+### Changed
+* Moved from browserify to webpack
+* Updated ruby dependencies
+* Updated JS dependencies
+* Updated hy-push-state and hy-drawer to latest versions
+
+## v7.5.2
+Jul 10 2018
+{:.heading.post-date}
+
+* Fixed an issue that caused the `list` layout to be empty after upgrading Jekyll
+* Updated dependencies
+
+## v7.5.1
+Apr 2 2018
+{:.heading.post-date}
+
+### Changed
+* Moved from browserify to webpack
+* Updated ruby dependencies
+* Updated JS dependencies
+* Updated hy-push-state and hy-drawer to latest versions
+
+## v7.5.0
+Dec 18 2017
+{:.heading.post-date}
+
+### Added
+* Added secondary `legal` nav in footer:
+
+  ```yml
+  # file: _config.yml
+  legal:
+    - title: Cookies Policy
+      href:  /cookies-policy/
+    - title: Foobar
+      href:  https://foobar.com/
+  ```
+
+* The "heading permalink" can now be configured via `strings.yml`:
+
+  ```yml
+  # file: _data/strings.yml
+  permalink:      Permalink
+  permalink_icon: icon-link
+  ```
+
+* Sections on resume layout can now be rearranged, e.g.:
+
+  ```yml
+  # file: resume.md
+  left_column:
+    - work
+    - volunteer
+    - education
+    - awards
+    - publications
+    - references
+  right_column:
+    - languages
+    - skills
+    - interests
+  ```
+
+
+### Fixed
+* Fixed a bug that caused `<sup>` tags to render as regular text ([#52](https://github.com/hydecorp/hydejack/pull/52))
+* Fixed a bug that caused Disqus to load the same thread on all pages ([#53](https://github.com/hydecorp/hydejack/pull/52))
+* Fixed a bug that prevented Disqus comments to be loaded on sites that didn't cause scroll events
+* Fixed a bug that caused Disqus to be loaded over HTTP instead of HTTPS.
+* Fixed a bug that caused an extra space in URLs ([#55](https://github.com/hydecorp/hydejack/pull/55)).
+* Comments no longer show up in the print version of the page.
+
+### Other
+* Set base font to `11pt` in print layout.
+* Set resume print layout to use 2 columns (A4 sheet)
+
+## v7.4.2
+Dec 1 2017
+{:.heading.post-date}
+
+### Fixed
+* Dramatically improved resume print layout.
+  It is now much less likely that there will be page breaks within logical units.
+* Fixed a bug that cause the page to break when setting `no_drawer`.
+* Fixed a bug that cased the "Random Posts" heading to appear, even when there are no posts to show
+
+## v7.4.1
+Nov 27 2017
+{:.heading.post-date}
+
+### Fixed
+* Fixed storing user-related data before accepting cookies.
+* Fixed tab order of cookie banner, so keyboard users can access it more easily.
+* Accepting cookies no longer causes a page reload in some browsers.
+* Fixed appearance of the okay button in the free version.
+* Menu icon now useable while the cookies banner is active.
+* Loading icon is now visible while the cookies banner is active.
+* Removed cookies banner from print layout.
+* Removed inline styles from cookie banner.
+
+## v7.4.0
+Nov 25 2017
+{:.heading.post-date}
+
+### Added
+* Allow markdown in copyright string
+* Added `theme_color` front-matter property to micro-manage the value of the the `theme-color` meta tag.
+  When not set, will use `accent_color`.
+* Added `theme_color` site setting, to set the value of `themeColor` in the app manifest.
+  When not set, will use `accent_color`.
+* Added `cookies_banner` setting:
+
+  ~~~yml
+  # file: _config.yml
+  hydejack:
+    cookies_banner: true
+  ~~~
+
+  Enabling this setting will show a notice at the top of the page to new visitors.
+  You can change the wording of the notice in `_data/strings.yml`
+  with the `cookies_banner.text` and `cookies_banner.okay` keys:
+
+  ~~~yml
+  # file: _data/strings.yml
+  cookies_banner:
+    text: This site uses cookies.
+    okay: Okay
+  ~~~
+
+### Fixed
+* Drawer no longer resizes/repaints in iOS Safari (iPhone) and Chrome for Android when the address bar autohides.
+* Fixed a bug that caused the drawer flicker/open unexpectedly when scrolling in mobile browsers.
+* Fixed how `image` works when using the `jekyll-seo-tag` plugin.
+
+### Design
+* Changed how line breaks work in resume layout
+* Changed margins of horizontals lines
+
+### Other
+* Updated docs
+* Updated posts
+
+
+## v7.3.0
+Nov 17 2017
+{:.heading.post-date}
+
+### Added
+* Allow markdown content on `projects` layout.
+* Renamed `big_project` option on projects to `featured` (`big_project` still works)
+
+### Fixed
+* Fixed default font weights
+* Fixed hard-coded `/projects/` URL in project layout
+* Link to feed.xml is only generated when using the `jekyll-feed` plugin
+
+
+## v7.2.0
+Nov 13 2017
+{:.heading.post-date}
+
+### Added
+* Added `_sass/my-variables.scss` file, which you can use to selectively override SCSS variables.
+* Font weights can now be configured via SCSS variables:
+  * `$font-weight` for normal font.
+  * `$font-weight-bold` for `strong` tags and similar.
+  * `$font-weight-heading` for headings.
+
+### Design
+* Message boxes will no longer span the full width, even with the break layout feature enabled.
+* Increased space between project card rows, so they look less like a brick wall.
+
+### Fixes
+* Reduced the draw range of the drawer on iOS, so that a larger portion of the screen is available for zooming (a11y).
+* Default images are now optimized, so they are no longer flagged by Google PageSpeed Insights and similar tools.
+* Query parameters are no longer used for cache busting.
+  Instead, the version number is no part of the file name for the CSS and JS resources.
+
+
+## v7.1.1
+Nov 3 2017
+{:.heading.post-date}
+
+### Fixes
+* Fix IE11 feature detection
+
+## v7.1.0
+Nov 2 2017
+{:.heading.post-date}
+
+### Changed
+* Renamed `no_description` to `hide_description`.
+  Since this feature isn't yet documented outside of the change log, the old name *will not* continue to work.
+* When providing images to `image`, `image.path`, `image.src`, `image.srcset` and `accent_image `,
+  it is no longer necessary to prepend the url with the `baseurl` of the site,
+  e.g. values like `accent_image: /assets/img/sidebar-bg.jpg` are now valid.
+* Limited scope of `a` and `img` styles to content areas.
+* Upgraded KaTeX to v0.8.3
+* Upgraded `jekyll-relative-links` to v5.0.1
+
+### Fixes
+* `font` and `font_heading` are now properly set when using the `no_inline_css` option [#47](https://github.com/hydecorp/hydejack/issues/47).
+* Fixed default values for `image` and `logo` that were referring to non-existing images.
+* Added missing JS dev dependencies.
+
+### Content
+* Updated documentation
+* Updated index, download, about and README pages.
+
+## v7.0.1
+Oct 27 2017
+{:.heading.post-date}
+
+### Fixes
+* Removed readme files from `assets` that would show up as pages when building on GitHub Pages [#42](https://github.com/hydecorp/hydejack/issues/42).
+* Disabled push state on Firefox for iOS
+* Changed some default settings in `_config.yml`
+
+### Content
+* Updated documentation
+
+## Removed
+* Removed outdated example script in `my-scripts.html`
+
+## v7.0.0
+Oct 24 2017
+{:.heading.post-date}
+
+### License Change
+The *free version* of Hydejack is now [GPL-3.0] licensed, which is a more restrictive license than MIT (but still *Open Source*).
+This was necessary because the two major components that make up Hydejack,
+[hy-push-state](https://hydecorp.github.io/hy-push-state/){:.external} and
+[hy-drawer](https://hydecorp.github.io/hy-drawer/){:.external},
+are now GPL licensed in turn.
+
+How will this affect you?
+* If you bought the *PRO version* you are not affected at all.
+* You can continue to use previous versions of Hydejack according to their license (MIT).
+* If you upgrade, keep the source code in a public repository and make sure you include the new `LICENSE.md` file.
+  DO NOT publish the *new code* with an *old license*.
+* If you upgrade and make changes to the source code, you are required to make those changes available to the public
+  under a GPL-3.0 compatible license.
+
+The full license text is available [here][GPL-3.0].
+You can read a summary on [tl;drLegel](https://tldrlegal.com/license/gnu-general-public-license-v3-(gpl-3)).
+
+If this change is not acceptable to you, DO NOT upgrade or consider [buying][buy] a [PRO license][PRO-license].
+
+Note that the above does not constitute legal advice.
+
+### Breaking
+This is a major release, but almost all options and APIs that were described in the docs continue to work.
+Some names have changed and are no longer mentioned in the docs, but they are still part of the code and continue to work.
+
+That being said, you should be aware of these (small) breaking changes:
+
+* The favicon is now located in `assets/icons`. To change the favicon of the page, edit `favicon.ico` (png) in the folder.
+
+* Changed the way tables work, so that they do the right thing more often.
+  Tables are now scrollable by default, but small tables are no longer stretched to span the full width.
+  Setting `scroll-table` on a larger table is sill recommended, as it will set `white-space: nowrap`.
+
+* Autogenerated ids for posts now look like `post-2017-01-01-my-title` instead of `post-2017/01/01/my-title`.
+
+* Event names described in the scripting chapter have changed from `y-push-state-*` to `hy-push-state-*`,
+  except `y-push-state-animationend`, which has been removed. See the [docs][pstate] for more.
+
+[pstate]: docs/scripts.md#registering-push-state-event-listeners
+
+### Changes
+* `image` has been renamed to `accent_image`, but `image` continues to work unless you add the `jekyll-seo-tag` plugin.
+  This change was necessary because `jekyll-seo-tag` uses the `image` keyword to set the thumbnail image of a page.
+  While it *may* be desirable to use the same image for both the sidebar and the thumbnail,
+  the new preferred way to set sidebar images is by using the `accent_image` key.
+
+* `color` has been renamed to `accent_color` to be consistent with the new `accent_image` key, but `color` continues to work.
+
+* Various options that do not make sense outside the context of Hydejack (like `no_push_state` or `no_drawer`)
+  have been moved under a common `hydejack` key. However, the old options continue to work.
+
+  ```yml
+  hydejack:
+    no_push_state: false
+    no_drawer: false
+  ```
+
+* All plugins (gems) are now optional.
+  The gem-based version of the theme no longer uses any plugins by default,
+  while the download version follow a "batteries-included" approach and enables some by default.
+
+* Links to the `/assets/` folder are no longer intercepted by the push state features,
+  which means clickable images and download links should work fine now.
+
+* Reader views in Firefox and Safari have an easier time recognizing the main content.
+
+* [Internal] No more `<style>` tags in the `body`.
+
+* [Internal] Content that is generated via JS (error pages, loading, etc...) is now cloned from `template` tags,
+  where it is easier to modify (but before you do, check out the new `_data/strings.yml` file).
+
+* [Internal] Changed how CSS code is organized.
+  Previously there were two versions of each CSS file for each 'topic',
+  one containing core styles to be inlined into the page, the other containing those fetched asynchronously via link tag.
+  Now there is only one file per topic, with the parts to be inlined/linked marked with comments.
+  A script has been added to "split" the CSS into the inline/link parts.
+  Note that this does not affect your `my-*.scss` files.
+
+* [Internal] Many CSS classnames have changes, specifically those that would conflict with Bootstrap class names.
+
+* [Internal] Many files in `_includes` have been reorganized, specially `head.html` and `body.html` have been broken up into smaller parts.
+
+* [Internal] The `y-drawer` component (MIT) has been replaced with the `hy-drawer` component (GPL-3.0).
+
+* [Internal] The `y-push-state` component (MIT) has been replaced with the `hy-push-state` component (GPL-3.0).
+
+### Added
+* The theme now has support for the [`jekyll-seo-tag`](https://github.com/jekyll/jekyll-seo-tag) plugin.
+  To use this gem, make sure you use the latest `Gemfile` and `Gemfile.lock` and run `bundle install`.
+  In your config file, add `jekyll-seo-tag` to `plugins` (formerly called `gems`).
+
+* All texts that were previously hard-coded into the theme can now be configured via `_data/strings.yml`.
+  This makes it possible to change certain phases without having to change source files,
+  but it should also make it easier to use Hydejack with other languages.
+  Time and date formats can also be configured, using Ruby's
+  [format directives](http://ruby-doc.org/core-2.4.1/Time.html#method-i-strftime).
+
+* The `lang` key now accepts values like `en-us` or `de_AT`.
+
+* Made the site "mobile web app capable"
+  * Added `manifest.json` for "Add to Homescreen" support on Android
+  * Added `theme-color` meta tag that matches the `accent_color` and changes dynamically
+  * Added `apple-mobile-web-app-*` meta tags
+  * Added `ieconfig.xml` for "Pin to start menu" support in Windows 10.
+  * Old icons and new ones are now located in `assets/icons`.
+
+* Hydejack now marks up content as *structured data*, to the extent possible.
+  The resume is provided as <https://schema.org/Person>
+  as well as [hCard](http://microformats.org/wiki/hcard),
+  while projects are provided as <https://schema.org/CreativeWork>.
+  You can use the [Structured Data Testing Tool](https://search.google.com/structured-data/testing-tool/) to see the results.
+
+  If you do not want to expose your data in machine-readable form, you can set the `no_structured_data` flag to `true` in your config file.
+
+  ```yml
+  hydejack:
+    no_structured_data: true
+  ```
+
+  Note that this only applies to the resume and project layout, not the data generated by by `jekyll-seo-tag`
+  (Facebook Open Graph and Twitter cards).
+
+* [PRO] Added "big projects". You can make a project card span the entire content width (instead of half),
+  by setting `big_project` to `true` in the project's front matter.
+
+* [PRO] The welcome layout now has a `content_separator` option,
+  which allows content to move below the "Selected/Latest Projects" and "Selected/Latest Posts" section.
+  Usage:
+
+  ~~~md
+  ---
+  layout: welcome
+  content_separator: <!--more-->
+  ---
+
+  Content above
+
+  <!--more-->
+
+  Content below
+  ~~~
+
+* [PRO] The PRO version now has built-in support for [Tinyletter](https://www.tinyletter.com).
+  To show a newsletter subscription box below each post, set `tinyletter: <username>` in your config file.
+  If you want to use a different mailing provider, you can add your own form in `_includes/my-newsletter.html`.
+
+* [PRO] The PRO version now includes styles for input elements, using the same CSS class names as Bootstrap.
+  Check out the [Bootstrap docs](https://getbootstrap.com/docs/4.0/components/forms/) to learn more.
+
+* [PRO] Added links to random posts at the bottom of each post. This can be beneficial for search engine rankings and content discovery.
+  You can remove them with the new `post_addons` option (see below).
+
+* [PRO] If a `endDate` is missing in your `resume.json`, it will render as "\<startDate\> -- *present*".
+  You can change the wording in the new `strings.yml` file.
+
+* Added support for [`jekyll-avatar`](https://github.com/benbalter/jekyll-avatar).
+  If this plugin is enabled in your config file, it will show the avatar of your github account
+  (`author.social.github`, `author.github.username` `author.github`).
+
+* Added support for [`jekyll-gist`](https://github.com/jekyll/jekyll-gist).
+
+* You can now add links to external sites in the sidebar.
+  Create a file like `something.md` and add a `title`, `menu`, `order` (optional) and a `redirect_to` field to the front matter, e.g.:
 
-- Document `site.repository` and its role with [`github-metadata`](https://github.com/jekyll/github-metadata) gem.
-- Add sample [archive page with content](https://mmistakes.github.io/minimal-mistakes/archive-layout-with-content/) for testing styles on demo site.
+  ```yml
+  ---
+  title: External
+  menu: true
+  redirect_to: https://example.com/
+  ---
+  ```
 
-## [3.3.6](https://github.com/mmistakes/minimal-mistakes/releases/tag/3.3.6)
+  You may combine this with the [`jekyll-redirect-from`](https://github.com/jekyll/jekyll-redirect-from) plugin
+  to generate a redirect page, but this is optional.
 
-### Bug Fixes
+* You can now configure the order of complementary content below posts and projects.
+  By default, Hydejack will show the author first (if any), the newsletter box next (if any),
+  and related posts/projects last.
 
-- Fix blank `site.teaser` bug. [#412](https://github.com/mmistakes/minimal-mistakes/issues/412)
+  ```yml
+  hydejack:
+    post_addons:    [about, newsletter, related, random]
+    project_addons: [about, newsletter, other]
+  ```
 
-## [3.3.5](https://github.com/mmistakes/minimal-mistakes/releases/tag/3.3.5)
+  To change the order in the output, change to order in the array.
+  You can also drop entries from the output by removing them from the list.
 
-### Enhancements
+* Added an error page that is shown when client-side network errors occur. It contains a link to retry loading the page.
+  Previously, the browser's default error page would have been shown.
 
-- Add English default text `site.locale` strings. [#407](https://github.com/mmistakes/minimal-mistakes/issues/407)
-- Add Portuguese localized UI text. [#411](https://github.com/mmistakes/minimal-mistakes/pull/411)
-- Add Italian localized UI text. [#409](https://github.com/mmistakes/minimal-mistakes/pull/409)
+* Added `hide_description` option to pages to prevent the content of `description` fields to show up in the output.
+  This allows you to use the `description` field in the front matter to set descriptions for search engines and sharing on social media,
+  without having to worry about the output.
 
-### Maintenance
+  You can activate this for all pages by adding to your config file:
 
-- Remove unused Google AdSense variables in `_config.yml`. [#404](https://github.com/mmistakes/minimal-mistakes/issues/404)
-- Update `Gemfile` instructions for using `github-pages` vs. native `jekyll` gems.
-- Disable `gems:` in `_config.yml` and enable plugins with Bundler instead.
-- Add `repository` to `_config.yml` to suppress GitHub Pages error `Liquid Exception: No repo name found.`
+  ```yml
+  defaults:
+    - scope:
+        path: ''
+      values:
+        hide_description: true
+  ```
 
-## [3.3.4](https://github.com/mmistakes/minimal-mistakes/releases/tag/3.3.4)
+* Added a new option called `no_inline_css`.
+  When `true`, Hydejack will generate a single CSS file to be fetched (synchronously) via `link` tag,
+  instead of inlining half and including the rest via `link` tag.
 
-### Enhancements
+  This option *may* be useful when serving content over HTTP/2, but you should perform your own tests.
+  For more on inlining CSS, [see this](https://varvy.com/pagespeed/inline-small-css.html).
 
-- Add support for configurable feed URL to use a service like FeedBurner instead of linking directly to `feed.xml` in `<head>` and the site footer. [#378](https://github.com/mmistakes/minimal-mistakes/issues/378), [#379](https://github.com/mmistakes/minimal-mistakes/pull/379), [#406](https://github.com/mmistakes/minimal-mistakes/pull/406)
-- Add Turkish localized UI text. [#403](https://github.com/mmistakes/minimal-mistakes/pull/403)
+  ```yml
+  hydejack:
+    no_inline_css: true
+  ```
 
-### Maintenance
+* Added `dns-prefetch` links to Google Fonts and Google Analytics domains to further boost page load speed.
+  These are only included when using Google Fonts/Analytics.
 
-- Update gems: `activesupport` (4.2.7), `ffi` (1.9.14), `github-pages` (88), `jekyll-redirect-from` (0.11.0), `jekyll-watch` (1.5.0).
+* You can now define an arbitrary CSS `background` for the sidebar instead of just images, e.g.:
 
-## [3.3.3](https://github.com/mmistakes/minimal-mistakes/releases/tag/3.3.3)
+  ```yml
+  accent_image:
+    background: 'linear-gradient(to bottom, rgba(35,62,76,1) 0%,rgba(60,146,158,1) 50%,rgba(213,213,212,1) 100%) #4fb1ba'
+  ```
 
-### Enhancements
+* Category and tag pages can now have arbitrary content (to be shown *above* the list).
 
-- Make footer stick to the bottom of the page.
+* Links can now be marked for FLIP animations by adding the `flip-title` class. Use this for links that have
+  the exact same text as the title of the page they are linking, e.g. `[NOTICE](NOTICE.md){:.heading.flip-title}`.
 
-### Bug Fixes
 
-- Fix `gallery` size bug [#402](https://github.com/mmistakes/minimal-mistakes/issues/402)
+### Performance
+* Reduced building time during development.
+  Roughly 50% of the time was spent rebuilding the inline CSS, which is now built once and included via `link` tag.
+  Production builds still inlines CSS, so the building speed remains unchanged.
+  For more on how to improve building speeds, [see here](docs/writing.md#a-word-on-building-speeds).
 
-### Maintenance
+### Design
+* The default background image is no longer anti-selling the theme...
 
-- Set default `lang` to `en`.
+* Code blocks, math blocks and tables now use as much space as there is available on the screen.
+  Limiting the line length makes sense for paragraphs, as they are more difficult to read
+  when they span the entire length on a large display,
+  but it is less useful for content, like tables, long formulas or code.
 
-## [3.3.2](https://github.com/mmistakes/minimal-mistakes/releases/tag/3.3.2)
+  If you do not like this change, you can set `no_break_layout` to `true` in your config file.
 
-### Bug Fixes
+  ```yml
+  hydejack:
+    no_break_layout: true
+  ```
 
-- Fix JavaScript that triggers "sticky" sidebar to avoid layout issues on screen sizes < `1024px`. [#396](https://github.com/mmistakes/minimal-mistakes/issues/396)
+* Margin below code blocks, math blocks and tables increased from `1rem` to `2rem`.
 
-## [3.3.1](https://github.com/mmistakes/minimal-mistakes/releases/tag/3.3.1)
+* Gray text now has a higher contrast ratio:
+  I don't want anybody to ["suffer from design"](https://lostinmobile.com/2016/10/25/im-suffering-from-design/).
 
-### Enhancements
-
-- Enable image popup on < 500px wide screens. [#385](https://github.com/mmistakes/minimal-mistakes/issues/385)
-- Indicate the relationship between component URLs in a paginated series by applying `rel="prev"` and `rel="next"` to pages that use `site.paginator`. [#253](https://github.com/mmistakes/minimal-mistakes/issues/253)
-- Improve link posts in archive listings. [#276](https://github.com/mmistakes/minimal-mistakes/issues/276)
-
-### Maintenance
-
-- Update gems: `github-pages` (86), `ffi` 1.9.13, `jekyll-mentions` 1.1.3, and `rouge` 1.11.1
-- Fix note about custom sidebar content appearing below author profile. [#388](https://github.com/mmistakes/minimal-mistakes/issues/388)
-
-## [3.2.13](https://github.com/mmistakes/minimal-mistakes/releases/tag/3.2.13)
-
-### Enhancements
-
-- Add English default UI text for Canada, Great Britain, and Australia. [#377](https://github.com/mmistakes/minimal-mistakes/issues/377)
-- Switch default locale from `en-US` to `en`.
-
-## [3.2.12](https://github.com/mmistakes/minimal-mistakes/releases/tag/3.2.12)
-
-### Enhancements
-
-- Remove window width "magic number" from sticky sidebar check in `main.js` for improved flexibility. [#375](https://github.com/mmistakes/minimal-mistakes/pull/375)
-
-### Bug Fixes
-
-- Fix author override conditional where a missing `authors.yml` would show broken sidebar content. Defaults to `site.author`. [#376](https://github.com/mmistakes/minimal-mistakes/pull/376)
-
-## [3.2.11](https://github.com/mmistakes/minimal-mistakes/releases/tag/3.2.11)
-
-### Bug Fixes
-
-- Fix disappearing author sidebar links [#372](https://github.com/mmistakes/minimal-mistakes/issues/372)
-
-### Maintenance
-
-- Update gems: `github-pages` (84), `jekyll-github-metadata` 2.0.2, and `kramdown` 1.11.1
-- Update vendor JavaScript: jQuery 1.12.4, Stickyfill.js 1.1.4
-- Update Font Awesome 4.6.3
-
-## [3.2.10](https://github.com/mmistakes/minimal-mistakes/releases/tag/3.2.10)
-
-### Maintenance
-
-- Add `CONTRIBUTING.md`
-
-## [3.2.9](https://github.com/mmistakes/minimal-mistakes/releases/tag/3.2.9)
-
-### Enhancements
-
-- Add support for [header overlay images](https://mmistakes.github.io/minimal-mistakes/docs/layouts/#header-overlay) for Open Graph images. [#358](https://github.com/mmistakes/minimal-mistakes/pull/358)
-
-### Bug Fixes
-
-- Fix `Person` typo Schema.org type [#358](https://github.com/mmistakes/minimal-mistakes/pull/358)
-
-### Maintenance
-
-- Update `github-pages` gem and dependencies.
-- Remove `minutes_read` to avoid awkward reading time wording [#356](https://github.com/mmistakes/minimal-mistakes/issues/356)
-
-## [3.2.8](https://github.com/mmistakes/minimal-mistakes/releases/tag/3.2.8)
-
-### Bug Fixes
-
-- Remove `cursor: pointer` that appears on white-space surrounding author side list items and links. [#354](https://github.com/mmistakes/minimal-mistakes/pull/354)
-
-### Maintenance
-
-- Add contributing information to `README.md`. [#357](https://github.com/mmistakes/minimal-mistakes/issues/357)
-
-## [3.2.7](https://github.com/mmistakes/minimal-mistakes/releases/tag/3.2.7)
-
-### Enhancements
-
-- Add French localized UI text. [#346](https://github.com/mmistakes/minimal-mistakes/pull/346)
-
-### Bug Fixes
-
-- Fix branch logic for Yandex and Alexa in `seo.html`. [#348](https://github.com/mmistakes/minimal-mistakes/pull/348)
-
-## [3.2.6](https://github.com/mmistakes/minimal-mistakes/releases/tag/3.2.6)
-
-### Bug Fixes
-
-- Fix error `Liquid Exception: divided by 0 in _includes/archive-single.html, included in _layouts/single.html` caused by null `words_per_minute` in `_config.yml`. [#345](https://github.com/mmistakes/minimal-mistakes/pull/345)
-
-## [3.2.5](https://github.com/mmistakes/minimal-mistakes/releases/tag/3.2.5)
-
-### Bug Fixes
-
-- Fix link color in hero overlay to be white.
-- Remove underlines from archive item titles.
-
-## [3.2.4](https://github.com/mmistakes/minimal-mistakes/releases/tag/3.2.4)
-
-### Enhancements
-
-- Improve text alignment of masthead, hero overlay, page footer to be flush left and remove awkward white-space gaps. [#342](https://github.com/mmistakes/minimal-mistakes/issues/342)
-- Add Spanish localized UI text. [#338](https://github.com/mmistakes/minimal-mistakes/pull/338)
-
-### Bug Fixes
-
-- Fix alignment of icons in author sidebar [#341](https://github.com/mmistakes/minimal-mistakes/issues/341)
-
-### Maintenance
-
-- Add background color to page footer to set it apart from main content. [#342](https://github.com/mmistakes/minimal-mistakes/issues/342)
-- Add terms and privacy policy to theme's demo site. [#343](https://github.com/mmistakes/minimal-mistakes/issues/343)
-- Update screenshots found in theme documentation.
-
-## [3.2.3](https://github.com/mmistakes/minimal-mistakes/releases/tag/3.2.3)
-
-### Enhancements
-
-- Add [Discourse](https://www.discourse.org/) as a commenting provider. [#335](https://github.com/mmistakes/minimal-mistakes/pull/335)
-
-## [3.2.2](https://github.com/mmistakes/minimal-mistakes/releases/tag/3.2.2)
-
-### Enhancements
-
-- Add support for image captions in Magnific Popup overlays via the [`gallery`](https://mmistakes.github.io/minimal-mistakes/docs/helpers/#gallery) helper. [#334](https://github.com/mmistakes/minimal-mistakes/issues/334)
-
-## [3.2.1](https://github.com/mmistakes/minimal-mistakes/releases/tag/3.2.1)
-
-### Bug Fixes
-
-- Remove need for "double tapping" masthead menu links on iOS devices. [#315](https://github.com/mmistakes/minimal-mistakes/issues/315)
-
-### Maintenance
-
-- Add `ISSUE_TEMPLATE.md` for improve issue submission process.
-
-## [3.2.0](https://github.com/mmistakes/minimal-mistakes/releases/tag/3.2.0)
-
-### Bug Fixes
-
-- Fix missing category/tag links in post footer due to possible conflict with `site.tags` and `site.categories`. [#329](https://github.com/mmistakes/minimal-mistakes/issues/329#issuecomment-222375568)
-
-## [3.1.8](https://github.com/mmistakes/minimal-mistakes/releases/tag/3.1.8)
-
-### Bug Fixes
-
-- Fix `Liquid Exception: undefined method 'gsub' for nil:NilClass in _layouts/single.html` error when `page.title` is null. `<h1>` element is now conditional if `title: ` is not set for a `page` or collection item. [#312](https://github.com/mmistakes/minimal-mistakes/issues/312)
-
-### Maintenance
-
-- Remove duplicate `fa-twitter` and `fa-twitter-square` classes from `_utilities.scss`. [#302](https://github.com/mmistakes/minimal-mistakes/issues/302)
-
-- Document installing additional Jekyll gem dependencies when using `gem "jekyll"` instead of `gem "github-pages"` to avoid any errors on run. [#305](https://github.com/mmistakes/minimal-mistakes/issues/305)
-
-## [3.1.7](https://github.com/mmistakes/minimal-mistakes/releases/tag/3.1.7)
-
-### Enhancements
-
-- Add translation key for "Recent Posts" used in home page `index.html`. [#316](https://github.com/mmistakes/minimal-mistakes/pull/316)
-
-### Maintenance
-
-- Small fix to avoid underlying the whitespace between icons and related text when hovering. [#303](https://github.com/mmistakes/minimal-mistakes/pull/303)
-
-## [3.1.6](https://github.com/mmistakes/minimal-mistakes/releases/tag/3.1.6)
-
-### Maintenance
-
-- Update gem dependencies. Run `bundle` to update `Gemfile.lock`.
-
-## [3.1.5](https://github.com/mmistakes/minimal-mistakes/releases/tag/3.1.5)
-
-### Maintenance
-
-- Fix `www` and `https` links in author profile include [#293](https://github.com/mmistakes/minimal-mistakes/pull/293)
-
-## [3.1.4](https://github.com/mmistakes/minimal-mistakes/releases/tag/3.1.4)
-
-### Enhancements
-
-- Add overlay_filter param to hero headers [#298](https://github.com/mmistakes/minimal-mistakes/pull/298)
-
-## [3.1.3](https://github.com/mmistakes/minimal-mistakes/releases/tag/3.1.3)
-
-### Enhancements
-
-- Improve `site.locale` documentation [#284](https://github.com/mmistakes/minimal-mistakes/issues/284)
-- Remove ProTip note about protocol-less `site.url` as it is an anti-pattern [#288](https://github.com/mmistakes/minimal-mistakes/issues/288)
-
-### Bug Fixes
-
-- Fix `og_image` URL in seo.html [#277](https://github.com/mmistakes/minimal-mistakes/issues/277)
-- Fix `author_profile` toggle when assigned in a `_layout` [#285](https://github.com/mmistakes/minimal-mistakes/issues/285)
-- Fix typo in `build:all` npm script [#283](https://github.com/mmistakes/minimal-mistakes/pull/283)
-- Fix URL typo documentation [#287](https://github.com/mmistakes/minimal-mistakes/issues/287)
-- SEO author bug. If `twitter.username` is set and `author.twitter` is `nil` bad things happen. [#289](https://github.com/mmistakes/minimal-mistakes/issues/289)
-
-## [3.1.2](https://github.com/mmistakes/minimal-mistakes/releases/tag/3.1.2)
-
-### Enhancements
-
-- Explain how to use `nav_list` helper in [documentation](https://mmistakes.github.io/minimal-mistakes/docs/helpers/#navigation-list).
-- Reduce left/right padding on smaller screens to increase width of main content column.
-
-### Bug Fixes
-
-- Fix alignment issues with related posts [#273](https://github.com/mmistakes/minimal-mistakes/issues/273) and "Follow" button in author profile [#274](https://github.com/mmistakes/minimal-mistakes/issues/274).
-
-## [3.1.1](https://github.com/mmistakes/minimal-mistakes/releases/tag/3.1.1)
-
-### Bug Fix
-
-- Fixed reading time bug when `words_per_minute` wasn't set in `_config.yml` [#271](https://github.com/mmistakes/minimal-mistakes/issues/271)
-
-## [3.1.0](https://github.com/mmistakes/minimal-mistakes/releases/tag/3.1.0)
-
-### Enhancements
-
-- Updated [Font Awesome](https://fortawesome.github.io/Font-Awesome/whats-new/) to version 4.6.1
-- Added optional GitHub and Bitbucket links to footer if set on `site.author` in `_config.yml`.
-
-### Bug Fixes
-- Fixed Bitbucket URL typo in author sidebar.
-
-## [3.0.3](https://github.com/mmistakes/minimal-mistakes/releases/tag/3.0.3)
-
-### Enhancements
-
-- Rebuilt the entire theme: layouts, includes, stylesheets, scripts, you name it.
-- Refreshed the look and feel while staying true to the original design of the theme (author sidebar/main content).
-- Replaced grid system with [Susy](http://susy.oddbird.net/).
-- Replaced Grunt tasks with `npm` scripts.
-- Removed Google Fonts and replaced with system fonts to improve performance (they can be [added back](https://mmistakes.github.io/minimal-mistakes/docs/stylesheets/) if desired)
-- Greatly improved [theme documentation](https://mmistakes.github.io/minimal-mistakes/docs/quick-start-guide/).
-- Increased the amount of sample posts, sample pages, and sample collections to throughly test the theme and edge-cases.
-- Moved all sample content and assets out of `master` to keep it as clean as possible for forking.
-- Added new layouts for `splash` pages, archives for [`jekyll-archives`](https://github.com/jekyll/jekyll-archives) if enabled, and [`compress.html`](https://github.com/penibelst/jekyll-compress-html) to improve performance.
-- Added taxonomy links to posts (tags and categories).
-- Added optional "reading time" meta data.
-- Improved Liquid used for Twitter Cards and Open Graph data in `<head>`.
-- Improved `gallery` include helper and added `feature_row` for use with splash page layout.
-- Added Keybase.io, author web URI, and Bitbucket optional links to sidebar.
-- Add `feed.xml` link to footer.
-- Added a [UI text data file](https://mmistakes.github.io/minimal-mistakes/docs/ui-text/) to easily change all text found in the theme.
-- Added LinkedIn to optional social share buttons.
-- Added Facebook, Google+, and custom commenting options in addition to Disqus.
-- Added optional breadcrumb links.
-
-## [2.2.1](https://github.com/mmistakes/minimal-mistakes/releases/tag/2.2.1)
-
-## [2.2.0](https://github.com/mmistakes/minimal-mistakes/releases/tag/2.2.0)
-
-### Enhancements
-
-- Add support for Jekyll 3.0
-- Minor updates to syntax highlighting CSS and theme documentation
-
-## [2.1.3](https://github.com/mmistakes/minimal-mistakes/releases/tag/2.1.3)
-
-### Enhancements
-
-- Cleaner print styles that remove the top navigation, social sharing buttons, and other elements not needed when printed.
-
-## [2.1.2](https://github.com/mmistakes/minimal-mistakes/releases/tag/2.1.2)
-
-### Enhancements
-
-- Add optional CodePen icon/url to author side bar [#156](https://github.com/mmistakes/minimal-mistakes/pull/156)
-- Documented Stackoverflow username explanation in `_config.yml` [#157](https://github.com/mmistakes/minimal-mistakes/pull/157)
-- Simplified Liquid in `post-index.html` to better handle year listings [#166](https://github.com/mmistakes/minimal-mistakes/pull/166)
-
-### Bug Fixes
-
-- Cleanup Facebook related Open Graph meta tags [#149](https://github.com/mmistakes/minimal-mistakes/issues/149)
-- Corrected minor typos [#158](https://github.com/mmistakes/minimal-mistakes/pull/158) [#175](https://github.com/mmistakes/minimal-mistakes/issues/175)
-
-## [2.1.1](https://github.com/mmistakes/minimal-mistakes/releases/tag/2.1.1)
-
-### Enhancements
-
-- Add optional XING profile link to author sidebar
-- Include open graph meta tags for feature image (if assigned) [#149](https://github.com/mmistakes/minimal-mistakes/issues/149)
-- Create an include for feed footer
-
-### Bug Fixes
-
-- Remove http protocol from Google search form on sample 404 page
-- Only show related posts if there are one or more available
-- Fix alignment of email address link in author sidebar
-
-## [2.1.0](https://github.com/mmistakes/minimal-mistakes/releases/tag/2.1.0)
-
-### Enhancements
-
-- Add optional social sharing buttons ([#42](https://github.com/mmistakes/minimal-mistakes/issues/42))
-
-![social sharing buttons](https://cloud.githubusercontent.com/assets/1376749/5860522/d9f28a96-a22f-11e4-9b83-940a3a9a766a.png)
-
-- Add Soundcloud, YouTube ([#95](https://github.com/mmistakes/minimal-mistakes/pull/95)), Flickr ([#119](https://github.com/mmistakes/minimal-mistakes/pull/119)), and Weibo ([#116](https://github.com/mmistakes/minimal-mistakes/pull/116)) icons for use in author sidebar.
-- Fix typos in posts and documentation and remove references to Less
-- Include note about Octopress gem being optional
-- Post author override support extended to the Atom feed ([#71](https://github.com/mmistakes/minimal-mistakes/pull/71))
-- Only include email address in feed if specified in `_config.yml` or author `_data`
-- Wrap all page content in `#main` to harmonize article and post index styles ([#86](https://github.com/mmistakes/minimal-mistakes/issues/86))
-- Include new sample feature images for posts and pages
-- Table of contents improvements: fix collapse toggle, indent nested elements, show on small screens, and create an `_include` for reusing in posts and pages.
-- Include note about running Jekyll with `bundle exec` when using Bundler
-- Fix home page path in top navigation
-- Remove Google Authorship ([#120](https://github.com/mmistakes/minimal-mistakes/issues/120))
-- Remove duplicate author content that displayed in `div.article-author-bottom`
-- Removed unused `_sass/print.scss` styles
-- Improve comments in `.scss` files
-
-## [2.0.0](https://github.com/mmistakes/minimal-mistakes/releases/tag/v2.0)
-
-## [1.3.3](https://github.com/mmistakes/minimal-mistakes/releases/tag/1.3.3)
-
-### Enhancements
-
-- Added new icons and profile links for Stackoverflow, Dribbble, Pinterest, Foursquare, and Steam to the author bio sidebar.
-- Cleaned up the Kramdown auto table of contents styling to be more readable
-- Removed page width specific .less stylesheets and created mixins for easier updating
-- Removed Modernizr since it wasn't being used
-- Added pages to sitemap.xml
-- Added category: to rake new_post task
-- Minor typographic changes
-
-### Bug Fixes
-
-- Corrected various broken links in README and Theme Setup.
-
-## [1.3.1](https://github.com/mmistakes/minimal-mistakes/releases/tag/1.3.1)
-
-### Enhancements
-
-- Cleaned up table of contents styling
-- Reworked top navigation to be a better experience on small screens. Nav items now display vertically when the menu button is tapped, revealing links with larger touch targets.
-
-![menu animation](https://camo.githubusercontent.com/3fbd8c1326485f4b1ab32c0005c0fca7660b5d31/68747470733a2f2f662e636c6f75642e6769746875622e636f6d2f6173736574732f313337363734392f323136343037352f31653366303663322d393465372d313165332d383961612d6436623636376562306564662e676966)
-
-## [1.2.0](https://github.com/mmistakes/minimal-mistakes/releases/tag/1.2.0)
-
-### Bug Fixes
-
-- Table weren't filling the entire width of the content container. They now scale at 100%. Thanks [@dhruvbhatia](https://github.com/dhruvbhatia)
-
-### Enhancements
-
-- Decreased spacing between Markdown footnotes
-- Removed dark background on footer
-- Removed UPPERCASE styling on post titles in the index listing
-
-## [1.1.4](https://github.com/mmistakes/minimal-mistakes/releases/tag/1.1.4)
-
-### Bug Fixes
-
-- Fix top navigation bug issue ([#10](https://github.com/mmistakes/minimal-mistakes/issues/10)) for real this time. Remember to clear your floats kids.
-
-## [1.1.3](https://github.com/mmistakes/minimal-mistakes/releases/tag/1.1.3)
-
-### Bug Fixes
-
-- Fix top navigation links that weren't click able on small viewports (Issue [#10](https://github.com/mmistakes/minimal-mistakes/issues/10)).
-- Remove line wrap from top navigation links that may span multiple lines.
-
-## [1.1.2](https://github.com/mmistakes/minimal-mistakes/releases/tag/1.1.2)
-
-### Enhancements
-
-- Added Grunt build script for compiling Less/JavaScript and optimizing image assets.
-- Added support for large image summary Twitter card.
-- Stylesheet adjustments
-
-## [1.1.1](https://github.com/mmistakes/minimal-mistakes/releases/tag/1.1.1)
-
-### Bug Fixes
-
-- Removed [Typeplate](http://typeplate.com/) styles. Was [causing issues with newer versions of Less](https://github.com/typeplate/typeplate.github.io/issues/108) and is no longer maintained.
-
-### Enhancements
-
-- Added [image attribution](http://mmistakes.github.io/minimal-mistakes/theme-setup/#feature-images) for post and page feature images.
-- Added [404 page](http://mmistakes.github.io/minimal-mistakes/404.html).
-- Cleaned up various Less variables to better align with naming conventions used in other MM Jekyll themes.
-- Removed Chrome Frame references.
-- Added global CSS3 transitions to text and block elements.
-- Improved typography in a few places.
-
-## [1.0.2](https://github.com/mmistakes/minimal-mistakes/releases/tag/v1.0.2)
-
-### Enhancements
-
-- Google Analytics, Google Authorship, webmaster verifies, and Twitter card meta are now optional.
-
-## [1.0.1](https://github.com/mmistakes/minimal-mistakes/releases/tag/v1.0.1)
+* Reduced the number of responsive breakpoints.
+
+* Added a hover effect on project images.
+
+* On mobile, footnotes will be shown as [1] instead of superscript, making them easer to tap.
+
+* The sidebar now has a subtle shadow on mobile, to indicate that it can be drawn from the side.
+
+* The sidebar now has less margin on the sides.
+
+* The sidebar now fits 5 social media icons, up from 4.
+
+* The `description` in the sidebar now has a smaller font size when it is longer than 100 characters.
+  This is to encourage writing a longer `description` for search engines (~160 characters).
+
+* `h1`, `h2` and `h3` headings now have different `line-height`s to improve readability when they span multiple lines.
+
+* Marks on external links are now less opaque, but have a hover effect.
+
+* More responsible usage of `font_heading` in resume layout.
+
+* When hovering over a headline, a `#` link will appear, so that readers can link to individual headlines.
+
+* Changed the loading spinner to use a single icon instead of several animated `div`s.
+
+### Fixes
+* When linking to an internal document that doesn't match the regular content structure,
+  the 'hot replacement' will no longer get stuck, and reload the page instead.
+* Fix jumping to `#` links after navigating to a new page.
+* Fix jumping to `#` links in MS Edge.
+* Fixed a bug on iOS were scrolling was blocked after closing the drawer.
+* Fixed a bug where the image used during the project FLIP animation would note be replaced with the higher resolution image
+  after the animation in certain browsers.
+* The drawer is now less likely to be opened by accident.
+
+## v6.6.1
+Aug 10 2017
+{:.heading.post-date}
+
+* Fixed sending incorrect paths to Google Analytics.
+  In previous versions, Hydejack would always send the URL of the initial page for all subsequent page views.
+  Thanks [@dannydwarren](https://twitter.com/dannydwarren) for pointing this out.
+* Fixed `tagline` not showing up in the title.
+
+## v6.6.0
+Aug 7 2017
+{:.heading.post-date}
+
+* Dependencies from external domains have been removed
+  (with the exception of those that are explicitly defined and optional: Google Analytics, Google Fonts and Disqus).
+  Instead, they are now located in the assets folder and managed via Bower.
+* KaTeX is no longer loaded on pages that do not contain math blocks.
+* `preload` link tags no longer use `onload`. Instead callbacks are registered within a script tag.
+* Code in code blocks is no longer smaller sized than inline code.
+  To undo this change, open (or create) `_sass/my-inline.scss` and add the following:
+
+  ~~~css
+  pre code { font-size: .75em; }
+  ~~~
+
+* Added `_includes/my-head.html`, to make it easier to add things to the `<head/>` without modifying the source.
+  This is especially useful when using the gem-based version of the theme.
+
+## v6.5.0
+Jul 27 2017
+{:.heading.post-date}
+
+This maintenance release includes various quality-of-life improvements when using the gem-based version of the theme.
+
+### Added
+* Hydejack now uses additional Jekyll plugins by default, which make working with GitHub more convenient.
+  They have been added to the `Gemfile` and `_config.yml`.
+  Note that existing users need to update their `_config.yml`:
+
+  ~~~yml
+  gems:
+    - jekyll-default-layout # new
+    - jekyll-feed
+    - jekyll-optional-front-matter # new
+    - jekyll-paginate
+    - jekyll-redirect-from
+    - jekyll-relative-links # new
+    - jekyll-sitemap
+  ~~~
+
+* Added `licenses` folder that includes the full license texts of licenses mentioned in `NOTICE.md`.
+* You can, once again, define the author in `_config.yml`.
+  Using `_data/authors.yml` is still recommended (and takes precedence),
+  but this option is more convenient when setting up a quick (project-) page using the gem-based theme.
+  Also, a mini-version of `_data/social.yml` can be provided as part `_config.yml`, e.g.:
+
+  ~~~yml
+  author:
+    social:
+      github: https://github.com/hydecorp/hydejack
+      npm: https://www.npmjs.com/package/hydejack
+      download: https://github.com/hydecorp/hydejack/archive/v6.5.0.zip
+
+  data_social:
+    github:
+      name: GitHub
+      icon: icon-github
+    npm:
+      name: npm
+      icon: icon-npm
+    download:
+      name: Download
+      icon: icon-box-add
+  ~~~
+
+* A download icon has been added to the default icon font and `_data/social.yml` has been updated.
+* Added `_includes/my-scripts.html`, `_sass/my-inline.scss` and `_sass/my-style.scss` to make it easier to add custom scripts and styles without modifying the source. This is especially handy when using the gem-based version of the theme.
+
+### Changed
+* Loading web fonts now starts earlier and content download no longer blocks
+  swapping out the fallback font for the new font.
+  Previously, a page containing lots of images could have delayed displaying the web fonts significantly.
+* The `home` layout no longer contains a message suggesting that you don't use it.
+* The `home` layout now shows up to 5 blog posts and up to 5 pages blow the regular content.
+* The version history has been moved from `docs/<version>/versions.md` to `CHANGELOG.md`.
+* The license notices have been moved from `docs/<version>/licenses.md` to `NOTICE.md`.
+* Updated gem and npm dependencies
+
+### Design
+* The default font has been changed from "Noto Serif" to "Noto Sans".
+  If you have a `font` entry in `_config.yml`, this will have no effect.
+* `nap.jpg` is no longer used as default background image in the gem-based theme.
+* The sidebar content width is now limited to the width of the sidebar (this only effects large screens).
+* Project cards and pagination buttons now have slightly rounded borders for a less "rigid" look.
+
+#### How to restore the old styles
+If you would like to use the old font, add the following to `_config.yml`:
+
+~~~yml
+font_heading: "'Roboto Slab', Helvetica, Arial, sans-serif"
+font:         "'Noto Serif', Georgia, serif"
+google_fonts: "Roboto+Slab:700|Noto+Serif:400,400i,700,700i"
+~~~
+
+If you were relying on the default setting for the background image, add the following to `_config.yml`:
+
+~~~yml
+image: /hydejack/assets/img/nap.jpg
+~~~
+
+Note that you have to replace `/hydejack` with your `baseurl`.
+
+To restore the old sidebar, open (or create) `_sass/my-inline.scss` and add the following:
+
+~~~css
+@media screen { .sidebar-sticky { left: 2rem; max-width: none; } }
+~~~
+
+To remove the border radius, open (or create) `_sass/my-inline.scss` and add the following:
+
+~~~css
+.card, .pagination-item { border-radius: 0!important; }
+~~~
+
+## v6.4.1
+Jun 23 2017
+{:.heading.post-date}
+
+* Fix invalid color hex
+
+## v6.4.0
+Jun 21 2017
+{:.heading.post-date}
+
+In this release I've added a "Other Projects" section to the bottom of each project page,
+making it easier for users to navigate through your collection and discover other projects.
+Also, it's now possible to display larger (data-) tables that were previously cut off (especially on mobile devices).
+
+For more on how to add tables, see the new section in [docs/writing][writing].
+
+Smaller changes include a reduced usage of horizontal lines and a more "semantic" use of `hr` elements.
+Specifically, the semantics of the resume layout have been improved.
+
+### Minor
+* Added "Other Projects" section to the bottom of the project layout (similar to "Related Posts")
+* Added CSS classes that make viewing larger (data-) tables possible
+* Added section on tables to [docs/writing][writing]
+* Reduced use of `<hr/>` elements, using CSS borders instead.
+* Improved semantic HTML of resume
+* Follow favicon best practices and include example icons
+* Added `no_google_fonts` option
+
+### Design
+* Reduced number of horizontal lines, making many layouts feel less "cluttered" (esp. `blog` layout)
+* Made link hover styles consistent across the board
+* Visually separated `thead` and `tbody` and `tfoot` within tables.
+* Changed RSS and email icons
+* Removed top margin for consecutive headings, e.g. when using `h3` immediately after `h2`.
+
+### Fixes
+* Fixed bug that caused inline math to be moved to the end of a paragraph when dynamically loading a page.
+* Fixed bug that caused layout to break in IE11.
+* Fixed bug that caused the project animation to "jump" when using long project titles.
+* No more empty attributes on `img` tags.
+
+## v6.3.0
+Jun 6 2017
+{:.heading.post-date}
+
+This release makes including third party plugins easier.
+Until now, the push state approach to loading new pages has been interfering with embedded `script` tags.
+This version changes this by simulating the sequential loading of script tags on a fresh page load.
+
+This approach should work in a majority of cases, but can still cause problems with scripts that can't be added more than once per page.
+If an issue can't be resolved, there's now the option to disable push state by setting `disable_push_state: true` in `config.yml`.
+
+### Minor
+* Support embedding `script` tags in markdown content
+* Add `disable_push_state` option to `_config.yml`
+* Add `disable_drawer` option to `_config.yml`
+* Rename syntax highlighting file to `syntax.scss`
+* Added [chapter on third party scripts][scripts] to documentation
+
+### Design
+* Add subtle intro animation
+* Rename "Check out X for more" to "See X for more" on welcome\* page
+* Replace "»" with "→" in "read more"-type of links
+
+### Fixes
+* Fix default color in gem-based theme
+
+## v6.2.0
+May 29 2017
+{:.heading.post-date}
+
+* Changed default color and image
+* Updated demo content
+* Finalized welcome and project page
+* Color is now fading correctly when no background image is provided
+* Added exemplary usage of excerpt separator
+* Removed social media links from `welcome` and `about` page
+* Updated dependencies
+
+## v6.1.1
+May 23 2017
+{:.heading.post-date}
+
+* Add support for `lang` in front matter and `_config.yml`.
+* Add support for `keywords` in front matter and `_config.yml`.
+
+## v6.1.0
+May 15 2017
+{:.heading.post-date}
+
+* Updated JS dependencies
+* Added version history and licenses to documentation
+* Fixed print layout
+
+## v6.0.0 (JavaScripten)
+May 3 2017
+{:.heading.post-date}
+
+Hydejack has always featured a JavaScript-heavy sidebar, but other than that, JS has been used sparingly. This changes with this release, which adds a ton of (optional) code that changes the feel of the theme dramatically.
+
+### Major
+Pages are now loaded and swapped through JavaScript. This has a number of effects. First of all, it looks cool, but the animations aren't just about aesthetics: They also help to hide the network time of fetching the next page, making the entire site feel faster. At the same time, the FOUC introduced in the last release will no longer occur (except on the initial page load).
+
+* Most JS is now unified in the `_js` directory and written in ES2016.
+* The `blog-by-tag` layout has been renamed to `list`.
+* `public` folder has been renamed to `assets` to make the theme compatible with Jekyll's gem-based themes.
+* Tags are now supported via Jekyll Collections instead of `_data`.
+* The sidebar can now add links to all kinds of pages.
+* Categories are now supported.
+* Author information moved to `_data/authors.yml`
+* Added support for multiple authors.
+* Using `jekyll-feed` plugin (supported on GitHub Pages) instead of custom solution.
+* Added `about` layout.
+* Added `not-found` layout.
+* Added `redirect` layout
+
+See the [the migration guide][migration] for instructions on how to upgrade.
+
+### Minor
+* The "accent" font (heading font) is now used for all headings. This gives the theme a "bolder" look and was necessary for the animation: link => heading.
+* Changed default text font from "PT Serif" to "Noto Serif".
+* Added [CSS classes][writing] for styling markdown content.
+* Links have a new style. They now always display an underline to make the choice of the link color less critical (darker colors were hard to distinguish from regular text).
+* Made social media icons larger and easier to tap.
+* Social media icons are now also part of the "about" sections of a post.
+* Added support for a copyright notice at the bottom. Can be set via the config variable `copyright`.
+* Changed responsive breakpoints and added support for very large displays.
+* The site is now printable.
+* The `blog` layout now only shows the excerpt instead of the full post.
+* Links to external pages are now marked with a symbol.
+* Added margin above social media icons to prevent accidental tapping
+* Added gem files so that `bundle install` and `bundle exec jekyll serve` work
+* Disabled HTML minification when running via `jekyll serve`
+* Added dingbat to signal end of post
+
+### Fixes
+* Related posts is no longer blank for posts that do not belong to a category.
+* Footnotes now use the text version of "leftwards arrow with hook" instead of the emoji on iOS.
+* Text is no longer invisible while waiting for Google Fonts to load.
+* Always show scrollbar to prevent layout "jumps"
+
+## v5.3.0
+Oct 1 2016
+{:.heading.post-date}
+
+a11y improvements
+- Use HTML5 semantics tags + roles
+- Don't set `maximum-scale=1`
+- Fix bug with `sr-only` class
+
+Math support improvements
+- LaTeX syntax errors will no longer prevent correct math blocks from being rendered
+- LaTeX syntax errors logged to console
+
+## v5.2.0
+Sep 29 2016
+{:.heading.post-date}
+
+Prevent structural FOUC
+
+## v5.1.0
+Sep 28 2016
+{:.heading.post-date}
+
+Cross-browser compatibility improvements:
+- Added features tests
+- Fixed layout in IE 10 and 11
+- Disabled stylesheets and JS in IE 9 and below.
+
+## v5.0.0 (The Fast One)
+Sep 16 2016
+{:.heading.post-date}
+
+This major release increases page load speed dramatically. The page now scores roughly 90/100 on [Google's PageSpeed Insights](https://developers.google.com/speed/pagespeed/insights/?url=http%3A%2F%2Fqwtel.com%2Fhydejack%2F) (up from ~50) and has a high score on similar tools.
+
+Most importantly, the critical rendering path is no longer blocked by loading styles or scripts, meaning the site becomes visible faster.
+
+Page load speed matters to Google, but is also _very_ apparent to visitors with slow internet connections.
+
+However, as a side effect of these optimizations, the site now has a visible [FOUC](https://en.wikipedia.org/wiki/Flash_of_unstyled_content).
+Future versions might address this, but it is the currency in which loading speed is being payed for and can not be fully avoided.
+
+### Major
+- HTML, CSS and JS served minified.
+- JS downloading starts only after the rest of the page is renderd.
+- Critical CSS (above-the-fold) is inlined into the document, the rest is fetched later.
+
+In order to minify the CSS and make it more modular it has been rewritten in SCSS.
+
+### Minor
+- Colored focus outline in page color
+- Tabindex for tab navigation
+- Social media icons easier tappable with finger
+
+### Trivia
+Not strictly part of the release, but the images have been blurred to increase text readability and help with loading speed as well (burred images get compressed by JPG much better).
+
+## v4.0.1
+Sep 11 2016
+{:.heading.post-date}
+
+Fix per-page color and image
+
+## v4.0.0 (Social Media Impocalypse)
+Aug 30 2016
+{:.heading.post-date}
+
+### Breaking
+- Structure of `_config.yml` has changed
+  - Social media usernames are now located under `author: social: <platform>: <username>`.
+  - `disqus` is now a top-level entry (moved from `author`).
+  - Now has `font`, `font_accent` and `google_fonts` fields that are mandatory.
+- Now defaults to the `blog` layout, old style is available via `blog-by-tag` layout, see `archive.html`.
+
+### New features
+- Added _a lot_ of social media icons, configurable via `_config.yml`.
+- New `blog` layout. Classic, paginated.
+- Fonts are configurable via `_config.yml`.
+
+### Design
+- Link underlines are now fixed-sized for all font sizes (no thicker lines for headlines, etc)
+
+### Fixes
+- Correctly set the meta description field using either the `description` field or `post.excerpt` as a fallback (used to contain the unmodified markdown).
+- Fixed various URL bugs relating to `site.baseurl`.
+
+### Internal
+- Refactoring, preventing code duplications, heavier usage of `includes`.
+
+## v3.0.0 (Hydejack)
+May 7 2016
+{:.heading.post-date}
+
+Hydejack is a pretentious two-column [Jekyll](http://jekyllrb.com) theme, stolen by [`@qwtel`](https://twitter.com/qwtel) from [Hyde](http://hyde.getpoole.com). You could say it was.. [hydejacked](http://media3.giphy.com/media/makedRIckZBW8/giphy.gif).
+
+### Features
+Unlike Hyde, it's very opinionated about how you are going to use it.
+
+Features include:
+* Touch-enabled sidebar / drawer for mobile, including fallback when JS is disabled.
+* Github Pages compatible tag support based on [this post][tag].
+* Customizable link color and sidebar image, per-site, per-tag and per-post.
+* Optional author section at the bottom of each post.
+* Optional comment section powered by Disqus.
+* Layout for posts grouped by year
+* Wide array of social media icons on sidebar.
+* Math blocks via [KaTeX](https://khan.github.io/KaTeX/).
+
+## v2.0.0 (Hyde)
+Jan 2 2014
+{:.heading.post-date}
+
+## v1.0.0 (Hyde)
+Oct 15 2013
+{:.heading.post-date}
+
+[tag]: http://www.minddust.com/post/tags-and-categories-on-github-pages/
+[migration]: docs/upgrade.md
+[writing]: docs/writing.md
+[scripts]: docs/scripts.md
+
+[buy]: https://app.simplegoods.co/i/AQTTVBOE
+[PRO-license]: licenses/PRO.md
+[GPL-3.0]: licenses/GPL-3.0.md

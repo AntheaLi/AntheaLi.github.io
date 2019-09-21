@@ -231,9 +231,9 @@ collections:
     permalink:         /tag-:name/
     output:            true
 
-  project:
-    permalink:         /project/:path/
-    output:            true
+  # project:
+  #   permalink:         /project/:path/
+  #   output:            true
 
 
 # File inclusion/exclusion

@@ -231,8 +231,8 @@ collections:
     permalink:         /tag-:name/
     output:            true
 
-  projects:
-    permalink:         /projects/:path/
+  project:
+    permalink:         /project/:path/
     output:            true
 
 

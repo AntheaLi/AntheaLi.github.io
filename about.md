@@ -11,10 +11,16 @@ Before coming to Stanford, I received my Bachelors with the Summa Cum Laude Hono
 I have multiple years of experiences working with 3D environments in visual effects production. In the future, I wish to bring my insights and experiences from computational geometry and image-level vision tasks to intelligent 3D content creation and motion generation. 
 
 
-Feel free to reach out
+## Contact me at:
 
 ### email:
 
 ```
 anthea.lee3@gmail.com
+```
+
+### Phone
+
+```
+857-400-4191
 ```

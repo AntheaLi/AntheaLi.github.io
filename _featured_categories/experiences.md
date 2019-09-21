@@ -5,5 +5,9 @@ slug: experiences
 menu: true
 order: 1
 description: >
-Past and on-going research and academic projects
+
+accent_color: rgb(38,139,210)
+accent_image:
+  background: rgb(32,32,32)
+  overlay:    false
 ---

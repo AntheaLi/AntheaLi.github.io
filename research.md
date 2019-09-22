@@ -1,18 +1,5 @@
----
-layout: list
-title: Research
-slug: research
-menu: true
-order: 2
-description: >
 
-accent_color: rgb(38,139,210)
-accent_image:
-  background: rgb(32,32,32)
-  overlay:    false
----
-
-* Online Variational Domain Adaptation (CDA) 
+* [Online Variational Domain Adaptation (CDA)](research/_posts/2019-09-25-CDA.md)
 **Li, Yichen.***, Peng, Xingchao.*, Hu, Ping.
 > In this paper, we define the problem of online variational transfer learning as continuous domain adaptation (CDA) and make three major contributions addressing this new task. First, we collect and annotate a large scale cross-domain recognition dataset for continuous domain adaptation, named WeatherDA. Second, we propose a novel end-to-end deep learning approach, Domain Adaptation with Disentangled Prototype(DADP), which aims to transfer knowledge learned from labeled source domains to a sequence of target domains by aligning the prototypes of disentangled domain-invariant features. Third, we propose to utilize a light-weight memory to handle the problem of catastrophic forgetting. In submission.
 

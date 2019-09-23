@@ -102,7 +102,7 @@ font_heading:          Roboto Slab, Helvetica, Arial, sans-serif
 
 defaults:
   - scope:
-      path:            hyde
+      path:            about
     values:
       accent_color:    rgb(38,139,210)
       accent_image:

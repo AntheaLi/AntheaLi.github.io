@@ -4,7 +4,7 @@ image: /assets/img/blog/hydejack-8.png
 
 # About Me
 
-I am a master student studying Computer Science at Stanford. I am interested in Machine Learning enabled Computer Graphics and Computer Vision research, especially in the 3D content generation realm.
+I am a master student studying Computer Science at Stanford. I am interested in Machine Learning enabled Computer Graphics and Computer Vision research, especially in the 3D content understanding, creation, and motion generation. I wish to bring artificial intelligence to enable the creation of a virtual world as an intelligent alternative to our physical reality.
 
 Before coming to Stanford, I received my Bachelors with the Summa Cum Laude Honor in Computer Science, Mathematics, and Economics at Boston University as well as the College Prize for Excellence in Computer Science. I was fortunate to get into Computational Geometry based research at the Shape Lab supervised by Professor Emily Whiting. I was also very lucky having been able to work along side many inspiring researchers specializing in various fields including Computer Vision, specifically image-level domain adaptation, as well as Natural Language Processing, specifically vision-language grounding.
 

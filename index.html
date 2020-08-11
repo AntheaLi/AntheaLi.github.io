@@ -1,0 +1,396 @@
+<!DOCTYPE HTML>
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <!-- Hi, Jon Here. Please DELETE the two <script> tags below if you use this HTML, otherwise my analytics will track your page -->
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-174594216-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-174594216-1');
+  </script>
+
+  <title>Yichen Li</title>
+  
+  <meta name="author" content="Yichen Li">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <link rel="stylesheet" type="text/css" href="stylesheet.css">
+  <link rel="icon" type="image/png" href="images/seal_icon.png">
+</head>
+
+<body>
+  <table style="width:100%;max-width:800px;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
+    <tr style="padding:0px">
+      <td style="padding:0px">
+        <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
+          <tr style="padding:0px">
+            <td style="padding:2.5%;width:63%;vertical-align:middle">
+              <p style="text-align:center">
+                <name>Yichen Li</name>
+              </p>
+              <p>I am a Computer Science Master's student at <a href="https://geometry.stanford.edu">Guibas Lab</a>, where I have been fortunate to worked with <a href="https://geometry.stanford.edu/member/guibas/index.html">Prof. Leonidas Guibas</a>, <a href="https://cs.stanford.edu/~kaichun/">Kaichun Mo</a>, and <a href="https://orlitany.github.io/">Dr.Or Litany</a>.
+              </p>
+              <p>
+                I received my B.S. in Computer Science and B.S. in Mathematics and Economics from <a href="https://www.bu.edu">Boston University</a>, where I worked with <a href="https://cs-people.bu.edu/whiting/">Prof. Emily Whiting</a> and <a href="http://ai.bu.edu/ksaenko.html">Prof. Kate Saenko</a>, as well as <a href="https://www.bu.edu/cs/profiles/bplum/">Prof. Bryan Plummer</a> on various computer vision and graphics research. Previously, I was a research intern at  <a href="https://www.nvidia.com">NVIDIA</a>, working with Dr.Bryan Catanzaro, Dr.Ben Eckart, Dr.Kevin Shih, Dr.Or Litany, and Andrew Tao.
+              </p>
+              <p>
+                My research interests lie in the areas of 3D computer vision, graphics, and machine learning. I am fascinated by building intelligent systems for 3D content understanding through representation learning, object interactions and physics-based geometry analysis.
+              </p>
+              <p style="text-align:center">
+                <a href="mailto:liyichen@cs.stanford.edu">Email</a> &nbsp/&nbsp
+                <!-- <a href="data/JonBarron-CV.pdf">CV</a> &nbsp/&nbsp -->
+                <a href="https://scholar.google.com/citations?user=J4hHGeUAAAAJ" target="_blank">Google Scholar</a> &nbsp/&nbsp
+                <a href="https://www.github.com/AntheaLi">GitHub</a> &nbsp/&nbsp
+                <a href="https://www.linkedin.com/in/antheayichenli/">LinkedIn</a>
+              </p>
+            </td>
+            <td style="padding:2.5%;width:40%;max-width:40%">
+              <a href="images/antheali.png"><img style="width:100%;max-width:100%" alt="profile photo" src="images/antheali.png" class="hoverZoomLink"></a>
+
+            </td>
+          </tr>
+        </tbody></table>
+        <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
+            <tr>
+            <td style="padding:10px;width:100%;vertical-align:middle">
+              <heading>News</heading>
+              <ul>
+                <!-- <li>Template</li> -->
+                <li><span  style="color:red">[new]</span> [June, 2020] Our paper <a href="https://arxiv.org/pdf/2003.09754.pdf" target="_blank">Learning 3D Part Assembly from A Single Image</a> is accepted to <a href="https://eccv2020.eu/" target="_blank">ECCV 2020</a>.</li>
+
+                <li><span  style="color:red">[new]</span> [June, 2020] Our paper <a href="https://arxiv.org/pdf/2007.09257.pdf" target="_blank">Domain2Vec: Domain Embedding for Unsupervised Domain Adaptation</a> is accepted to <a href="https://eccv2020.eu/" target="_blank">ECCV 2020</a>.</li>
+              </ul> 
+            </td>
+          </tr>
+        </tbody></table>
+        <br>
+
+
+        <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
+          <tr>
+            <td style="padding:10px;width:30%;vertical-align:middle">
+              <heading>Publications</heading>
+            </td>
+          </tr>
+
+          <tr onmouseout="assem_stop()" onmouseover="assem_start()">
+            <td style="padding:10px;width:30%;vertical-align:bottom;">
+              <div class="one">
+                <div class="two" id='assem_image'>
+                  <img src='images/assembly.png' width="240"></div>
+                <img src='images/assembly.png' width="240">
+              </div>
+              <script type="text/javascript">
+                function assem_start() {
+                  document.getElementById('assem_image').style.opacity = "1";
+                }
+
+                function assem_stop() {
+                  document.getElementById('assem_image').style.opacity = "0";
+                }
+                assem_stop()
+              </script>
+            </td>
+            <td style="padding:20px;width:70%;vertical-align:middle">
+              <br>
+              <a href="https://arxiv.org/abs/2003.09754" target="_blank">
+                <papertitle>Learning 3D Part Assembly from A Single Image</papertitle>
+              </a>
+              <br>
+              <strong>Yichen Li*</strong>,
+              <a href="https://cs.stanford.edu/~kaichun/" target="_blank">Kaichun Mo*</a>,
+              <a href="https://linsats.github.io/" target="_blank">Lin Shao</a>,
+              <a href="https://mhsung.github.io/" target="_blank">Minhyuk Sung</a>,
+              <a href="https://geometry.stanford.edu/member/guibas/index.html" target="_blank">Leonidas Guibas</a>,
+              <br>
+              <em>European Conference on Computer Vision (ECCV)</em>, 2020  
+              <br>
+              <a href="https://arxiv.org/abs/2003.09754" target="_blank">[paper]</a> &nbsp  
+              <a href="https://cs.stanford.edu/~liyichen/projects/assembly/" target="_blank">[project page]</a> &nbsp
+              <a href="https://github.com/AntheaLi/3DPartAssembly/" target="_blank">[code]</a> &nbsp
+              <!-- <a href="https://drive.google.com/file/d/1gygDQarCOZ7E4qptvTyYF_iZNxsJ4WnI/view" target="_blank">[dataset]</a> -->
+              <br>
+              <!-- <p>
+              We propose a local adversarial disentangling network for facial makeup and de-makeup, using multiple and overlapping local discriminators in a content-style disentangling network.
+              </p> -->
+            </td>
+          </tr>  
+
+          <tr onmouseout="d2v_stop()" onmouseover="d2v_start()">
+            <td style="padding:10px;width:30%;vertical-align:middle;">
+              <div class="one">
+                <div class="two" id='d2v_image'>
+                  <img src='images/d2v.png' width="240"></div>
+                <img src='images/d2v.png' width="240">
+              </div>
+              <script type="text/javascript">
+                function assem_start() {
+                  document.getElementById('d2v_image').style.opacity = "1";
+                }
+
+                function assem_stop() {
+                  document.getElementById('d2v_image').style.opacity = "0";
+                }
+                d2v_stop()
+              </script>
+            </td>
+            <td style="padding:20px;width:70%;vertical-align:middle">
+              <br>
+              <a href="https://arxiv.org/pdf/2007.09257.pdf" target="_blank">
+                <papertitle>Domain2Vec: Domain Embedding for Unsupervised Domain Adaptation</papertitle>
+              </a>
+              <br>
+              <strong>Yichen Li*</strong>,
+              <a href="https://cs-people.bu.edu/xpeng" target="_blank">Xingchao Peng*</a>,
+              <a href="http://ai.bu.edu/ksaenko.html" target="_blank">Kate Saenko</a>,
+              <br>
+              <em>European Conference on Computer Vision (ECCV)</em>, 2020  
+              <br>
+              <a href="https://arxiv.org/pdf/2007.09257.pdf" target="_blank">[paper]</a> &nbsp  
+              <a href="https://cs.stanford.edu/~liyichen/projects/d2v" target="_blank">[project page]</a> &nbsp
+              <a href="https://github.com/VisionLearningGroup/Domain2Vec" target="_blank">[code]</a> &nbsp
+              <!-- <a href="https://drive.google.com/file/d/1gygDQarCOZ7E4qptvTyYF_iZNxsJ4WnI/view" target="_blank">[dataset]</a> -->
+              <br>
+              <!-- <p>
+              We propose a local adversarial disentangling network for facial makeup and de-makeup, using multiple and overlapping local discriminators in a content-style disentangling network.
+              </p> -->
+            </td>
+          </tr>  
+
+           <tr onmouseout="nasda_stop()" onmouseover="nasda_start()">
+            <td style="padding:10px;width:30%;vertical-align:middle;">
+              <div class="one">
+                <div class="two" id='nasda_image'>
+                  <img src='images/NASDA.png' width="240"></div>
+                <img src='images/NASDA.png' width="240">
+              </div>
+              <script type="text/javascript">
+                function nasda_start() {
+                  document.getElementById('nasda_image').style.opacity = "1";
+                }
+
+                function nasda_stop() {
+                  document.getElementById('nasda_image').style.opacity = "0";
+                }
+                nasda_stop()
+              </script>
+            </td>
+            <td style="padding:20px;width:70%;vertical-align:middle">
+              <br>
+              <a href="..." target="_blank">
+                <papertitle>NASDA: Neural Architecture Search for Domain Adaptation</papertitle>
+              </a>
+              <br>
+              <strong>Yichen Li*</strong>,
+              <a href="https://cs-people.bu.edu/xpeng" target="_blank">Xingchao Peng*</a>,
+              <a href="http://ai.bu.edu/ksaenko.html" target="_blank">Kate Saenko</a>
+              <br>
+              <em>Preprint (in submission)</em>, 2020  
+              <br>
+              <a href="..." target="_blank">[paper]</a> &nbsp  
+              <a href="https://cs.stanford.edu/~liyichen/projects/nasda/" target="_blank">[project page]</a> &nbsp
+              <!-- <a href="https://github.com/AntheaLi/3DPartAssembly/" target="_blank">[code]</a> &nbsp -->
+              <br>
+              <!-- <p>
+              We propose a local adversarial disentangling network for facial makeup and de-makeup, using multiple and overlapping local discriminators in a content-style disentangling network.
+              </p>  -->
+            </td>
+          </tr>     
+
+
+          <tr onmouseout="vqa_stop()" onmouseover="vqa_start()">
+            <td style="padding:20px;width:30%;vertical-align:middle;">
+              <div class="one">
+                <div class="two" id='vqa_image'>
+                  <img src='images/vqa.png' width="240"></div>
+                <img src='images/vqa.png' width="240">
+              </div>
+              <script type="text/javascript">
+                function vqa_start() {
+                  document.getElementById('vqa_image').style.opacity = "1";
+                }
+
+                function vqa_stop() {
+                  document.getElementById('vqa_image').style.opacity = "0";
+                }
+                vqa_stop()
+              </script>
+            </td>
+            <td style="padding:20px;width:70%;vertical-align:middle">
+              <br>
+              <a href="ttps://arxiv.org/pdf/1811.07212" target="_blank">
+                <papertitle>Revisiting Image-Language Networks for Open-ended Phrase Detection</papertitle>
+              </a>
+              <br>
+              <a href="http://bryanplummer.com/" target="_blank">Bryan Plummer</a>,
+              <a href="http://scholar.google.com/citations?user=4x3DhzAAAAAJ&hl=en" target="_blank">Kevin Shih</a>,
+              <strong>Yichen Li</strong>,
+              <a href="https://www.richardkxu.com/" target="_blank">Ke Xu</a>,
+              <a href="http://slazebni.cs.illinois.edu/" target="_blank">Svetlana Lazebnik</a>,
+              <a href="http://www.cs.bu.edu/~sclaroff/" target="_blank">Stan Sclaroff</a>,
+              <a href="http://ai.bu.edu/ksaenko.html" target="_blank">Kate Saenko</a>
+              <br>
+              <em>TPAMI</em>, 2019  
+              <br>
+              <a href="https://arxiv.org/pdf/1811.07212" target="_blank">[paper]</a> &nbsp  
+              <!-- <a href="https://github.com/AntheaLi/3DPartAssembly/" target="_blank">[code]</a> &nbsp -->
+              <br>
+              <!-- <p>
+              We propose a local adversarial disentangling network for facial makeup and de-makeup, using multiple and overlapping local discriminators in a content-style disentangling network.
+              </p>  -->
+            </td>
+          </tr>   
+
+          <tr onmouseout="lida_stop()" onmouseover="lida_start()">
+            <td style="padding:10px;width:30%;vertical-align:middle;">
+              <div class="one">
+                <div class="two" id='lida_image'>
+                  <img src='images/lida.png' width="240"></div>
+                <img src='images/lida.png' width="240">
+              </div>
+              <script type="text/javascript">
+                function lida_start() {
+                  document.getElementById('lida_image').style.opacity = "1";
+                }
+
+                function lida_stop() {
+                  document.getElementById('lida_image').style.opacity = "0";
+                }
+                lida_stop()
+              </script>
+            </td>
+            <td style="padding:10px;width:70%;vertical-align:middle">
+              <br>
+              <a href="..." target="_blank">
+                <papertitle>Lifelong Domain Adaptation with Interpolated Feature Alignment</papertitle>
+              </a>
+              <br>
+              <strong>Yichen Li</strong>,
+              <a href="https://cs-people.bu.edu/xpeng" target="_blank">Xingchao Peng</a>,
+              <a href="https://cs-people.bu.edu/pinghu" target="_blank">Ping Hu</a>
+              <br>
+              <em>Preprint </em>, 2019 
+              <br>
+              <a href="..." target="_blank">[paper]</a> &nbsp  
+              <!-- <a href="https://cs.stanford.edu/~liyichen/projects/lida/" target="_blank">[project page]</a> &nbsp -->
+              <!-- <a href="https://github.com/AntheaLi/3DPartAssembly/" target="_blank">[code]</a> &nbsp -->
+              <br>
+              <!-- <p>
+              We propose a local adversarial disentangling network for facial makeup and de-makeup, using multiple and overlapping local discriminators in a content-style disentangling network.
+              </p>  -->
+            </td>
+          </tr> 
+
+          <tr onmouseout="bridge_stop()" onmouseover="bridge_start()">
+            <td style="padding:10px;width:30%;vertical-align:middle;">
+              <div class="one">
+                <div class="two" id='bridge_image'>
+                  <img src='images/bridge.png' width="240"></div>
+                <img src='images/bridge.png' width="240">
+              </div>
+              <script type="text/javascript">
+                function bridge_start() {
+                  document.getElementById('bridge_image').style.opacity = "1";
+                }
+
+                function bridge_stop() {
+                  document.getElementById('bridge_image').style.opacity = "0";
+                }
+                bridge_stop()
+              </script>
+            </td>
+            
+            <td style="padding:10px;width:70%;vertical-align:middle">
+              <br>
+              <a href="https://arxiv.org/pdf/1811.07212" target="_blank">
+                <papertitle>Learning Domain Adaptive Features with Unlabeled Domain Bridges</papertitle>
+              </a>
+              <br>
+              <a href="https://cs-people.bu.edu/xpeng" target="_blank">Xingchao Peng</a>,
+              <strong>Yichen Li</strong>,
+              <br>
+              <em>preprint</em>,  2019
+              <br>
+              <a href="https://arxiv.org/pdf/1811.07212" target="_blank">[paper]</a> &nbsp  
+              <!-- <a href="https://cs.stanford.edu/~liyichen/projects/bridge/" target="_blank">[project page]</a> &nbsp -->
+              <!-- <a href="https://github.com/AntheaLi/3DPartAssembly/" target="_blank">[code]</a> &nbsp -->
+              <br>
+              <!-- <p>
+              We propose a local adversarial disentangling network for facial makeup and de-makeup, using multiple and overlapping local discriminators in a content-style disentangling network.
+              </p>  -->
+            </td>
+          </tr>   
+
+        </tbody></table>
+        <br>
+
+        <br>
+
+        <table width="100%" align="center" border="0" cellspacing="0" cellpadding="10"><tbody>
+          <tr>
+            <td>
+              <heading>Academic Services</heading>
+            </td>
+          </tr>
+          <tr>
+            <td width="70%" valign="center">
+              Conference Reviewer: <a href="https://" target="_blank">NeurIPS</a>, <a href="https://wacv20.wacv.net/" target="_blank">WACV</a>, <a href="https://www.aaai.org/" target="_blank">AAAI</a>, <a href="https://sites.google.com/view/task-cv2019/home" target="_blank">ICCV-W-TaskCV</a>, <a href="https://sites.google.com/view/task-cv2020" target="_blank">ECCV-W-TASKCV</a>
+            </td>
+          </tr>
+        </tbody></table>
+        <br>
+
+        <table width="100%" align="center" border="0" cellspacing="0" cellpadding="10"><tbody>
+          <tr>
+            <td>
+              <heading>Teaching</heading>
+            </td>
+          </tr>
+          <tr>
+            <td style="padding:10px;width:30%;vertical-align:middle"><img src="images/cs468.png" alt="cs229" width="240"></td>
+            <td width="70%" valign="center">
+              <a href="https://explorecourses.stanford.edu/search?q=CS+468%3A+Topics+in+Geometric+Algorithms%3A+Machine+Learning+for+3D+Data&view=catalog&page=0&academicYear=20172018&collapse=&filter-coursestatus-Active=on" target="_blank">CS468: Topics in Geometric Algorithms: Non-Euclidean Methods in Machine Learning </a> (Fall 2020)</a>
+              <p> 
+                Teaching Assistant (TA)
+              <p>
+            </td>
+          </tr>
+        </tbody></table>
+        <br>
+
+        <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
+            <tr>
+            <td style="padding:10px;width:100%;vertical-align:middle">
+              <heading>Awards</heading>
+              <ul>
+                <li> College Prize For Excellence in Computer Science (GPA Rank: 1st) (2018)</li>
+                <li> Summa Cum Laude (2018)</li>
+                <li> Boston University Arts Initiative Research Award (2018)</li>
+                <li> UROP Summer Research Award (2018)</li>
+                <li> Dean's List 4 Years (2014-2018)</li>
+              </ul> 
+            </td>
+          </tr>
+        </tbody></table>
+        <br>
+
+        <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
+          <tr>
+            <td style="padding:10px">
+              <br>
+              <br>
+              <p style="text-align:right;font-size:small;">
+                 <a style="font-size:small;" href="https://jonbarron.info/" target="_blank">This guy makes a nice webpage.</a>
+              </p>
+            </td>
+          </tr>
+        </table>
+
+      </td>
+    </tr>
+  </table>
+</body>
+
+</html>

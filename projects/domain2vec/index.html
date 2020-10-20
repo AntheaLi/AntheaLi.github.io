@@ -1,0 +1,100 @@
+<html>
+<head>
+<title>Domain Embedding</title>
+<link rel="SHORTCUT ICON" href="favicon.ico"/>
+<link href='css/paperstyle.css' rel='stylesheet' type='text/css'>
+</head>
+
+<body>
+
+<div class="pageTitle">
+    Domain2Vec: Domain Embedding for Unsupervised Domain Adaptation
+  <br>
+  <br>
+  <span class = "Authors">
+      <a href="https://cs-people.bu.edu/xpeng/" target="_blank">Xingchao Peng</a><sup>1*</sup> &nbsp; &nbsp;
+      <a href="http://cs.stanford.edu/~liyichen" target="_blank">Yichen Li</a><sup>2*</sup> &nbsp; &nbsp;
+      <a href="http://ai.bu.edu/ksaenko.html" target="_blank">Kate Saenko</a><sup>1</sup> &nbsp; &nbsp;<br>
+      <i>(*: indicates joint first authors)</i><br><br>
+      <sup>1</sup><a href = "https://research.adobe.com/" target="_blank"> Boston University </a> &nbsp; &nbsp;
+      <sup>2</sup><a href = "http://www.stanford.edu/" target="_blank"> Stanford University </a> &nbsp; &nbsp;<br><br>
+      <a href="https://eccv2020.eu/" target="_blank"><i>European Conference on Computer Vision (ECCV) 2020</i></a>
+  </span>
+  </div>
+<br>
+<div class = "material">
+        <a href="https://arxiv.org/pdf/2007.09257.pdf" target="_blank">[ArXiv Preprint]</a>
+        <a href="paper.bib" target="_blank">[BibTex]</a> 
+        <a href="https://github.com/VisionLearningGroup/Domain2Vec" target="_blank">[Code (Github)]</a>
+        <a href="https://github.com/VisionLearningGroup/Domain2Vec" target="_blank">[Data]</a>
+        <a href="slides.pdf" target="_blank">[Slides]</a><br>
+</div>
+
+<div class = "abstractTitle">
+  Abstract
+  </div>
+  <p class = "abstractText">
+  Autonomous assembly is a crucial capability for robots in many applications. For this task, several problems such as obstacle avoidance, motion planning, and actuator control have been extensively studied in robotics. However, when it comes to task specification, the space of possibilities remains underexplored. Towards this end, we introduce a novel problem, single-image-guided 3D part assembly, along with a learningbased solution. We study this problem in the setting of furniture assembly from a given complete set of parts and a single image depicting the entire assembled object. Multiple challenges exist in this setting, including handling ambiguity among parts (e.g., slats in a chair back and leg stretchers) and 3D pose prediction for parts and part subassemblies, whether visible or occluded. We address these issues by proposing a two-module pipeline that leverages strong 2D-3D correspondences and assembly-oriented graph message-passing to infer part relationships. In experiments with a PartNet-based synthetic benchmark, we demonstrate the effectiveness of our framework as compared with three baseline approaches.
+</p>
+
+
+<!-- <div class = "abstractTitle">
+  Long 8-min Video Presentation
+  </div>
+  <center>
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/gtaBaEAs22s" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  </center>
+
+
+<div class = "abstractTitle">
+  Short 1-min Video Presentation
+  </div>
+  <center>
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/TCME39wusek" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  </center> -->
+
+
+<div class="abstractTitle">
+    Network Architecture
+</div>
+  <img class = "bannerImage" src="images/model.png", width="800"><br>
+  <table width="800" align="center"><tr><td><p class = "figureTitleText">
+              Figure 2. <b>Network Architecture.</b> Our Domain2Vec architecture achieve deep domain embedding by by joint learning of feature disentanglement and Gram matrix. We employ domain disentanglement (red lines) and class disentanglement (blue lines) to extract domain-specific features and category specific features, both trained adversarially. We further apply a mutual information minimizer to enhance the disentanglement.
+  </p></td></tr></table>
+
+<div class="abstractTitle">
+    Qualitative Results TinyDA
+</div>
+  <img class = "bannerImage" src="images/emb1.png", width="800"><br>
+  <table width="800" align="center"><tr><td><p class = "figureTitleText">
+              Figure 3. <b>Qualitative Results.</b>  we show the  <i>(a)t-SNE plot of the embedding result (color indicates different domain)</i> and <i>Domain knowledge graph. The size and color of the circles indicate the number of training examples and the degree of that domain, respectively. The width of the edge shows the domain distance between two domains. </i>  as well as the <i> final deep embedding </i>.
+  </p></td></tr></table>
+
+<div class="abstractTitle">
+    Quantitative Results DomainBank
+</div>
+  <img class = "bannerImage" src="images/emb2.png", width="800"><br>
+  <table width="800" align="center"><tr><td><p class = "figureTitleText">
+              Figure 4. We also show the embeding results for DomainBank.
+  </p></td></tr></table>
+
+  <div class="abstractTitle">
+    Quantitative Results 
+</div>
+  <img class = "bannerImage" src="images/quant.png", width="800"><br>
+  <table width="800" align="center"><tr><td><p class = "figureTitleText">
+              Figure 4. MSDA results on the TinyDA dataset.
+  </p></td></tr></table>
+
+
+  <div class = "abstractTitle">
+  Acknowledgements
+  </div>
+  <p class = "abstractText">
+This work was partially supported by NSF and Honda Research Institute.
+</p>
+
+
+
+</p></td></tr></table>
+</body></html>

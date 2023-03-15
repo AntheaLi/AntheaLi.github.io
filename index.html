@@ -121,6 +121,51 @@
             </td>
           </tr>  
 
+          <tr onmouseout="assem_stop()" onmouseover="assem_start()">
+            <td style="padding:10px;width:30%;vertical-align:bottom;">
+              <div class="one">
+                <div class="two" id='assem_image'>
+                  <img src='images/assembly.png' width="240"></div>
+                <img src='images/assembly.png' width="240">
+              </div>
+              <script type="text/javascript">
+                function assem_start() {
+                  document.getElementById('assem_image').style.opacity = "1";
+                }
+
+                function assem_stop() {
+                  document.getElementById('assem_image').style.opacity = "0";
+                }
+                assem_stop()
+              </script>
+            </td>
+            <td style="padding:20px;width:70%;vertical-align:middle">
+              <br>
+              <a href="https://arxiv.org/abs/2303.06163" target="_blank">
+                <papertitle>Category-Level Multi-Part Multi-Joint 3D Shape Assembly</papertitle>
+              </a>
+              <br>
+              <strong>Yichen Li</strong>,
+              <a href="https://cs.stanford.edu/~kaichun/" target="_blank">Kaichun Mo</a>,
+              <a href="https://duanyueqi.github.io/" target="_blank">Yueqi Duan</a>,
+              <a href="https://hughw19.github.io/" target="_blank">He Wang</a>,
+              <a href="https://jiequanz.github.io/" target="_blank">Jiequan Zhuang</a>,
+              <a href="https://linsats.github.io/" target="_blank">Lin Shao</a>,
+              <a href="https://cdfg.csail.mit.edu/wojciech#biography" target="_blank">Wojciech Matusik</a>,
+              <a href="https://geometry.stanford.edu/member/guibas/index.html" target="_blank">Leonidas Guibas</a>,
+              <br>
+              <em> (in submission) </em>, 2023 
+              <br>
+              <a href="https://arxiv.org/abs/2303.06163" target="_blank">[paper]</a> &nbsp  
+              <a href="https://people.csail.mit.edu/yichenl/projects/joint/" target="_blank">[project page]</a> &nbsp
+              <!-- <a href="https://github.com/AntheaLi/3DPartAssembly/" target="_blank">[code]</a> &nbsp -->
+              <!-- <a href="https://drive.google.com/file/d/1gygDQarCOZ7E4qptvTyYF_iZNxsJ4WnI/view" target="_blank">[dataset]</a> -->
+              <br>
+              <!-- <p>
+              We propose a local adversarial disentangling network for facial makeup and de-makeup, using multiple and overlapping local discriminators in a content-style disentangling network.
+              </p> -->
+            </td>
+          </tr>  
 
 
 

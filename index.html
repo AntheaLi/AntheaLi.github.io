@@ -57,6 +57,7 @@
               <ul>
                 <!-- <li>Template</li> -->
                 <li><span  style="color:red">[new]</span> [Jan, 2023] Our paper <a href="https://people.csail.mit.edu/yunsheng/Assemble-Them-All/paper.pdf" target="_blank">Assemble Them All: Physics-Based Planning for Generalizable Assembly by Disassembly</a> is accepted to <a href="https://asia.siggraph.org/2023/" target="_blank">Siggraph Asia 2022</a>.</li>
+                <li><span  style="color:red">[new]</span> [May, 2023] Our paper <a href="" target="_blank">Learning Preconditioner for Conjugate Gradient PDE Solver</a> is accepted to <a href="https://icml.cc/Conferences/2023/Dates" target="_blank">ICML 2023</a>.</li>
                 
                 <!-- <li><span  style="color:red">[new]</span> [June, 2020] Our paper <a href="https://arxiv.org/pdf/2007.09257.pdf" target="_blank">Domain2Vec: Domain Embedding for Unsupervised Domain Adaptation</a> is accepted to <a href="https://eccv2020.eu/" target="_blank">ECCV 2020</a>.</li> -->
               </ul> 
@@ -73,7 +74,53 @@
             </td>
           </tr>
 
+          
+          <tr onmouseout="precond_stop()" onmouseover="precond_start()">
+            <td style="padding:10px;width:30%;vertical-align:bottom;">
+              <div class="one">
+                <div class="two" id='assem_image'>
+                  <img src='images/ama.jpg' width="240"></div>
+                <img src='images/ama.jpg' width="240">
+              </div>
+              <script type="text/javascript">
+                function precond_start() {
+                  document.getElementById('assem_image').style.opacity = "1";
+                }
 
+                function precond_stop() {
+                  document.getElementById('assem_image').style.opacity = "0";
+                }
+                assem_stop()
+              </script>
+            </td>
+            <td style="padding:20px;width:70%;vertical-align:middle">
+
+              <br>
+              <a href="https://people.csail.mit.edu/yunsheng/Assemble-Them-All/paper.pdf" target="_blank">
+                <papertitle>Learning Preconditioner for Conjugate Gradient PDE Solver</papertitle>
+              </a>
+              <br>
+              <strong>Yichen Li*</strong>,
+              <a href="https://peterchencyc.com/">Peter Yichen Chen</a>,
+              <a href="https://people.iiis.tsinghua.edu.cn/~taodu/">Tao Du</a>,
+              <a href="http://people.csail.mit.edu/wojciech/">Wojciech Matusik</a>
+              <br>
+              <em>Siggraph Asia</em>, 2022
+              <br>
+              <a href="" target="_blank">[paper]</a> &nbsp  
+              <a href="" target="_blank">[project page]</a> &nbsp
+              <a href="" target="_blank">[code]</a> &nbsp
+              <!-- <a href="" target="_blank">[dataset]</a> -->
+              <br>
+              <!-- <p>
+              We propose a local adversarial disentangling network for facial makeup and de-makeup, using multiple and overlapping local discriminators in a content-style disentangling network.
+              </p> -->
+            </td>
+          </tr>  
+
+          
+          
+          
           <tr onmouseout="ama_stop()" onmouseover="ama_start()">
             <td style="padding:10px;width:30%;vertical-align:bottom;">
               <div class="one">

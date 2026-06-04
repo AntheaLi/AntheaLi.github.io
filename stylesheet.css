@@ -2,146 +2,274 @@
   --name-font-size: 32px;
   --title-font-size: 20px;
   --text-font-size: 15px;
+  --accent: #1772d0;
+  --accent-hover: #f09228;
 }
 
-
-/* latin-ext */
+/* ── Font faces ───────────────────────────────────────────── */
 @font-face {
-  font-family: 'Poppins';
-  font-style: italic;
-  font-weight: 400;
+  font-family: 'Poppins'; font-style: italic; font-weight: 400;
   src: local('Poppins Italic'), local('Poppins-Italic'), url(https://fonts.gstatic.com/s/Poppins/v15/S6u8w4BMUTPHjxsAUi-qNiXg7eU0.woff2) format('woff2');
   unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
 }
-/* latin */
 @font-face {
-  font-family: 'Poppins';
-  font-style: italic;
-  font-weight: 400;
+  font-family: 'Poppins'; font-style: italic; font-weight: 400;
   src: local('Poppins Italic'), local('Poppins-Italic'), url(https://fonts.gstatic.com/s/Poppins/v15/S6u8w4BMUTPHjxsAXC-qNiXg7Q.woff2) format('woff2');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
-/* latin-ext */
 @font-face {
-  font-family: 'Poppins';
-  font-style: italic;
-  font-weight: 700;
+  font-family: 'Poppins'; font-style: italic; font-weight: 700;
   src: local('Poppins Bold Italic'), local('Poppins-BoldItalic'), url(https://fonts.gstatic.com/s/Poppins/v15/S6u_w4BMUTPHjxsI5wq_FQftx9897sxZ.woff2) format('woff2');
   unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
 }
-/* latin */
 @font-face {
-  font-family: 'Poppins';
-  font-style: italic;
-  font-weight: 700;
+  font-family: 'Poppins'; font-style: italic; font-weight: 700;
   src: local('Poppins Bold Italic'), local('Poppins-BoldItalic'), url(https://fonts.gstatic.com/s/Poppins/v15/S6u_w4BMUTPHjxsI5wq_Gwftx9897g.woff2) format('woff2');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
-/* latin-ext */
 @font-face {
-  font-family: 'Poppins';
-  font-style: normal;
-  font-weight: 400;
+  font-family: 'Poppins'; font-style: normal; font-weight: 400;
   src: local('Poppins Regular'), local('Poppins-Regular'), url(https://fonts.gstatic.com/s/Poppins/v15/S6uyw4BMUTPHjxAwXiWtFCfQ7A.woff2) format('woff2');
   unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
 }
-/* latin */
 @font-face {
-  font-family: 'Poppins';
-  font-style: normal;
-  font-weight: 400;
+  font-family: 'Poppins'; font-style: normal; font-weight: 400;
   src: local('Poppins Regular'), local('Poppins-Regular'), url(https://fonts.gstatic.com/s/Poppins/v15/S6uyw4BMUTPHjx4wXiWtFCc.woff2) format('woff2');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
-/* latin-ext */
 @font-face {
-  font-family: 'Poppins';
-  font-style: normal;
-  font-weight: 700;
+  font-family: 'Poppins'; font-style: normal; font-weight: 700;
   src: local('Poppins Bold'), local('Poppins-Bold'), url(https://fonts.gstatic.com/s/Poppins/v15/S6u9w4BMUTPHh6UVSwaPGQ3q5d0N7w.woff2) format('woff2');
   unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
 }
-/* latin */
 @font-face {
-  font-family: 'Poppins';
-  font-style: normal;
-  font-weight: 700;
+  font-family: 'Poppins'; font-style: normal; font-weight: 700;
   src: local('Poppins Bold'), local('Poppins-Bold'), url(https://fonts.gstatic.com/s/Poppins/v15/S6u9w4BMUTPHh6UVSwiPGQ3q5d0.woff2) format('woff2');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
-a {
-  color: #1772d0;
-  text-decoration: none;
-}
+/* ── Base ─────────────────────────────────────────────────── */
+a { color: var(--accent); text-decoration: none; }
+a:focus, a:hover { color: var(--accent-hover); text-decoration: none; }
 
-a:focus,
-a:hover {
-  color: #f09228;
-  text-decoration: none;
-}
-
-body,
-td,
-th,
-tr,
-p,
-a {
-  font-family: 'Poppins', Verdana, Helvetica, sans-serif;
-  font-size: var(--text-font-size)
-}
-
-strong {
+body { margin: 0; background: #ffffff; color: #202020; }
+body, td, th, tr, p, a {
   font-family: 'Poppins', Verdana, Helvetica, sans-serif;
   font-size: var(--text-font-size);
 }
+img { max-width: 100%; height: auto; }
+strong { font-family: 'Poppins', Verdana, Helvetica, sans-serif; font-size: var(--text-font-size); }
+heading { font-family: 'Poppins', Verdana, Helvetica, sans-serif; font-size: var(--title-font-size); }
+papertitle { font-family: 'Poppins', Verdana, Helvetica, sans-serif; font-size: var(--text-font-size); font-weight: 700; }
+name { font-family: 'Poppins', Verdana, Helvetica, sans-serif; font-size: var(--name-font-size); }
 
-heading {
+/* ── Image hover (publications) ───────────────────────────── */
+.one { width: 160px; height: 160px; position: relative; }
+.two { width: 160px; height: 160px; position: absolute; transition: opacity .2s ease-in-out; }
+.fade { transition: opacity .2s ease-in-out; }
+span.highlight { background-color: #ffffd0; }
+
+/* ── Profile layout ───────────────────────────────────────── */
+.profile-focus { padding-left: 20px; }
+
+/* ── Toggle tabs ──────────────────────────────────────────── */
+.toggle-wrapper {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 20px 0;
+}
+.toggle-tab {
   font-family: 'Poppins', Verdana, Helvetica, sans-serif;
-  font-size: var(--title-font-size);
+  font-size: 14px;
+  font-weight: 500;
+  color: #666;
+  background: none;
+  border: none;
+  padding: 8px 18px;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: color 0.2s, border-color 0.2s;
+  white-space: nowrap;
+}
+.toggle-tab:hover { color: #333; }
+.toggle-tab.active {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+  font-weight: 600;
 }
 
-papertitle {
-  font-family: 'Poppins', Verdana, Helvetica, sans-serif;
-  font-size: var(--text-font-size);
-  font-weight: 700
+/* ── Smooth content swap ──────────────────────────────────── */
+#toggle-content { transition: opacity 0.2s ease-in-out; }
+
+/* ── Section helper ───────────────────────────────────────── */
+.section-table { width: 100%; border: 0; border-spacing: 0; border-collapse: separate; margin: 0 auto; }
+.section-cell  { padding: 10px 20px; width: 100%; vertical-align: middle; }
+.featured-toggle-section { margin-bottom: 24px; }
+.technical-blogs-section { margin-bottom: 24px; }
+
+/* ── Selected Research card grid ──────────────────────────── */
+.selected-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 14px;
+}
+.selected-card {
+  display: flex;
+  min-height: 142px;
+  flex-direction: column;
+  gap: 7px;
+  padding: 14px;
+  border: 1px solid #d9e4ee;
+  border-radius: 8px;
+  background: #fbfdff;
+  color: #202020;
+  text-decoration: none;
+}
+.selected-card:hover,
+.selected-card:focus {
+  border-color: var(--accent-hover);
+  color: #202020;
+  text-decoration: none;
+}
+.selected-card.is-upcoming {
+  cursor: default;
+  background: #f8fafc;
+}
+.selected-card.is-upcoming:hover,
+.selected-card.is-upcoming:focus {
+  border-color: #d9e4ee;
+}
+.selected-card strong { line-height: 1.35; }
+.selected-card span  { line-height: 1.45; font-size: 13px; }
+
+.selected-venue {
+  width: fit-content;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: #eef4fa;
+  color: #4f6172;
+  font-size: 12px;
 }
 
-name {
+/* ── Recent Technical Explorations ────────────────────────── */
+.exploration-list { margin-top: 12px; border-top: 1px solid #e6edf3; }
+.exploration-item { padding: 12px 0; border-bottom: 1px solid #e6edf3; }
+.exploration-item p { margin: 6px 0 0; line-height: 1.55; }
+
+/* ── Tag filter buttons ────────────────────────────────────── */
+.tag-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.tag-filter {
   font-family: 'Poppins', Verdana, Helvetica, sans-serif;
-  font-size: var(--name-font-size);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 3px 12px;
+  border-radius: 12px;
+  border: 1.5px solid #d9e4ee;
+  background: #fff;
+  color: #596b7a;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+.tag-filter:hover { border-color: #a0b4c8; }
+.tag-filter.active                  { background: #596b7a; color: #fff; border-color: #596b7a; }
+.tag-filter[data-filter="video"].active      { background: #1d4ed8; color: #fff; border-color: #1d4ed8; }
+.tag-filter[data-filter="rl"].active         { background: #15803d; color: #fff; border-color: #15803d; }
+.tag-filter[data-filter="physics"].active    { background: #c2410c; color: #fff; border-color: #c2410c; }
+.tag-filter[data-filter="multimodal"].active { background: #0f766e; color: #fff; border-color: #0f766e; }
+.tag-filter[data-filter="robotics"].active   { background: #7c3aed; color: #fff; border-color: #7c3aed; }
+.tag-filter[data-filter="other"].active      { background: #475569; color: #fff; border-color: #475569; }
+
+/* filtered-out publication rows */
+#publication tr.tag-hidden { display: none; }
+
+/* align publication thumbnails with paper titles */
+#publication > tbody > tr > td:first-child {
+  width: 24% !important;
+  padding-top: 20px !important;
+  padding-right: 8px !important;
+  vertical-align: top !important;
 }
 
-.one {
+#publication > tbody > tr > td:nth-child(2) {
+  width: 76% !important;
+  padding-left: 8px !important;
+  vertical-align: top !important;
+}
+
+#publication > tbody > tr > td:nth-child(2) > br:first-child {
+  display: none;
+}
+
+#publication .one img {
   width: 160px;
   height: 160px;
-  position: relative;
+  object-fit: contain;
 }
 
-.two {
+/* ── Publication tags ─────────────────────────────────────── */
+.pub-tag {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 1px 8px;
+  border-radius: 10px;
+  margin-left: 4px;
+  vertical-align: middle;
+  letter-spacing: 0.02em;
+}
+.pub-tag.video      { background: #dbeafe; color: #1d4ed8; }
+.pub-tag.rl         { background: #dcfce7; color: #15803d; }
+.pub-tag.physics    { background: #ffedd5; color: #c2410c; }
+.pub-tag.multimodal { background: #ccfbf1; color: #0f766e; }
+.pub-tag.robotics   { background: #ede9fe; color: #7c3aed; }
+.pub-tag.other      { background: #f1f5f9; color: #475569; }
+
+/* ── Paper placeholder (no image) ─────────────────────────── */
+.paper-placeholder {
+  display: flex;
   width: 160px;
   height: 160px;
-  position: absolute;
-  transition: opacity .2s ease-in-out;
-  -moz-transition: opacity .2s ease-in-out;
-  -webkit-transition: opacity .2s ease-in-out;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 16px;
+  border: 1px solid #d9e4ee;
+  border-radius: 8px;
+  background: #f5f8fb;
+  box-sizing: border-box;
+  text-align: center;
 }
+.paper-placeholder span  { color: var(--accent); font-size: 28px; font-weight: 700; }
+.paper-placeholder small { color: #596b7a; font-size: 12px; line-height: 1.35; }
 
-.fade {
-  transition: opacity .2s ease-in-out;
-  -moz-transition: opacity .2s ease-in-out;
-  -webkit-transition: opacity .2s ease-in-out;
-}
+/* ── Professional experience ──────────────────────────────── */
+.exp-item { margin-bottom: 14px; }
+.exp-item strong { font-size: var(--text-font-size); }
+.exp-item p { margin: 2px 0 0; color: #444; }
 
-span.highlight {
-  background-color: #ffffd0;
-}
+/* ── Mobile ───────────────────────────────────────────────── */
+@media (max-width: 640px) {
+  .profile-row,
+  .profile-bio,
+  .profile-photo {
+    display: block;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box;
+  }
+  .profile-photo { text-align: center; }
+  .profile-photo img { max-width: 220px !important; }
 
-#avatar {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 150px;
-  border-radius: 100%;
-  box-shadow: 0 0 0 0.3em #ddd;
+  .toggle-wrapper { flex-wrap: wrap; }
+  .toggle-tab { font-size: 13px; padding: 6px 12px; }
+
+  .selected-grid { grid-template-columns: 1fr; }
+  .section-cell { padding: 10px; }
 }

@@ -1,106 +1,135 @@
-<html>
-<head>
-<title>Learning Preconditioner for Conjugate Gradient PDE Solver</title>
-<link rel="SHORTCUT ICON" href="favicon.ico"/>
-<link href='css/paperstyle.css' rel='stylesheet' type='text/css'>
-</head>
+<!DOCTYPE html>
 
-<body>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
 
-<div class="pageTitle">
-    Learning Preconditioner for Conjugate Gradient PDE Solver
-  <br>
-  <br>
-  <span class = "Authors">
-      <a href="https://people.csail.mit.edu/yichenl/" target="_blank">Yichen Li</a><sup>1</sup> &nbsp; &nbsp;
-      <a href="https://peterchencyc.com/" target="_blank">Peter Yichen Chen</a><sup>1</sup> &nbsp; &nbsp;
-      <a href="https://people.iiis.tsinghua.edu.cn/~taodu/" target="_blank">Tao Du</a><sup>2, 3</sup> &nbsp; &nbsp;
-      <a href="https://cdfg.mit.edu/" target="_blank">Wojciech Matusik</a><sup>1</sup> &nbsp; &nbsp;
+    <meta name="description" content="Project website for PreconditionerGNN">
+    <meta name="author" content="Yichen Li">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdn.tailwindcss.com"></script>
+      <!-- Google tag (gtag.js) -->
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-RW1J13JRY6"></script>
+      <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
 
+        gtag('config', 'G-RW1J13JRY6');
+      </script>
+    <title>PreconditionerGNN</title>
+  </head>
 
-      <sup>1</sup><a href = "http://csail.mit.edu/" target="_blank">  MIT CSAIL </a> &nbsp; &nbsp;
-      <sup>2</sup><a href = "" target="_blank"> Tsinghua University</a> &nbsp; &nbsp;<br><br>
-      <sup>3</sup><a href = "" target="_blank"> Shanghai Qizhi Institute</a> &nbsp; &nbsp;<br><br>
-      <!-- <a href="https://eccv2020.eu/" target="_blank"><i>European Conference on Computer Vision (ECCV) 2020</i></a> -->
-  </span>
-  </div>
-<br>
-<div class = "material">
-        <a href="" target="_blank">[Paper]</a>
-        <a href="paper.bib" target="_blank">[BibTex]</a> 
-        <!-- <a href="https://github.com/AntheaLi/3DPartAssembly" target="_blank">[Code (Github)]</a> -->
-        <!-- <a href="slides.pdf" target="_blank">[Slides]</a><br> -->
-</div>
+  <style>
+    .grad_text {
+      background: -webkit-linear-gradient(right, #003f5c, #58508d, #bc5090, #ff6361, #ffa600);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+  </style>
 
-<div class = "abstractTitle">
-  Abstract
-  </div>
-  <p class = "abstractText">
-    Efficient numerical solvers for partial differential equations empower science and engineering. One of the commonly employed numerical solvers is the preconditioned conjugate gradient (PCG) algorithm that can solve large systems to a given precision level. One challenge in PCG solvers is the selection of preconditioners, as different problem-dependent systems can benefit from different preconditioners.  We present a new method to introduce \emph{inductive bias} in preconditioning conjugate gradient algorithm.  Given a system matrix and a set of solution vectors arise from an underlying distribution, we train a graph neural network to obtain an approximate decomposition to the system matrix to be used as a preconditioner in the context of PCG solvers. We conduct extensive experiments to demonstrate the efficacy and generalizability of our proposed approach on solving various 2D and 3D linear second-order PDEs.
-</p>
-
-<!-- <img class = "bannerImage" src="images/teaser.png", width="800"><br>
-<table width="800" align="center"><tr><td><p class = "figureTitleText">
-            Figure 1. <b>Single-Image-Based 3D Part Assembly Task.</b> Given as inputs an image and a set of part point clouds depicted in (a), the task is to predict 6D part poses in camera coordinates that assemble the parts to a 3D shape in the given image as shown in (b).
-</p></td></tr></table> -->
-
-
-<!-- <div class = "abstractTitle">
-  Long 8-min Video Presentation
-  </div>
-  <center>
-      <iframe width="560" height="315" src="https://www.youtube.com/embed/gtaBaEAs22s" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-  </center> -->
-
-
-<!-- <div class = "abstractTitle">
-  Short 1-min Video Presentation
-  </div>
-  <center>
-      <iframe width="560" height="315" src="https://www.youtube.com/embed/TCME39wusek" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-  </center> -->
-
-
-<!-- <div class="abstractTitle">
-    Network Architecture
-</div>
-  <img class = "bannerImage" src="images/network.png", width="800"><br>
-  <table width="800" align="center"><tr><td><p class = "figureTitleText">
-              Figure 2. <b>Network Architecture.</b> We propose a method that contains two network modules: (a) the part-instance image segmentation module, in which we predict 2D instance-level part masks on the image, and (b) the part pose prediction module, where we combine 2D mask information and 3D geometry feature for each part, push them through two phases of graph convolution, and finally predict 6D part poses.
-  </p></td></tr></table> -->
-
-<!-- <div class="abstractTitle">
-    Qualitative Results
-</div>
-  <img class = "bannerImage" src="images/result1.png", width="800"><br>
-  <table width="800" align="center"><tr><td><p class = "figureTitleText">
-              Figure 3. <b>Qualitative Results.</b> We show six examples of the three furniture categories, each in two different modalities. The upper and lower rows correspond to modality <i>Level-3</i> and <i>Level-mixed</i> respectively.
-  </p></td></tr></table> -->
-
-<!-- <div class="abstractTitle">
-    Quantitative Comparisons.
-</div>
-  <img class = "bannerImage" src="images/table1.png", width="800"><br>
-  <table width="800" align="center"><tr><td><p class = "figureTitleText">
-              Figure 4. <b>Quantitative Comparisons to Baseline Methods.</b> Our approach obtains the best performance across three baseline methods, under the <i>part accuracy</i> and <i>assembly chamfer sistance (CD)</i> metrics.
-  </p></td></tr></table> -->
-
-  <!-- <div class="abstractTitle">
-    Failure Cases
-</div>
-<img class = "bannerImage" src="images/failure.png", width="800"><br>
-  <table width="800" align="center"><tr><td><p class = "figureTitleText">
-              Figure 5. <b>Failure Cases.</b> We show two examples of failure cases. Case (a), the input image is not geometrically informative. Case (b), the chair has only one type of part geometry.
-  </p></td></tr></table> -->
-
-  <div class = "abstractTitle">
-  <!-- Acknowledgements -->
-  </div>
-  <p class = "abstractText">
-<!-- This research was supported by a Vannevar Bush Faculty Fellowship, grants from the Samsung GRO program and the Stanford SAIL Toyota Research Center, and gifts from Autodesk and Adobe. -->
-</p>
-
-
-
-</p></td></tr></table>
-</body></html>
+  <body>
+    <section>
+      <div class="relative items-center w-full px-5 pt-12 pb-2 mx-auto md:px-12 lg:px-16 max-w-7xl lg:pt-24 lg:pb-4">
+        <div class="flex w-full mx-auto text-left">
+          <div class="relative inline-flex items-center mx-auto align-middle">
+            <div class="text-center">
+              <h1 class="max-w-5xl text-3xl font-bold leading-none tracking-tighter text-black-600 md:text-5xl lg:text-5xl lg:max-w-7xl">
+                Learning Preconditioners<br>for Conjugate Gradient PDE Solvers
+              </h1>
+              <div class="space-y-2">
+                <p class="max-w-6xl mx-auto mt-8 text-md md:text-xl lg:text-xl lg:text-xl leading-relaxed text-gray-600 space-x-5">
+                  <a href="https://people.csail.mit.edu/yichenl/" target="_blank">Yichen Li</a><sup>1</sup> &nbsp; &nbsp;
+                  <a href="https://peterchencyc.com/" target="_blank">Peter Yichen Chen</a><sup>1</sup> &nbsp; &nbsp;
+                  <a href="https://people.iiis.tsinghua.edu.cn/~taodu/" target="_blank">Tao Du</a><sup>2, 3</sup> &nbsp; &nbsp;
+                  <a href="https://cdfg.mit.edu/" target="_blank">Wojciech Matusik</a><sup>1</sup> &nbsp; &nbsp;
+                </p>
+            
+                  <p class="max-w-6xl mx-auto mt-8 text-md md:text-xl lg:text-xl lg:text-xl leading-relaxed text-gray-400 space-x-7">
+                  <sup>1</sup><a href = "http://csail.mit.edu/" target="_blank">  MIT CSAIL </a> &nbsp; &nbsp;
+                  <sup>2</sup><a href = "" target="_blank"> Tsinghua University</a> &nbsp; &nbsp;
+                  <sup>3</sup><a href = "" target="_blank"> Shanghai Qizhi Institute</a> &nbsp; &nbsp;<br><br>
+                </p>
+                <p class="max-w-6xl mx-auto mt-8 text-md md:text-xl lg:text-xl lg:text-xl leading-relaxed text-gray-600 space-x-7">
+                  <span class="font-bold">ICML 2023</span>
+                </p>
+              </div>
+              <div class="flex items-center justify-center w-full max-w-2xl gap-2 mx-auto mt-6">
+                <a href="./paper.pdf" class="inline-flex items-center text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-3 mr-2 mb-2 dark:bg-gray-600 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800">
+                  <svg aria-hidden="true" class="w-5 h-5 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+                  </svg>
+                  <span>Paper</span>
+                </a>
+                <a href="https://arxiv.org/abs/2305.16432" class="inline-flex items-center text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-3 mr-2 mb-2 dark:bg-gray-600 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800">
+                  <svg aria-hidden="true" class="w-5 h-5 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5M10 11.25h4M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z" />
+                  </svg>
+                  <span>Arxiv</span>
+                </a>
+                <a href="https://slideslive.com/39003386/learning-preconditioner-for-conjugate-gradient-pde-solver?ref=search-presentations" class="inline-flex items-center text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-3 mr-2 mb-2 dark:bg-gray-600 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800">
+                  <svg aria-hidden="true" class="w-5 h-5 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15.91 11.672a.375.375 0 010 .656l-5.603 3.113a.375.375 0 01-.557-.328V8.887c0-.286.307-.466.557-.327l5.603 3.112z" />
+                  </svg>
+                  <span>Video</span>
+                </a>
+                <a href="https://github.com/AntheaLi/Preconditioner.git" class="inline-flex items-center text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-3 mr-2 mb-2 dark:bg-gray-600 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800">
+                  <svg aria-hidden="true" class="w-5 h-5 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M14.25 9.75L16.5 12l-2.25 2.25m-4.5 0L7.5 12l2.25-2.25M6 20.25h12A2.25 2.25 0 0020.25 18V6A2.25 2.25 0 0018 3.75H6A2.25 2.25 0 003.75 6v12A2.25 2.25 0 006 20.25z" />
+                  </svg>
+                  <span>Code</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="flex flex-col items-center justify-center pt-3 mx-auto rounded-lg pt-6 max-w-4xl">
+          <img src="./images/preconditioner-teaser.png" class="object-cover object-center">
+        </div>
+      </div>
+      <div class="flex flex-col items-center px-5 pt-8 pb-6 my-6 mx-auto max-w-5xl sm:px-6 lg:px-8">
+        <div class="flex flex-col w-full max-w-5xl mx-auto border-l-4 p-12 rounded-r-xl bg-gray-50 prose text-left text-gray-800 leading-7">
+          <h2 class="text-2xl font-bold pb-5"><span>Abstract</span></h2>
+          <p>
+            Efficient numerical solvers for partial differential equations empower science and engineering. One of the commonly employed numerical solvers is the preconditioned conjugate gradient (PCG) algorithm that can solve large systems to a given precision level. One challenge in PCG solvers is the selection of preconditioners, as different problem-dependent systems can benefit from different preconditioners.  We present a new method to introduce \emph{inductive bias} in preconditioning conjugate gradient algorithm.  Given a system matrix and a set of solution vectors arise from an underlying distribution, we train a graph neural network to obtain an approximate decomposition to the system matrix to be used as a preconditioner in the context of PCG solvers. We conduct extensive experiments to demonstrate the efficacy and generalizability of our proposed approach on solving various 2D and 3D linear second-order PDEs.
+          </p>
+        </div>
+      </div>
+      <div class="flex flex-col items-center px-5 pt-6 pb-3 mx-auto max-w-6xl sm:px-6 lg:px-8">
+        <div class="flex flex-col items-center max-w-6xl mx-auto prose text-left text-gray-800">
+          <h2 class="text-2xl font-bold pb-5"><span class="grad_text">Method Overview</span></h2>
+          <!-- Add top margin for spacing and responsive flex classes -->
+          <div class="flex flex-col items-center justify-center pt-3 mx-auto rounded-lg pt-6 max-w-4xl">
+            <!-- First Image (38% Width) -->
+            <div class="w-full md:w-[90%] md:pr-2 mb-4 md:mb-0">
+              <img src="./images/icml_poster1.png" class="w-full h-auto object-contain">
+            </div>
+      
+            <!-- Divider Line (2% Buffer) -->
+            <!-- <div class="hidden md:flex w-[2%] justify-center items-center">
+              <div class="w-[2px] bg-black h-full"></div>
+            </div>
+      
+            <div class="w-full md:w-[60%] md:pl-2">
+              <img src="/images/model_architecture.png" class="w-full h-auto object-contain">
+            </div> -->
+          </div>
+        </div>
+      </div>
+      <div class="flex flex-col items-center px-5 pt-0 pb-12 mx-auto max-w-6xl sm:px-6 lg:px-8">
+        <div class="flex flex-col items-center max-w-6xl mx-auto prose text-left text-gray-800">
+          <h2 class="text-2xl font-bold pb-5"><span class="grad_text">BibTeX</span></h2>
+          <pre><code class="language-plaintext text-sm sm:text-base inline-flex text-left items-center space-x-4 bg-gray-800 text-white rounded-lg p-4 pl-6">
+            @inproceedings{li2023preconditioner,
+              title={Learning preconditioners for conjugate gradient PDE solvers},
+              author={Li, Yichen and Chen, Peter Yichen and Du, Tao and Matusik, Wojciech},
+              booktitle={International Conference on Machine Learning},
+              pages={19425--19439},
+              year={2023},
+              organization={PMLR}
+            }</code></pre>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>

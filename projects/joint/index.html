@@ -1,5 +1,19 @@
 <html>
 <head>
+  <meta charset="UTF-8">
+  <meta name="description" content="MultiJointAssembly">
+  <meta name="author" content="Yichen Li">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RW1J13JRY6"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-RW1J13JRY6');
+    </script>
 <title>Joint-based 3D Part Assembly</title>
 <link rel="SHORTCUT ICON" href="favicon.ico"/>
 <link href='css/paperstyle.css' rel='stylesheet' type='text/css'>
@@ -48,20 +62,26 @@
 <div class="abstractTitle">
     Qualitative Results
 </div>
-  <img class = "bannerImage" src="images/result1.png", width="800"><br>
+  <img class = "bannerImage" src="images/joint-assembly-results.png", width="800"><br>
   <table width="800" align="center"><tr><td><p class = "figureTitleText">
               Figure 3. <b>Qualitative Results.</b> 
   </p></td></tr></table>
 
-<div class="abstractTitle">
-    Quantitative Comparisons.
+<div class="flex flex-col items-center px-5 pt-0 pb-12 mx-auto max-w-6xl sm:px-6 lg:px-8">
+  <div class="flex flex-col items-center max-w-6xl mx-auto prose text-left text-gray-800">
+    <h2 class="text-2xl font-bold pb-5"><span class="grad_text">BibTeX</span></h2>
+    <pre><code class="language-plaintext text-sm sm:text-base inline-flex text-left items-center space-x-4 bg-gray-800 text-white rounded-lg p-4 pl-6">
+      @inproceedings{li2024jointassembly,
+        title={Category-level multi-part multi-joint 3d shape assembly},
+        author={Li, Yichen and Mo, Kaichun and Duan, Yueqi and Wang, He and Zhang, Jiequan and Shao, Lin},
+        booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition},
+        pages={3281--3291},
+        year={2024}
+      }  
+    </code></pre>
+  </div>
 </div>
-  <img class = "bannerImage" src="images/table1.png", width="800"><br>
-  <table width="800" align="center"><tr><td><p class = "figureTitleText">
-              Figure 4. <b>Quantitative Comparisons to Baseline Methods.</b> 
-  <div class="abstractTitle">
-    Failure Cases
-</div>
+
 
 
 </p></td></tr></table>

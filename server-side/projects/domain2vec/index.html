@@ -1,0 +1,107 @@
+<html>
+<head>
+<title>Domain Embedding</title>
+<link rel="SHORTCUT ICON" href="favicon.ico"/>
+<link href='css/paperstyle.css' rel='stylesheet' type='text/css'>
+</head>
+
+<body>
+
+<div class="pageTitle">
+    Domain2Vec: Domain Embedding for Unsupervised Domain Adaptation
+  <br>
+  <br>
+  <span class = "Authors">
+      <a href="https://cs-people.bu.edu/xpeng/" target="_blank">Xingchao Peng</a><sup>1*</sup> &nbsp; &nbsp;
+      <a href="http://cs.stanford.edu/~liyichen" target="_blank">Yichen Li</a><sup>2*</sup> &nbsp; &nbsp;
+      <a href="http://ai.bu.edu/ksaenko.html" target="_blank">Kate Saenko</a><sup>1</sup> &nbsp; &nbsp;<br>
+      <i>(*: indicates joint first authors)</i><br><br>
+      <sup>1</sup><a href = "https://research.adobe.com/" target="_blank"> Boston University </a> &nbsp; &nbsp;
+      <sup>2</sup><a href = "http://www.stanford.edu/" target="_blank"> Stanford University </a> &nbsp; &nbsp;<br><br>
+      <a href="https://eccv2020.eu/" target="_blank"><i>European Conference on Computer Vision (ECCV) 2020</i></a>
+  </span>
+  </div>
+<br>
+<div class = "material">
+        <a href="https://arxiv.org/pdf/2007.09257.pdf" target="_blank">[Paper]</a>
+        <a href="paper.bib" target="_blank">[BibTex]</a> 
+        <a href="https://github.com/VisionLearningGroup/Domain2Vec" target="_blank">[Code (Github)]</a>
+        <a href="https://github.com/VisionLearningGroup/Domain2Vec" target="_blank">[Data]</a>
+        <a href="slides.pdf" target="_blank">[Slides]</a><br>
+</div>
+
+<div class = "abstractTitle">
+  Abstract
+  </div>
+  <p class = "abstractText">Conventional unsupervised domain adaptation (UDA) studies the knowledge transfer between a limited number of domains. This neglects the more practical scenario where data are distributed in numerous different domains in the real world. A technique to measure domain similarity is critical for domain adaptation performance. To describe and learn relations between different domains, we propose a novel Domain2Vec model to provide vectorial representations of visual domains based on joint learning of feature disentanglement and Gram matrix. To evaluate the effectiveness of our Domain2Vec model, we create two large-scale cross-domain benchmarks. The first one is TinyDA, which contains 54 domains and about one million MNIST-style images. The second benchmark is DomainBank , which is collected from 56 existing vision datasets. We demonstrate that our embedding is capable of predicting domain similarities that match our intuition about visual relations between different domains. Extensive experiments are conducted to demonstrate the power of our new datasets in benchmarking state-of-the-art multi-source domain adaptation methods, as well as the advantage of our proposed model. 
+</p>
+
+
+<!-- <div class = "abstractTitle">
+  Long 8-min Video Presentation
+  </div>
+  <center>
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/gtaBaEAs22s" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  </center>
+
+
+<div class = "abstractTitle">
+  Short 1-min Video Presentation
+  </div>
+  <center>
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/TCME39wusek" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  </center> -->
+
+
+<div class="abstractTitle">
+    Network Architecture
+</div>
+  <img class = "bannerImage" src="images/model.png", width="800"><br>
+  <table width="800" align="center"><tr><td><p class = "figureTitleText">
+              Figure 2. <b>Network Architecture.</b> Our Domain2Vec architecture achieve deep domain embedding by by joint learning of feature disentanglement and Gram matrix. We employ domain disentanglement (red lines) and class disentanglement (blue lines) to extract domain-specific features and category specific features, both trained adversarially. We further apply a mutual information minimizer to enhance the disentanglement.
+  </p></td></tr></table>
+
+  <div class="abstractTitle">
+    Dataset
+</div>
+  <img class = "bannerImage" src="images/dataset.png", width="800"><br>
+  <table width="800" align="center"><tr><td><p class = "figureTitleText">
+              Figure 4. Examples of our dataset.
+  </p></td></tr></table>
+<div class="abstractTitle">
+
+    Qualitative Results TinyDA
+</div>
+  <img class = "bannerImage" src="images/emb1.png", width="800"><br>
+  <table width="800" align="center"><tr><td><p class = "figureTitleText">
+              Figure 3. <b>Qualitative Results.</b>  we show the  <i>(a)t-SNE plot of the embedding result (color indicates different domain)</i> and <i>Domain knowledge graph. The size and color of the circles indicate the number of training examples and the degree of that domain, respectively. The width of the edge shows the domain distance between two domains. </i>  as well as the <i> final deep embedding </i>.
+  </p></td></tr></table>
+
+<div class="abstractTitle">
+    Quantitative Results DomainBank
+</div>
+  <img class = "bannerImage" src="images/emb2.png", width="800"><br>
+  <table width="800" align="center"><tr><td><p class = "figureTitleText">
+              Figure 4. We also show the embeding results for DomainBank.
+  </p></td></tr></table>
+
+  <div class="abstractTitle">
+    Quantitative Results 
+</div>
+  <img class = "bannerImage" src="images/quant.png", width="800"><br>
+  <table width="800" align="center"><tr><td><p class = "figureTitleText">
+              Figure 4. MSDA results on the TinyDA dataset.
+  </p></td></tr></table>
+
+
+  <div class = "abstractTitle">
+  Acknowledgements
+  </div>
+  <p class = "abstractText">
+This work was partially supported by NSF and Honda Research Institute.
+</p>
+
+
+
+</p></td></tr></table>
+</body></html>

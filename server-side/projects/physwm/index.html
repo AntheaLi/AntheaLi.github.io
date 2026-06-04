@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="description" content="PhysWM: Generalized Dynamics Generation towards Scannable Physical World Model">
+    <meta name="author" content="Yichen Li, Zhiyi Li, Brandon Feng, Antonio Torralba">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Space+Mono:wght@400;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RW1J13JRY6"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-RW1J13JRY6');
+    </script>
+    <title>PhysWM - Physical World Model</title>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              'display': ['Playfair Display', 'serif'],
+              'body': ['DM Sans', 'sans-serif'],
+              'mono': ['Space Mono', 'monospace'],
+            },
+            colors: {
+              'primary': {
+                '50': '#f0fdf4',
+                '100': '#dcfce7',
+                '200': '#bbf7d0',
+                '300': '#86efac',
+                '400': '#4ade80',
+                '500': '#22c55e',
+                '600': '#16a34a',
+                '700': '#15803d',
+              },
+              'accent': {
+                'teal': '#14b8a6',
+                'blue': '#3b82f6',
+                'indigo': '#6366f1',
+                'emerald': '#10b981',
+              }
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+      body {
+        background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 50%, #e2e8f0 100%);
+        min-height: 100vh;
+      }
+      
+      .gradient-text {
+        background: linear-gradient(135deg, #059669 0%, #14b8a6 40%, #3b82f6 70%, #6366f1 100%);
+        background-size: 200% auto;
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      
+      .card {
+        background: rgba(255, 255, 255, 0.95);
+        border: 1px solid rgba(0, 0, 0, 0.06);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+      }
+      
+      .physics-grid {
+        background-image: 
+          linear-gradient(rgba(20, 184, 166, 0.05) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(20, 184, 166, 0.05) 1px, transparent 1px);
+        background-size: 40px 40px;
+      }
+      
+      .feature-icon {
+        transition: all 0.3s ease;
+      }
+      
+      .feature-icon:hover {
+        transform: translateY(-4px) scale(1.05);
+      }
+      
+      .btn {
+        transition: all 0.2s ease;
+      }
+      
+      .btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+      }
+      
+      .section-line {
+        height: 2px;
+        background: linear-gradient(90deg, transparent, #14b8a6, #3b82f6, transparent);
+      }
+      
+      .mesh-bg {
+        position: absolute;
+        inset: 0;
+        opacity: 0.4;
+        background: 
+          radial-gradient(ellipse at 20% 30%, rgba(20, 184, 166, 0.15) 0%, transparent 50%),
+          radial-gradient(ellipse at 80% 70%, rgba(99, 102, 241, 0.12) 0%, transparent 50%);
+      }
+    </style>
+  </head>
+
+  <body class="text-gray-800 font-body physics-grid">
+    <main class="relative">
+      <!-- Hero Section -->
+      <section class="relative pt-16 pb-10 lg:pt-24 lg:pb-14 overflow-hidden">
+        <div class="mesh-bg"></div>
+        <div class="max-w-5xl mx-auto px-6 relative z-10">
+          <div class="text-center">
+            <!-- Logo/Icon -->
+            <div class="flex justify-center mb-6">
+              <div class="p-5 rounded-2xl bg-gradient-to-br from-teal-500 to-emerald-600 shadow-lg">
+                <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+                </svg>
+              </div>
+            </div>
+            
+            <!-- Title -->
+            <h1 class="font-display text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-4 leading-tight">
+              <span class="text-gray-800">Generalized Dynamics Generation</span>
+              <br />
+              <span class="text-gray-800">towards </span>
+              <span class="gradient-text">Scannable Physical World Model</span>
+            </h1>
+            
+            <!-- Subtitle -->
+            <p class="text-lg text-gray-500 max-w-2xl mx-auto mt-4 font-light">
+              PhysWM: Learning generalizable dynamics from 3D scans for physical simulation and prediction
+            </p>
+            
+            <!-- Authors -->
+            <div class="flex flex-wrap justify-center gap-x-6 gap-y-2 mt-8 text-base text-gray-600">
+              <a href="https://people.csail.mit.edu/yichenl/" target="_blank" class="hover:text-teal-600 transition-colors">
+                Yichen Li<sup class="text-teal-600">1</sup>
+              </a>
+              <a href="#" target="_blank" class="hover:text-teal-600 transition-colors">
+                Zhiyi Li<sup class="text-teal-600">1</sup>
+              </a>
+              <a href="#" target="_blank" class="hover:text-teal-600 transition-colors">
+                Brandon Feng<sup class="text-teal-600">1</sup>
+              </a>
+              <a href="https://web.mit.edu/torralba/www/" target="_blank" class="hover:text-teal-600 transition-colors">
+                Antonio Torralba<sup class="text-teal-600">1</sup>
+              </a>
+            </div>
+            
+            <!-- Affiliations -->
+            <div class="mt-4 text-sm text-gray-500 space-x-6">
+              <span><sup>1</sup><a href="http://csail.mit.edu/" target="_blank" class="hover:text-gray-700">MIT CSAIL</a></span>
+            </div>
+            
+            <!-- Action Buttons -->
+            <div class="flex flex-wrap justify-center gap-4 mt-10">
+              <a href="./2510.15041.pdf" class="btn inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gray-900 text-white font-medium">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+                Paper
+              </a>
+              <a href="https://arxiv.org/abs/2510.15041" target="_blank" class="btn inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-white border border-gray-200 text-gray-700 font-medium hover:bg-gray-50">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4" />
+                </svg>
+                arXiv
+              </a>
+              <a href="https://github.com/yichenl/physwm" target="_blank" class="btn inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-white border border-gray-200 text-gray-700 font-medium hover:bg-gray-50">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                </svg>
+                Code
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Teaser Section -->
+      <section class="py-8">
+        <div class="max-w-3xl mx-auto px-6">
+          <div class="card rounded-2xl p-3 overflow-hidden">
+            <img src="./images/teaser.png" alt="PhysWM Teaser" class="w-full rounded-xl" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'flex items-center justify-center h-64 text-gray-400\'>Teaser image coming soon</div>'">
+          </div>
+        </div>
+      </section>
+
+      <div class="section-line max-w-xl mx-auto my-10"></div>
+
+      <!-- Abstract Section -->
+      <section class="py-10">
+        <div class="max-w-4xl mx-auto px-6">
+          <div class="card rounded-2xl p-8 md:p-10">
+            <h2 class="font-display text-2xl font-semibold mb-6 flex items-center gap-3 text-gray-800">
+              <div class="w-1 h-8 bg-gradient-to-b from-teal-500 to-emerald-500 rounded-full"></div>
+              Abstract
+            </h2>
+            <p class="text-lg leading-relaxed text-gray-600">
+              We present PhysWM, a framework for learning generalizable physical dynamics from 3D scans of real-world objects. Our approach enables the prediction and simulation of how scanned objects will behave under various physical interactions, bridging the gap between static 3D captures and dynamic physical simulation. By learning a latent dynamics model that generalizes across object categories and material properties, PhysWM can predict physically plausible deformations, motions, and interactions without requiring object-specific training. We demonstrate that our model can be applied to novel scanned objects at test time, enabling applications in robotics, virtual reality, and physical reasoning.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-line max-w-xl mx-auto my-6"></div>
+
+      <!-- Method Overview -->
+      <section class="py-10">
+        <div class="max-w-5xl mx-auto px-6">
+          <h2 class="font-display text-2xl md:text-3xl font-semibold mb-8 text-center text-gray-800">
+            <span class="gradient-text">Method Overview</span>
+          </h2>
+          
+          <div class="card rounded-2xl p-6 md:p-10">
+            <p class="text-gray-600 leading-relaxed mb-8 text-center max-w-3xl mx-auto">
+              PhysWM learns to predict physical dynamics by combining neural scene representations with learned physics priors. Given a 3D scan, our model infers latent physical properties and simulates forward dynamics under applied forces or interactions.
+            </p>
+            
+            <!-- Method Figure -->
+            <div class="rounded-xl overflow-hidden bg-gray-50 p-4 mb-10">
+              <img src="./images/method.png" alt="Method Overview" class="w-full rounded-lg" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'flex items-center justify-center h-48 text-gray-400\'>Method figure coming soon</div>'">
+            </div>
+            
+            <!-- Key Components -->
+            <div class="grid md:grid-cols-3 gap-6">
+              <div class="feature-icon p-6 rounded-xl bg-gradient-to-br from-teal-50 to-emerald-50 border border-teal-100">
+                <div class="w-12 h-12 rounded-lg bg-teal-500 flex items-center justify-center mb-4">
+                  <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-2 1m2-1l-2-1m2 1v2.5M14 4l-2-1-2 1M4 7l2-1M4 7l2 1M4 7v2.5M12 21l-2-1m2 1l2-1m-2 1v-2.5M6 18l-2-1v-2.5M18 18l2-1v-2.5" />
+                  </svg>
+                </div>
+                <h3 class="font-semibold text-gray-800 mb-2">3D Scene Encoder</h3>
+                <p class="text-sm text-gray-500">Encodes 3D Gaussian splat representations into latent geometry and appearance features.</p>
+              </div>
+              
+              <div class="feature-icon p-6 rounded-xl bg-gradient-to-br from-blue-50 to-indigo-50 border border-blue-100">
+                <div class="w-12 h-12 rounded-lg bg-blue-500 flex items-center justify-center mb-4">
+                  <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
+                  </svg>
+                </div>
+                <h3 class="font-semibold text-gray-800 mb-2">Physics Prior Network</h3>
+                <p class="text-sm text-gray-500">Infers material properties and physical parameters from visual observations.</p>
+              </div>
+              
+              <div class="feature-icon p-6 rounded-xl bg-gradient-to-br from-indigo-50 to-purple-50 border border-indigo-100">
+                <div class="w-12 h-12 rounded-lg bg-indigo-500 flex items-center justify-center mb-4">
+                  <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                  </svg>
+                </div>
+                <h3 class="font-semibold text-gray-800 mb-2">Dynamics Generator</h3>
+                <p class="text-sm text-gray-500">Generates future states by simulating physics-aware deformations and motions.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-line max-w-xl mx-auto my-6"></div>
+
+      <!-- Pipeline Section -->
+      <section class="py-10">
+        <div class="max-w-5xl mx-auto px-6">
+          <h2 class="font-display text-2xl md:text-3xl font-semibold mb-8 text-center text-gray-800">
+            <span class="gradient-text">Generation Pipeline</span>
+          </h2>
+          
+          <div class="card rounded-2xl p-6 md:p-10">
+            <!-- Pipeline Steps -->
+            <div class="relative">
+              <div class="absolute top-10 left-0 right-0 h-0.5 bg-gradient-to-r from-teal-400 via-blue-400 to-indigo-400 hidden md:block"></div>
+              
+              <div class="grid md:grid-cols-4 gap-8">
+                <div class="relative text-center">
+                  <div class="w-20 h-20 rounded-full bg-gradient-to-br from-teal-500 to-teal-600 flex items-center justify-center mx-auto mb-4 relative z-10 shadow-lg">
+                    <span class="font-mono font-bold text-2xl text-white">1</span>
+                  </div>
+                  <h4 class="font-semibold text-gray-800 mb-2">Scan Input</h4>
+                  <p class="text-sm text-gray-500">3D Gaussian splat from real-world capture or reconstruction</p>
+                </div>
+                
+                <div class="relative text-center">
+                  <div class="w-20 h-20 rounded-full bg-gradient-to-br from-emerald-500 to-teal-500 flex items-center justify-center mx-auto mb-4 relative z-10 shadow-lg">
+                    <span class="font-mono font-bold text-2xl text-white">2</span>
+                  </div>
+                  <h4 class="font-semibold text-gray-800 mb-2">Physics Inference</h4>
+                  <p class="text-sm text-gray-500">Estimate material properties and physical parameters</p>
+                </div>
+                
+                <div class="relative text-center">
+                  <div class="w-20 h-20 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center mx-auto mb-4 relative z-10 shadow-lg">
+                    <span class="font-mono font-bold text-2xl text-white">3</span>
+                  </div>
+                  <h4 class="font-semibold text-gray-800 mb-2">Dynamics Rollout</h4>
+                  <p class="text-sm text-gray-500">Simulate forward in time with learned dynamics</p>
+                </div>
+                
+                <div class="relative text-center">
+                  <div class="w-20 h-20 rounded-full bg-gradient-to-br from-indigo-500 to-purple-500 flex items-center justify-center mx-auto mb-4 relative z-10 shadow-lg">
+                    <span class="font-mono font-bold text-2xl text-white">4</span>
+                  </div>
+                  <h4 class="font-semibold text-gray-800 mb-2">Render Output</h4>
+                  <p class="text-sm text-gray-500">Generate novel views of the dynamic scene</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-line max-w-xl mx-auto my-6"></div>
+
+      <!-- Key Features Section -->
+      <section class="py-10">
+        <div class="max-w-5xl mx-auto px-6">
+          <h2 class="font-display text-2xl md:text-3xl font-semibold mb-8 text-center text-gray-800">
+            <span class="gradient-text">Key Features</span>
+          </h2>
+          
+          <div class="grid md:grid-cols-2 gap-6">
+            <div class="card rounded-xl p-6">
+              <div class="flex items-start gap-4">
+                <div class="w-10 h-10 rounded-lg bg-teal-100 flex items-center justify-center flex-shrink-0">
+                  <svg class="w-5 h-5 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                  </svg>
+                </div>
+                <div>
+                  <h3 class="font-semibold text-gray-800 mb-1">Zero-Shot Generalization</h3>
+                  <p class="text-sm text-gray-500">Apply to novel objects without retraining, enabling instant physical simulation of new scans.</p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="card rounded-xl p-6">
+              <div class="flex items-start gap-4">
+                <div class="w-10 h-10 rounded-lg bg-blue-100 flex items-center justify-center flex-shrink-0">
+                  <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+                  </svg>
+                </div>
+                <div>
+                  <h3 class="font-semibold text-gray-800 mb-1">Physically Plausible</h3>
+                  <p class="text-sm text-gray-500">Dynamics respect physical constraints like conservation of momentum and material properties.</p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="card rounded-xl p-6">
+              <div class="flex items-start gap-4">
+                <div class="w-10 h-10 rounded-lg bg-indigo-100 flex items-center justify-center flex-shrink-0">
+                  <svg class="w-5 h-5 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+                  </svg>
+                </div>
+                <div>
+                  <h3 class="font-semibold text-gray-800 mb-1">Real-Time Rendering</h3>
+                  <p class="text-sm text-gray-500">Gaussian splat representation enables fast, high-quality novel view synthesis.</p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="card rounded-xl p-6">
+              <div class="flex items-start gap-4">
+                <div class="w-10 h-10 rounded-lg bg-emerald-100 flex items-center justify-center flex-shrink-0">
+                  <svg class="w-5 h-5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z"/>
+                  </svg>
+                </div>
+                <div>
+                  <h3 class="font-semibold text-gray-800 mb-1">Diverse Materials</h3>
+                  <p class="text-sm text-gray-500">Handle rigid, deformable, and articulated objects with varying material properties.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-line max-w-xl mx-auto my-6"></div>
+
+      <!-- BibTeX Section -->
+      <section class="py-10 pb-16">
+        <div class="max-w-4xl mx-auto px-6">
+          <h2 class="font-display text-2xl md:text-3xl font-semibold mb-8 text-center text-gray-800">
+            <span class="gradient-text">BibTeX</span>
+          </h2>
+          
+          <div class="rounded-xl p-6 overflow-x-auto bg-gray-800">
+            <pre class="font-mono text-sm text-gray-300 leading-relaxed"><code>@article{li2025physwm,
+  title={Generalized Dynamics Generation towards Scannable Physical World Model},
+  author={Li, Yichen and Li, Zhiyi and Feng, Brandon and Zhang, Dinghuai and Torralba, Antonio},
+  journal={arXiv preprint arXiv:2510.15041},
+  year={2025}
+}</code></pre>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-gray-200 bg-white/50">
+      <div class="max-w-4xl mx-auto px-6 py-8">
+        <p class="text-center text-sm text-gray-500">
+          Questions? Contact <a href="mailto:yichenl@mit.edu" class="text-teal-600 hover:underline">yichenl@mit.edu</a>
+        </p>
+        <p class="text-center text-xs text-gray-400 mt-2">
+          © 2025 MIT CSAIL. All rights reserved.
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>
+

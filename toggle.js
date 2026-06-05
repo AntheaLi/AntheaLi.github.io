@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function () {
   var modeConfigs = {
     multimodal: {
       'card-mmsim':      { order: 1, visible: true },
-      'card-physwm':     { order: 2, visible: true },
+      'card-mmz':        { order: 2, visible: true },
       'card-awm':        { order: 3, visible: false },
       'card-eses':       { order: 4, visible: false },
       'card-projective': { order: 5, visible: false },
@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', function () {
       'card-awm':        { order: 1, visible: true },
       'card-eses':       { order: 2, visible: true },
       'card-mmsim':      { order: 3, visible: false },
-      'card-physwm':     { order: 4, visible: false },
+      'card-mmz':        { order: 4, visible: false },
       'card-projective': { order: 5, visible: false },
       'card-hardware':   { order: 6, visible: false }
     },
@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', function () {
       'card-projective': { order: 1, visible: true },
       'card-hardware':   { order: 2, visible: true },
       'card-mmsim':      { order: 3, visible: false },
-      'card-physwm':     { order: 4, visible: false },
+      'card-mmz':        { order: 4, visible: false },
       'card-awm':        { order: 5, visible: false },
       'card-eses':       { order: 6, visible: false }
     }

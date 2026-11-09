@@ -1,0 +1,302 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Unitactile: from robot geometry to tactile skin | Anthea Yichen Li</title>
+<meta name="description" content="Cutting, unfolding, and wiring robot surfaces: experiments with tactile-skin layouts, AI design agents, and an integrated-flex readout concept.">
+<meta name="author" content="Anthea Yichen Li">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Unitactile: from robot geometry to tactile skin">
+<meta property="og:description" content="Cutting, unfolding, and wiring robot surfaces: experiments with tactile-skin layouts, AI design agents, and an integrated-flex readout concept.">
+<meta property="og:url" content="https://antheali.github.io/projects/unitactile/">
+<meta property="og:image" content="https://antheali.github.io/projects/unitactile/assets/hand_integration.png">
+<meta property="og:image:alt" content="Face-patch, connected-patch, and integrated-flex whole-hand assembly concepts">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://antheali.github.io/projects/unitactile/">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<a class="skip-link" href="#article">Skip to article</a>
+<nav class="site-nav" aria-label="Site"><a class="brand" href="https://antheali.github.io/">Anthea Yichen Li</a><span>Research notes / Robotics &amp; computational design</span><a href="https://antheali.github.io/">← Home</a></nav>
+<main>
+<header class="hero">
+<div><div class="eyebrow">Unitactile · Research note</div>
+<h1>From robot geometry<br>to tactile skin</h1>
+<p class="deck">A flexible circuit has to fit the surface <em>and</em> keep its electrodes connected. What happens when we design both together?</p>
+<p class="byline">Anthea Yichen Li · November 2026<br>Based on the October 2026 manuscript</p>
+<div class="actions"><a href="assets/unitactile.pdf">Read the manuscript ↗</a><a href="#what-happens-when-we-allow-more-sheets">Jump to results ↓</a></div></div>
+<figure><img src="assets/glove.png" width="1050" height="1050" alt="Proposed green integrated-flex skin on an Allegro hand with a single base-readout reservation." fetchpriority="high"><figcaption>Whole-hand integrated-flex concept. Packaging visualization; global routing and physical fit remain unverified.</figcaption></figure>
+</header>
+<nav class="contents" aria-label="Article contents"><details><summary>In this post</summary><ol><li><a href="#a-robots-shape-is-only-the-beginning">A robot&#39;s shape is only the beginning</a></li><li><a href="#two-flex-boards-one-sensing-grid">Two flex boards, one sensing grid</a></li><li><a href="#from-the-assembled-hand-to-a-circuit">From the assembled hand to a circuit</a></li><li><a href="#a-score-that-does-not-reward-squashing-the-surface">A score that does not reward squashing the surface</a></li><li><a href="#what-happens-when-we-allow-more-sheets">What happens when we allow more sheets?</a></li><li><a href="#deterministic-geometry-and-ai-agents">Deterministic geometry and AI agents</a></li><li><a href="#put-the-returns-on-the-back-of-the-flex">Put the returns on the back of the flex</a></li><li><a href="#from-connected-patches-to-a-glove">From connected patches to a glove</a></li><li><a href="#what-i-take-from-this-project">What I take from this project</a></li><li><a href="#manuscript-and-related-work">Manuscript and related work</a></li></ol></details></nav>
+<article class="article" id="article"><h2 id="a-robots-shape-is-only-the-beginning">A robot&#39;s shape is only the beginning</h2>
+<p>Suppose we have the CAD model of a robot hand and want to cover its contact surfaces with tactile sensors. The natural starting point is geometric: identify the exposed surfaces, flatten them, draw an electrode grid, and wrap the resulting flexible circuit back onto the hand.</p>
+<p>Each of those steps is possible on its own. The difficulty is making their outputs compatible. A cut that helps a sheet fit a curved finger can disconnect an electrode row. Dividing a surface into smaller patches can reduce distortion but leave too little room for connectors. A layout can look densely covered in a rendering while most of its electrodes cannot reach the readout electronics.</p>
+<p><strong>Unitactile studies this coupled geometry–connectivity problem:</strong> how should we cut, flatten, and wire a robot&#39;s surface so that the resulting tactile skin is electrically useful?</p>
+<p>The project combines geometric processing, circuit evaluation, deterministic search, and exploratory language-model agents. Its most useful finding is a design tension: smaller sheets often fit better, but their electrical interfaces become harder to accommodate. That observation led us from independently connected patches toward a glove-like architecture with traces on the back of the flex and a shared base readout.</p>
+<aside class="note"><strong>What this post reports.</strong> These are computational design experiments and an integration concept. Selected local circuits pass our implemented geometry and connectivity checks. The whole-hand glove has not been fabricated, physically fitted, or electrically validated.</aside>
+
+<h2 id="two-flex-boards-one-sensing-grid">Two flex boards, one sensing grid</h2>
+<p>Our sensing architecture uses a sandwich of two flexible printed circuit boards (FPCBs). One carries horizontal electrode connections; the other carries vertical connections. Each board uses its reverse copper layer to route from the electrodes through vias toward its interface. A sensing location is useful only when <em>both</em> its row and its column are reachable.</p>
+<p>This distinction matters when looking at a circuit drawing. Row and column traces can cross in an overlay because they occupy separate boards. Distinct electrical nets on the same copper layer must remain isolated. The baseline also reserves actual flexible-flat-cable (FFC) connector footprints, including stiffeners, rather than treating a connector as a point that fits anywhere.</p>
+<p>We fixed the baseline hardware before evaluating layouts:</p>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Fixed baseline hardware settings; scroll horizontally on small screens"><table>
+<thead>
+<tr>
+<th align="left" scope="col">Constraint</th>
+<th align="left" scope="col">Baseline setting</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Electrode grid</td>
+<td align="left">3 mm pitch; 2 × 2 mm square pads</td>
+</tr>
+<tr>
+<td align="left">Readout capacity</td>
+<td align="left">32 channels per axis</td>
+</tr>
+<tr>
+<td align="left">Usable planar extent</td>
+<td align="left">95 × 95 mm</td>
+</tr>
+<tr>
+<td align="left">Connector stiffener</td>
+<td align="left">23.7 × 6.8 mm, contained within the sheet</td>
+</tr>
+<tr>
+<td align="left">Copper rules</td>
+<td align="left">0.20 mm traces; 0.15 mm clearance</td>
+</tr>
+<tr>
+<td align="left">Geometric threshold</td>
+<td align="left">At most 5% local principal-stretch error</td>
+</tr>
+</tbody></table></div>
+<p>The 5% threshold is a design assumption, not a measured tolerance of a fabricated FPCB stack. Likewise, fully connecting a grid does not mean covering every square millimeter: the pads themselves occupy only 4/9 of a full interior grid cell before cuts, margins, and routing constraints enter the picture.</p>
+<h2 id="from-the-assembled-hand-to-a-circuit">From the assembled hand to a circuit</h2>
+<p>The pipeline begins with part meshes positioned using their URDF assembly transforms. We classify which surfaces are externally exposed, exclude parts with less than 5% exposed area, densify eligible meshes, and remove small components and thin features. Postprocessing produces contiguous, hole-free target regions. These targets are frozen before optimization so that a search cannot quietly remove difficult areas from its coverage denominator.</p>
+<p>The design process then has four stages:</p>
+<ol>
+<li><strong>Choose the sheet boundaries.</strong> Keep one connected surface with seams, or partition it into several connected regions.</li>
+<li><strong>Flatten the surface.</strong> Produce a planar chart while preserving the correspondence to the assigned source triangles and measuring local stretch and compression.</li>
+<li><strong>Place the grid and its interfaces.</strong> Search over grid position and orientation, then connector poses or flex continuations.</li>
+<li><strong>Reconstruct and evaluate the circuit.</strong> Generate copper under fixed rules; check clearance, pin assignments, and row/column reachability; credit only the area under reachable pads.</li>
+</ol>
+<p>The evaluator reconstructs the circuit rather than accepting a proposed score or connectivity claim. This makes the same evaluation usable for numerical algorithms and agent-written programs.</p>
+<figure>
+  <a href="assets/macro_micro.png"><img src="assets/macro_micro.png" alt="Three scales of Unitactile: a proposed whole-hand carrier, a finger-link region with its flattened circuit and mapped electrodes, and a schematic of shared row and separate column returns." loading="lazy" width="1650" height="1695" decoding="async"></a>
+  <figcaption><strong>From hand to electrode.</strong> The finger-link example connects all 98 retained pads to local flex continuations, covering 37.68% of its selected region. The 3D pad view shows source correspondence, not a simulated physical fit. The shared-return schematic and whole-hand carrier explain the proposed integration architecture.</figcaption>
+</figure>
+
+<h2 id="a-score-that-does-not-reward-squashing-the-surface">A score that does not reward squashing the surface</h2>
+<p>An early evaluation failure was surprisingly instructive. If coverage simply counts the source surface underneath each planar pad, a badly compressed chart can look excellent: one small physical pad maps back to a large area of the robot. The numerical score rewards a sensor that could not fit that surface.</p>
+<p>We therefore measure distortion with <strong>log-stretch</strong>, which treats stretching and reciprocal compression symmetrically and grows without bound as a chart collapses. The geometry factor combines area-weighted distortion with the average over the worst 1% of source area, so a small, severely distorted region cannot disappear in a global mean. Internal seam length and slit tips incur a separate penalty.</p>
+<p>For coverage, each triangle–pad intersection receives the smaller of its planar area and corresponding source area, down-weighted by distortion. It contributes only if both axes are reachable on a safely routed board pair. The resulting per-sheet objective is:</p>
+<div class="equation" role="math" aria-label="Score equals geometry quality times seam factor times one plus distortion-weighted reachable coverage.">score = geometry quality × seam factor × (1 + weighted reachable coverage)</div>
+
+<p>The additive one keeps a useful geometry signal even before routing succeeds. Agents receive the individual components as well as the scalar, because a single number does not explain whether the next improvement should target distortion, seams, or connectivity. The full definitions are in <a href="assets/unitactile.pdf#page=3">the manuscript</a>.</p>
+<p>We also keep three different ideas separate: a circuit can be <em>safe</em> without connecting every pad; it can connect every pad while distorting the surface too much; and it can pass both computational checks without having been physically qualified. Partial layouts remain informative results, with their actual reachable area reported.</p>
+<h2 id="what-happens-when-we-allow-more-sheets">What happens when we allow more sheets?</h2>
+<p>The main experiment evaluates a deterministic multi-sheet baseline on <strong>21 prepared Allegro-hand targets</strong>. We compare one sheet, caps of two, four, or eight sheets, and an automatic splitting policy. The partitioner builds a graph of neighboring triangles and favors cuts across large changes in surface orientation. It recursively splits regions that fail geometric checks, then searches grid and connector placements for the retained regions.</p>
+<p>This is deliberately a geometry-driven baseline: connector failures do not feed back into the partitioner. That makes it useful for seeing what geometric decomposition alone can achieve—and what it misses.</p>
+<p>Of 105 target–policy conditions, 104 completed. Automatic segmentation of the palm timed out; its metrics are missing, not zero. The other policies completed all 21 targets.</p>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Multi-sheet policy outcomes; scroll horizontally on small screens"><table>
+<thead>
+<tr>
+<th align="left" scope="col">Sheet policy</th>
+<th align="right" scope="col">Targets completed</th>
+<th align="right" scope="col">Raw reachable coverage</th>
+<th align="right" scope="col">Coverage on fully passing sheets</th>
+<th align="right" scope="col">Fully passing sheets</th>
+<th align="right" scope="col">Connectors</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">One sheet</td>
+<td align="right">21</td>
+<td align="right">5.8%</td>
+<td align="right">0.0%</td>
+<td align="right">0</td>
+<td align="right">16</td>
+</tr>
+<tr>
+<td align="left">Up to 2</td>
+<td align="right">21</td>
+<td align="right">8.2%</td>
+<td align="right">0.8%</td>
+<td align="right">3</td>
+<td align="right">44</td>
+</tr>
+<tr>
+<td align="left">Up to 4</td>
+<td align="right">21</td>
+<td align="right">15.0%</td>
+<td align="right">5.1%</td>
+<td align="right">12</td>
+<td align="right">72</td>
+</tr>
+<tr>
+<td align="left">Up to 8</td>
+<td align="right">21</td>
+<td align="right">14.0%</td>
+<td align="right">8.3%</td>
+<td align="right">18</td>
+<td align="right">66</td>
+</tr>
+<tr>
+<td align="left">Automatic*</td>
+<td align="right">20</td>
+<td align="right">17.0%</td>
+<td align="right">9.7%</td>
+<td align="right">16</td>
+<td align="right">52</td>
+</tr>
+</tbody></table></div>
+<p class="table-note">“Fully passing” means satisfying the implemented geometry, strain, and complete-connectivity criteria. Raw coverage includes reachable pads on safely routed but incomplete or over-strained sheets. All coverage uses original target area. Connector totals include every selected routed sheet, including partial designs. *Automatic excludes the timed-out palm and has a different denominator.</p>
+
+<p>Allowing eight sheets produces 18 fully passing sheets on 12 targets. Those sheets cover 8.3% of the total target area. This is a useful local result, but it is not full coverage of 12 parts. Nor is the policy with the most reachable area necessarily the policy with the most acceptable geometry: four sheets gives higher raw coverage, while eight gives more coverage on fully passing sheets.</p>
+<p>For a like-for-like comparison including the automatic policy, we exclude the palm from <em>every</em> policy. On those 20 targets, raw coverage peaks at four sheets (23.2%), while coverage on fully passing sheets reaches 9.7% under both eight-sheet and automatic policies. The palm accounts for about 35% of the full target area, so this denominator change matters.</p>
+<figure>
+  <a href="assets/coverage.png"><img src="assets/coverage.png" alt="Paired 20-target comparison of raw and valid-sheet electrode coverage across segmentation policies, with their associated connector counts." loading="lazy" width="1316" height="497" decoding="async"></a>
+  <figcaption><strong>More pieces change both geometry and hardware cost.</strong> This plot uses the same 20 targets for every policy. It shows observed operating points, not an optimal trade-off frontier.</figcaption>
+</figure>
+
+<p>Splitting shifts the bottleneck. Under the eight-sheet policy, <strong>57 of 95 retained regions have no connector placement found by the sampled search</strong>. This is not proof that a connector could never fit; it says that the tested search, outline, and footprint combination failed. Smaller regions can be easier to flatten and harder to instrument at the same time.</p>
+<h2 id="deterministic-geometry-and-ai-agents">Deterministic geometry and AI agents</h2>
+<p>We also compared fixed-topology flattening, an incremental cut-growth heuristic, Boundary First Flattening (BFF) with four or eight cones, and OptCuts on three development targets: a finger link, a fingertip, and a thumb link. These methods optimize different geometric objectives. A conformal map or an acceptable OptCuts energy does not automatically satisfy a maximum-strain limit or preserve the wiring.</p>
+<p>The agent experiments explored three interfaces:</p>
+<ul>
+<li><strong>Direct:</strong> generate a design program from the target and public contract in one attempt.</li>
+<li><strong>Generic feedback:</strong> revise the program using numerical evaluation feedback.</li>
+<li><strong>Two specialists:</strong> alternate a geometry role for cuts and unfolding with a layout role for the grid and connectors.</li>
+</ul>
+<p>Agents operate with public inputs and contracts while the evaluator implementation remains private. Saved artifacts were re-evaluated offline under the same scoring and hardware rules. The table below summarizes the selected scores; agent rows retain agent-chosen placements, while deterministic charts use an 18-pose placement bank.</p>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Single-sheet method scores; scroll horizontally on small screens"><table>
+<thead>
+<tr>
+<th align="left" scope="col">Method</th>
+<th align="right" scope="col">Finger score</th>
+<th align="right" scope="col">Fingertip score</th>
+<th align="right" scope="col">Thumb score</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Fixed topology</td>
+<td align="right">0.023</td>
+<td align="right">0.0032</td>
+<td align="right">—</td>
+</tr>
+<tr>
+<td align="left">Cut growth (fell back to fixed map)</td>
+<td align="right">0.023</td>
+<td align="right">0.0032</td>
+<td align="right">—</td>
+</tr>
+<tr>
+<td align="left">BFF, 4 cones</td>
+<td align="right">0.071</td>
+<td align="right">0.0079</td>
+<td align="right">—</td>
+</tr>
+<tr>
+<td align="left">BFF, 8 cones</td>
+<td align="right">0.186</td>
+<td align="right">0.018</td>
+<td align="right">—</td>
+</tr>
+<tr>
+<td align="left">OptCuts, bound 4.05</td>
+<td align="right">0.023</td>
+<td align="right">0.0083</td>
+<td align="right">—</td>
+</tr>
+<tr>
+<td align="left">Direct agent</td>
+<td align="right">—†</td>
+<td align="right">0.0060</td>
+<td align="right">0.0074</td>
+</tr>
+<tr>
+<td align="left">Generic feedback</td>
+<td align="right">0.160</td>
+<td align="right">0.114</td>
+<td align="right">0.00013†</td>
+</tr>
+<tr>
+<td align="left">Two specialists</td>
+<td align="right">0.233</td>
+<td align="right">0.117</td>
+<td align="right">—</td>
+</tr>
+</tbody></table></div>
+<p class="table-note">Higher is better under the per-sheet objective, but a score does not certify complete connectivity or acceptable strain. A dash means no safely evaluated candidate, not a zero score. † Interrupted condition. These are single observations with unequal search budgets and different placement strategies, not a controlled ranking of agent architectures.</p>
+
+<p>The agent fingertip charts are an interesting partial success. Two meet the geometric threshold with five-slit unfoldings, yet only 62/165 and 73/167 retained pads reach both local interfaces. Conversely, some deterministic layouts connect every retained pad while distorting the surface far too much. Across the 520 candidates in this common-evaluator analysis, none meets all the computational criteria at once.</p>
+<p>The best saved agent designs score above the best deterministic settings on the finger and fingertip. That observation motivates further work; it does not establish that specialization is better than a generalist, or that an agent reliably solves the problem. Applying the same placement bank to saved agent charts improves one finger result but misses feasible poses on several other charts. <strong>The chart and its electrical layout have to be considered together.</strong></p>
+<h2 id="put-the-returns-on-the-back-of-the-flex">Put the returns on the back of the flex</h2>
+<p>The local-connector bottleneck suggests changing the architecture. Instead of fitting a connector body onto every sensing region, can traces continue through non-sensing flex to a shared readout elsewhere?</p>
+<p>We tested this locally on three saved designs. Their charts, grids, and sensing pads stay fixed. We remove the local connector bodies and stiffeners, add short non-sensing tails, and search tail positions, widths, routing order, and independent row/column exits. The copper width, clearance, and via rules remain in force. Counts now measure reachability to unpopulated <em>continuation interfaces</em>, not to a verified hand-base circuit.</p>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Local flex-continuation outcomes; scroll horizontally on small screens"><table>
+<thead>
+<tr>
+<th align="left" scope="col">Example</th>
+<th align="right" scope="col">Local FFC reference</th>
+<th align="right" scope="col">Backside flex continuations</th>
+<th align="right" scope="col">Extra substrate per FPCB</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Finger region</td>
+<td align="right">98/98 pads</td>
+<td align="right">98/98 pads</td>
+<td align="right">39.15 mm²</td>
+</tr>
+<tr>
+<td align="left">Thumb region</td>
+<td align="right">64/64 pads</td>
+<td align="right">63/64 pads</td>
+<td align="right">44.85 mm²</td>
+</tr>
+<tr>
+<td align="left">Fingertip</td>
+<td align="right">62/165 pads</td>
+<td align="right">96/165 pads</td>
+<td align="right">44.65 mm²</td>
+</tr>
+</tbody></table></div>
+<p>The fingertip gains <strong>34 jointly reachable pads</strong>, without changing its five-slit chart. The finger retains full grid connectivity. The thumb loses one pad, a reminder that removing a connector footprint does not automatically make every route easier. The added tails earn no sensing-area credit.</p>
+<figure>
+  <a href="assets/designs.png"><img src="assets/designs.png" alt="Finger, thumb, and fingertip source regions, their fixed planar charts, and newly routed flex continuations. Reachable pads are green and incomplete pads pink." loading="lazy" width="1650" height="1140" decoding="async"></a>
+  <figcaption><strong>Same sensing geometry, different exit architecture.</strong> Green pads reach both local continuation interfaces. Pale-green tails are non-sensing. Overlaid row and column traces belong to separate FPCBs. These are separate extension experiments, not replacements for the frozen baseline results above.</figcaption>
+</figure>
+
+<h2 id="from-connected-patches-to-a-glove">From connected patches to a glove</h2>
+<p>At the whole-hand scale, the idea is to make the interconnect part of the skin. Adjacent patches can tap a continuous backside return for a shared row. Distinct column addresses on the companion board preserve unique row–column pairs. Instead of many exposed return bundles and a board on each part, the paired flex layers could carry signals toward a base readout.</p>
+<p>We visualized three stages: distributed face patches, connected patches with one readout per finger plus a palm readout, and an integrated flex carrier with one base readout. Their board reservations decrease from <strong>17 to five to one</strong>. The light-green connecting regions are carrier material and joint webs, not extra sensing area.</p>
+<figure class="wide">
+  <a href="assets/hand_integration.png"><img src="assets/hand_integration.png" alt="Three whole-hand packaging concepts: face patches with 17 readout reservations, connected patches with five, and integrated flex with one base readout." loading="lazy" width="1650" height="615" decoding="async"></a>
+  <figcaption><strong>An architectural direction, not a measured coverage comparison.</strong> All three concepts retain 156 intended sensing targets. Readout reservations are not connector counts. Whole-hand copper routing, a manufacturable flat pattern, and motion-compatible joint bridges remain unresolved.</figcaption>
+</figure>
+
+<p>Centralization also changes the engineering problem. The concept uses 127 row and 140 column channels, exceeding the baseline&#39;s 32 per axis, and requires longer analog paths. A neat rendering does not show that a non-stretching flex can follow a moving joint. The local routes evaluated above have not been connected through the entire carrier to the base board.</p>
+<p>The promising next optimization is therefore broader than UV unwrapping: <strong>choose sensing patches, non-sensing bridges, shared returns, and readout locations jointly</strong>. It should minimize added substrate and connector overhead while retaining reachable sensing area and respecting the mechanical demands of articulation.</p>
+<h2 id="what-i-take-from-this-project">What I take from this project</h2>
+<p>Robot-to-skin design is a useful example of why physical design needs more than a plausible output image. Geometry, connectivity, and packaging impose different constraints, and optimizing one can make another worse. The evaluator made those conflicts visible: compressed charts that inflated coverage, low-distortion cuts that severed buses, and small patches that could not accommodate the sampled connectors.</p>
+<p>There are encouraging local results, including completely connected finger regions and improved fingertip reachability through backside flex continuations. There is also a clear remaining gap between those results and an installed tactile glove. Closing it will require global routing, joint-aware mechanical design, fabrication, and electrical and tactile characterization.</p>
+<p>For agent-based design, the lesson is equally concrete. A useful research environment must expose the right diagnostics and preserve the distinction between a partial improvement and a solved device. Unitactile provides a working setting for that investigation, with real geometric inputs and explicit circuit constraints.</p>
+<h2 id="manuscript-and-related-work">Manuscript and related work</h2>
+<p>This post adapts the October 28, 2026 manuscript, <a href="assets/unitactile.pdf"><em>Unitactile: Geometry–Connectivity Trade-offs in Automated Tactile Skin Design</em></a>. The PDF includes the objective definitions, full per-target tables, evaluation details, and experiment limitations.</p>
+<p>Relevant starting points include:</p>
+<ul>
+<li>Olberding et al., <a href="https://doi.org/10.1145/2501988.2502048">A Cuttable Multi-Touch Sensor</a>, UIST 2013.</li>
+<li>Murphy et al., <a href="https://doi.org/10.1145/3706599.3720147">Fits like a Flex-Glove: Automatic Design of Personalized FPCB-Based Tactile Sensing Gloves</a>, CHI Extended Abstracts 2025.</li>
+<li>Sawhney and Crane, <a href="https://doi.org/10.1145/3132705">Boundary First Flattening</a>, ACM TOG 2018.</li>
+<li>Li et al., <a href="https://www.cs.ubc.ca/labs/imager/tr/2018/OptCuts/">OptCuts: Joint Optimization of Surface Cuts and Parameterization</a>, ACM TOG 2018.</li>
+<li>Rabinovich et al., <a href="https://igl.ethz.ch/projects/slim/SLIM2017.pdf">Scalable Locally Injective Mappings</a>, ACM TOG 2017.</li>
+</ul>
+<p class="endnote">The main study concerns one hand at one fixed pose; related part geometries are not independent robot families. No fabrication, force calibration, durability study, or robot manipulation evaluation was performed.</p>
+</article>
+<footer><a href="https://antheali.github.io/">← Back to Anthea Yichen Li</a> · <a href="assets/unitactile.pdf">Manuscript PDF</a></footer>
+</main>
+</body>
+</html>

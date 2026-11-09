@@ -9,13 +9,13 @@
   gtag('config', 'G-RW1J13JRY6');
 </script>
 
-  <title>Yichen Li</title>
-  <meta name="author" content="Yichen Li">
+  <title>Yichen Anthea Li</title>
+  <meta name="author" content="Yichen Anthea Li">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" type="text/css" href="stylesheet.css?v=20260604">
+  <link rel="stylesheet" type="text/css" href="stylesheet.css?v=20261109c">
   <link rel="icon" type="image/png" href="images/antheali.png">
 </head>
 
@@ -29,31 +29,24 @@
           <tr class="profile-row" style="padding:0px">
             <td class="profile-bio" style="padding:2.5%;width:65%;vertical-align:middle">
               <p style="text-align:center">
-                <name>Yichen Li</name>
+                <name>Anthea Yichen Li</name>
               </p>
 
-              <p>
-                I am a final-year Ph.D. candidate in EECS at MIT CSAIL, advised by <a href="https://groups.csail.mit.edu/vision/torralbalab/">Prof. Antonio Torralba</a>.
-                My Ph.D. research focuses on generative foundation models for multimodal perception and interactive world understanding.
-              </p>
-              <p>
-                I enjoy principled development towards:
-              </p>
-              <ul class="profile-focus">
-                <li><strong>Multimodal and World Model:</strong> approaches from video models, interactions, and multimodality.</li>
-                <li><strong>Post-training and RL:</strong> generic RL alg. for faster convergence with zeroth-order and dense backprop.</li>
-                <li><strong>Model Architecture:</strong> effective mechanisms of learning and hardware-inspired architecture design.</li>
-              </ul>
-              <p>
-                Recognizing the scaling dilemma of Academic ML research, I started an <a href="https://antheali.github.io/open-research-seeds/" target="_blank">Open Research Seeds</a> effort to help junior students. Before coming to MIT, I worked with <a href="https://geometry.stanford.edu/member/guibas/index.html">Prof. Leonidas Guibas</a> and <a href="https://stanford.edu/~gordonwz/">Prof. Gordon Wetzstein</a> at Stanford.
-              </p>
-              <p style="text-align:center">
-                Email: yichenl [at] mit [dot] edu
-              </p>
-
-              <p style="text-align:center">
-                <a href="https://scholar.google.com/citations?hl=en&user=Lp7FBZ4AAAAJ" target="_blank">Google Scholar</a> &nbsp;/&nbsp;
+                <p>
+                  I received my Ph.D. in EECS from MIT CSAIL, advised by <a href="https://groups.csail.mit.edu/vision/torralbalab/" target="_blank">Prof. Antonio Torralba</a>. I study how to make model training, from pretraining through post-training, more efficient and stable: hardware-aware architecture design, attention mechanisms, reinforcement learning, and optimization methods. During my Ph.D., I built and trained models on vision, language, 3D, tactile, physics-simulation, and robotics data. This breadth enables me to train generalist foundation models that can acquire and combine diverse skills.
+                </p>
+                <p>
+                  More recently, I have become interested in the physical and engineering constraints underlying computation, particularly how models and hardware can be designed together.
+                  <button type="button" class="bio-more-btn" aria-expanded="false" aria-controls="bio-more"
+                    onclick="var m=document.getElementById('bio-more'),o=m.hidden;m.hidden=!o;this.setAttribute('aria-expanded',o);this.textContent=o?'less \u25BE':'more \u25B8';">more &#9656;</button>
+                </p>
+                <p id="bio-more" class="bio-more" hidden>
+                  EDA, silicon, power electronics, spintronic devices, quantum optics, and lithography. I want to bring AI to these fields, including the hardware that AI itself is trained on and to the development of broad physical sciences.
+                </p>
+                <p style="text-align:center">
+                  <a href="https://scholar.google.com/citations?hl=en&user=Lp7FBZ4AAAAJ" target="_blank">Google Scholar</a> &nbsp;/&nbsp;
                 <a href="https://x.com/AntheaYLi">Twitter</a>&nbsp;/&nbsp;
+                <a href="mailto:anthea.lee3@gmail.com">Email</a>&nbsp;/&nbsp;
                 <a href="https://www.github.com/AntheaLi">GitHub</a>
               </p>
             </td>
@@ -65,120 +58,122 @@
         </tbody></table>
 
 
-        <!-- ════════ NEWS ════════ -->
-        <table class="section-table"><tbody>
+        <!-- ════════ RECENT WORK ════════ -->
+        <table class="section-table recent-work-section"><tbody>
           <tr>
             <td class="section-cell">
-              <heading>New</heading>
-              <ul>
-                <li><span style="color:red">[new]</span> [June 2026] Releasing <a href="https://github.com/AntheaLi/AC" target="_blank">AC</a> a hardware-aware pareto-front architecture compiler.</li>
-                <li><span style="color:red">[new]</span> [June 2026] Starting an <a href="https://antheali.github.io/open-research-seeds/" target="_blank">Open Research Seeds</a> effort for junior students.</li>
-                <li><span style="color:red">[new]</span> [June 2026] Organizing <a href="https://any2any-mllm.github.io/workshop-cvpr26/" target="_blank">Multimodal</a> and Sense Space workshops at CVPR 2026.</li>
-                <li><span style="color:red">[new]</span> [May 2026] <a href="https://arxiv.org/abs/2509.25050" target="_blank">AWM</a> accepted to ICML 2026.</li>
-                <li><span style="color:red">[new]</span> [May 2026] <a href="https://weakriver.github.io/#/post/projective-attention" target="_blank">Projective Attention blog series</a>.</li>
-              </ul>
-            </td>
-          </tr>
-        </tbody></table>
+              <heading>Recent Work</heading>
+              <div class="work-list">
 
-        <!-- ════════ TOGGLE ════════ -->
-        <div class="toggle-wrapper">
-          <button class="toggle-tab active" data-mode="multimodal">Multimodal &amp; World Model</button>
-          <button class="toggle-tab" data-mode="rl">RL Post-Training</button>
-          <button class="toggle-tab" data-mode="architecture">Model Architecture</button>
-        </div>
+                <!-- AC -->
+                <details class="work-item">
+                  <summary>
+                    <span class="work-head"><papertitle>AC: Model Architecture Compiler under Hardware Constraints</papertitle><span class="work-tag">Open source &middot; 2026</span></span>
+                    <span class="work-oneliner">AC sits between model scaling laws and roofline throughput estimation. Given a hardware platform, parameter count, training tokens, serving workload, and an optional base model, it searches for multi-objective Pareto-improving model architectural designs.</span>
+                  </summary>
+                  <div class="work-body">
+                    <span class="work-meta"><code>pip install archc</code></span>
+                    <p>A compiler for model architecture design under hardware constraints. Given a hardware target (H100, B200, GB200 NVL72, TPU v5e/v5p, Trainium 2/3), parameter count, training tokens, a serving workload, and optionally a base model, AC returns Pareto-improving architectures or architecture deltas across loss, training cost, memory, and serving latency, and names the binding hardware constraint (HBM bandwidth, KV footprint, tile fit, all-reduce or all-to-all pressure) with the price of relaxing it. It connects scaling-law quality estimates to roofline compute, memory, and communication models, so a choice like MLA vs. GQA becomes a constrained multi-objective decision rather than folklore. In a pre-registered study against five published architecture decisions (DeepSeek-V3 MLA and first-K-dense, Llama-3 GQA-8, Mistral SWA, wide expert parallelism on NVL72), AC scored 4 hits and 1 partial; absolute loss and MFU remain uncalibrated priors, and every miss is published.</p>
+                    <p class="work-links">
+                      <a href="https://github.com/AntheaLi/AC" target="_blank">[code]</a> &nbsp;
+                      <a href="https://antheali.github.io/ac-demo/" target="_blank">[demo]</a> &nbsp;
+                      <a href="https://github.com/AntheaLi/AC/blob/main/assets/anchor_report.md" target="_blank">[validation report]</a>
+                    </p>
+                  </div>
+                </details>
 
-        <div id="toggle-content">
+                <!-- Efficient and stable RL post-training: ESES + AWM + VARL -->
+                <details class="work-item">
+                  <summary>
+                    <span class="work-head"><papertitle>Efficient RL for Post-Training LLM and Autoregressive Generative Models</papertitle><span class="work-tag">ICML 2026 &middot; Reports</span></span>
+                    <span class="work-oneliner">Three ways to make RL post-training cheaper and more stable: forward-pass-only evolution strategies (ESES), training with the pretraining loss (AWM), and densified reward over autoregressive rollouts (VARL).</span>
+                  </summary>
+                  <div class="work-body">
+                    <div class="work-sub">
+                      <a href="https://antheali.notion.site/eses" target="_blank"><papertitle>ESES: Efficient and Stable Evolutionary RL for LLM Post-training</papertitle></a>
+                      <span class="work-meta">Technical report &middot; 2025 &middot; <strong>Yichen Li</strong>, Songlin Yang, Yulu Gan, Kai Zhang, Hanwen Jiang, Hao Tan, Sai Bi</span>
+                      <p>Evolution strategies estimate the policy gradient from forward passes alone, which buys rollout diversity and training stability at the cost of sample efficiency. ESES makes ES cheaper by sampling low-rank (LoRA) perturbations that can be batch-served, and maps how population size, noise scale, and perturbation rank trade off in the small-population regime (Qwen2.5-3B). Because ES never backpropagates, perturbations can stay at the base model's precision, so weights can be quantized (INT8, FP8, INT4) without the training&ndash;inference mismatch that destabilizes PPO and GRPO.</p>
+                      <p class="work-links">
+                        <a href="https://antheali.notion.site/eses" target="_blank">[write-up]</a>
+                      </p>
+                    </div>
+                    <div class="work-sub">
+                      <a href="https://arxiv.org/abs/2509.25050" target="_blank"><papertitle>AWM: Advantage Weighted Matching</papertitle></a>
+                      <span class="work-meta">ICML 2026 &middot; Shuchen Xue, Chongjian Ge, Shilong Zhang, <strong>Yichen Li</strong>, Zhi-Ming Ma</span>
+                      <p>Shows that DDPO is an implicit form of score/flow matching with noisy targets, which raises variance and slows convergence. AWM instead trains with the pretraining score/flow-matching loss, reweighting each sample by its advantage. Up to 34&times; faster than Flow-GRPO on SD3.5 Medium and FLUX.</p>
+                      <p class="work-links">
+                        <a href="https://arxiv.org/abs/2509.25050" target="_blank">[paper]</a> &nbsp;
+                        <a href="https://github.com/scxue/advantage_weighted_matching" target="_blank">[code]</a>
+                      </p>
+                    </div>
+                    <div class="work-sub">
+                      <a href="https://antheali.notion.site/varl" target="_blank"><papertitle>VARL: Reinforcing Autoregressive Video Generation</papertitle></a>
+                      <span class="work-meta">Technical report &middot; 2025 &middot; <strong>Yichen Li</strong>, Hao Tan, Kai Zhang, Hanwen Jiang, Sai Bi</span>
+                      <p>In autoregressive block-diffusion models, one rollout costs autoregressive steps &times; denoising steps. VARL rolls out many short block sequences, scores them as a group, then extends a random subset and rescores, densifying reward along the sequence for a fraction of the cost of full rollouts.</p>
+                      <p class="work-links">
+                        <a href="https://antheali.notion.site/varl" target="_blank">[write-up]</a>
+                      </p>
+                    </div>
+                  </div>
+                </details>
 
-        <!-- ════════ SELECTED RESEARCH (card grid, reorders on toggle) ════════ -->
-        <table class="section-table featured-toggle-section"><tbody>
-          <tr>
-            <td class="section-cell">
-              <div class="selected-grid">
+                <!-- Projective Attention -->
+                <details class="work-item">
+                  <summary>
+                    <span class="work-head"><papertitle>Projective Attention: A Geometric Design Space for Attention</papertitle><span class="work-tag">Blog series &middot; 5 posts &middot; 2026</span></span>
+                    <span class="work-oneliner">What if softmax is just one choice? Attention read as a generalized vector activation, with its own design choices: activation function, gauge control, and decoding.</span>
+                  </summary>
+                  <div class="work-body">
+                    <p><span class="work-team">Main finding.</span> Under random, shuffled, and compute-matched controls, the gains that held up came from separating key direction from key norm, and every variant made stable drifted back toward standard attention.</p>
+                    <p>Reads each key as a hyperplane normal, so a head becomes a one-hidden-layer network whose hidden units come from the context: logits are signed incidences, the attention row is an activation code, and values decode it. This places 18 published variants (ReLU, sigmoid, signed, sparse, routed, QK-norm, XSA, &hellip;) on three axes (activation, hyperplane gauge, decoding) and generates new ones (Hyperplane-Projection Attention, Projection Feature, Projective Clipping, two-sided decoding), each tested against random, shuffled, rotated, and compute-matched versions of itself.</p>
+                    <ul class="work-takeaways">
+                      <li><span class="work-team">Pretraining &amp; architecture.</span> Softmax is not sacred, but normalized activation is: every replacement had to rebuild part of what SDPA already provides (row normalization, bounded output, scale control) before it trained stably. That gives a checklist for judging an attention proposal before spending compute on it, and points to extensions that open one degree of freedom of SDPA at a time instead of replacing it.</li>
+                      <li><span class="work-team">Training stability.</span> The most reliable gains came from gauge control. A raw dot product ties a key&rsquo;s direction to its logit scale, the same entanglement QK-norm removes to stop attention-logit growth. The open proposal is to keep the norm as a separate confidence or temperature signal rather than discard it.</li>
+                      <li><span class="work-team">Interpretability.</span> Hyperplane-Projection Attention separates addressing from content (the QK and OV roles) by subtracting the key-aligned &ldquo;address shadow&rdquo; from what a head reads out. With normalized keys it improved synthetic retrieval in 16 of 16 settings, and head-split variants let some heads keep the address while others drop it.</li>
+                      <li><span class="work-team">Research methodology.</span> Controls overturned several early wins: the first seed was misleadingly optimistic, and random or shuffled branches matched the Projection Feature and Projective Clipping gains. A branch-budget measure (branch norm relative to the attention output) separates branches that are decorative from ones that overwhelm the readout.</li>
+                    </ul>
+                    <p class="work-meta">Scope: small models (2-layer, synthetic retrieval and character-level LM). The findings are about mechanism and method; quality at scale is untested.</p>
+                    <p class="work-links">
+                      <a href="https://weakriver.github.io/#/post/projective-attention" target="_blank">[framework]</a> &nbsp;
+                      <a href="https://weakriver.github.io/#/post/hpa" target="_blank">[hyperplane projection]</a> &nbsp;
+                      <a href="https://weakriver.github.io/#/post/paa" target="_blank">[projection activation]</a> &nbsp;
+                      <a href="https://weakriver.github.io/#/post/otda" target="_blank">[two-sided decoding]</a> &nbsp;
+                      <a href="https://weakriver.github.io/#/post/back-to-sdpa" target="_blank">[lessons: back to SDPA]</a> &nbsp;
+                      <a href="https://github.com/AntheaLi/Projective-Attention" target="_blank">[code]</a>
+                    </p>
+                  </div>
+                </details>
 
-                <!-- Multimodal and world model -->
-                <a class="selected-card" id="card-mmsim" href="https://people.csail.mit.edu/yichenl/projects/multimodalvideo/" target="_blank">
-                  <span class="selected-venue">ICCV 2025</span>
-                  <strong>Multimodal Action Conditioned Video Generation</strong>
-                  <span>Sole-authored end-to-end: jointly conditions on language, bounding-box trajectories, and reference frames. 40% FVD improvement, trained on 8&times;H100 GPUs.</span>
-                </a>
+                <!-- Natively multimodal token embeddings + multimodal generative models -->
+                <details class="work-item">
+                  <summary>
+                    <span class="work-head"><papertitle>Natively Multimodal Token Embeddings and Multimodal Generative Models</papertitle><span class="work-tag">ICCV 2025 &middot; ICLR 2024</span></span>
+                    <span class="work-oneliner">One embedding shared across input modalities, and a video generator conditioned on language, motion, and appearance at once.</span>
+                  </summary>
+                  <div class="work-body">
+                    <div class="work-sub">
+                      <a href="https://sites.google.com/view/iclr-submission-force-vision/" target="_blank"><papertitle>Learning to Jointly Understand Visual and Tactile Signals</papertitle></a>
+                      <span class="work-meta">ICLR 2024 &middot; <strong>Yichen Li</strong>, Yilun Du, Chao Liu, Chao Liu, Francis Williams, Michael Foshey, Benjamin Eckart, Jan Kautz, Joshua B. Tenenbaum, Antonio Torralba, Wojciech Matusik</span>
+                      <p>An autodecoder learns a single cross-modal latent manifold, so full-hand tactile pressure maps and manipulation video map to one shared embedding: either modality can be predicted from the other, and the latent space exposes structure common to both. Comes with a new paired visual&ndash;tactile dataset of human manipulation. The recipe is modality-agnostic, which is what lets the learned embedding serve as an extended token embedding for a foundation model.</p>
+                      <p class="work-links">
+                        <a href="https://openreview.net/pdf?id=NtQqIcSbqv" target="_blank">[paper]</a> &nbsp;
+                        <a href="https://sites.google.com/view/iclr-submission-force-vision/" target="_blank">[project page]</a> &nbsp;
+                        <a href="https://www.dropbox.com/scl/fo/o4h4r3irgknmyopchvxjf/AHlX-BVQv10Lyf7BZjRMBys?rlkey=bj7et814evbqrtfzjuyye4sg4&amp;dl=0" target="_blank">[dataset]</a>
+                      </p>
+                    </div>
+                    <div class="work-sub">
+                      <a href="https://arxiv.org/abs/2510.02287" target="_blank"><papertitle>Multimodal Action Conditioned Video Generation</papertitle></a>
+                      <span class="work-meta">ICCV 2025 &middot; <strong>Yichen Li</strong>, Antonio Torralba</span>
+                      <p>Sole student author; trained from scratch, end to end: architecture, data, training, and evaluation for a video generator that jointly conditions on language, bounding-box trajectories, and reference frames. 40% FVD improvement over text-conditioned baselines.</p>
+                      <p class="work-links">
+                        <a href="https://arxiv.org/abs/2510.02287" target="_blank">[paper]</a> &nbsp;
+                        <a href="https://people.csail.mit.edu/yichenl/projects/multimodalvideo/" target="_blank">[project page]</a> &nbsp;
+                        <a href="https://github.com/AntheaLi/MMVidSim" target="_blank">[code]</a>
+                      </p>
+                    </div>
+                  </div>
+                </details>
 
-                <a class="selected-card" id="card-mmz" href="https://sites.google.com/view/iclr-submission-force-vision/" target="_blank">
-                  <span class="selected-venue">ICLR 2024</span>
-                  <strong>Learning Generic Multimodal Embeddings</strong>
-                  <span>An Autodecoder way of learning one generic embedding of any given modalities of input that can serve as a extended embedding for any large foundation model.</span>
-                </a>
-
-                <!-- RL post-training -->
-                <a class="selected-card" id="card-awm" href="https://arxiv.org/abs/2509.25050" target="_blank" style="display:none;">
-                  <span class="selected-venue">ICML 2026</span>
-                  <strong>AWM: Advantage Weighted Matching</strong>
-                  <span>Established mathematical equivalence between DDPO and DSM objectives. Aligns RL fine-tuning with diffusion pretraining.</span>
-                </a>
-
-                <a class="selected-card" id="card-eses" href="https://antheali.notion.site/eses" target="_blank" style="display:none;">
-                  <span class="selected-venue">Blog 2025</span>
-                  <strong>ESES: Efficient and Stable Evolutionary RL</strong>
-                  <span>Zeroth-order evolutionary RL using LoRA perturbations and quantized base weights for memory-efficient population-based post-training.</span>
-                </a>
-
-                <!-- Architecture -->
-                <a class="selected-card" id="card-projective" href="https://weakriver.github.io/#/post/projective-attention" target="_blank" style="display:none;">
-                  <span class="selected-venue">Blog 2026</span>
-                  <strong>Projective Attention</strong>
-                  <span>A geometric lens on attention and controlled architecture experiments, including key-normalized variants and random/shuffled controls.</span>
-                </a>
-
-                <a class="selected-card" id="card-hardware" href="https://antheali.github.io/ac-demo" target="_blank" style="display:none;">
-                  <span class="selected-venue">CLI 2026</span>
-                  <strong>Hardware-Aware Architecture Compiler</strong>
-                  <span>Hardware-ware model architecture calculus for architectures and deltas on the quality–latency–memory tradeoff pareto-front.</span>
-                </a>
-
-              </div>
-            </td>
-          </tr>
-        </tbody></table>
-
-        <!-- ════════ OPEN RESEARCH SEEDS ════════ -->
-        <table class="section-table open-research-seeds-section"><tbody>
-          <tr>
-            <td class="section-cell">
-              <heading>Open Research Seeds</heading>
-              <p>The <a href="https://antheali.github.io/open-research-seeds/" target="_blank">Open Research Seeds</a> effort is to offer some delibrately unconventional research ideas to help junior researchers to start in resource scarce academia.</p>
-              <ul>
-                <li><a href="https://antheali.github.io/open-research-seeds/#kuramoto-multimodal-coupling" target="_blank">Self-Supervised Multimodal Learning with Kuramoto Coupling</a></li>
-                <li><a href="https://antheali.github.io/open-research-seeds/#physics-from-video-dmd" target="_blank">Learning Physics from Videos through Dynamic Mode Decomposition</a></li>
-                <li><a href="https://antheali.github.io/open-research-seeds/#task-driven-sensor-design" target="_blank">Task-driven to Sensor Optimization through Differentiable Manifold Optimization</a></li>
-              </ul>
-              </div>
-            </td>
-          </tr>
-        </tbody></table>
-
-
-        <!-- ════════ RECENT TECHNICAL EXPLORATIONS ════════ -->
-        <table class="section-table technical-blogs-section"><tbody>
-          <tr>
-            <td class="section-cell">
-              <heading>Technical and Perspective Blogs</heading>
-              <!-- <div class="exploration-list"> -->
-                <!-- <div class="exploration-item">
-                  <a href="" target="_blank"><papertitle>Hardware inspired architecture design</papertitle></a>
-                  <p>.</p> -->
-                <!-- </div> -->
-                <div class="exploration-item">
-                  <a href="https://weakriver.github.io/#/post/projective-attention" target="_blank"><papertitle>Projective Attention</papertitle></a> and <a href="https://weakriver.github.io/#/post/back-to-sdpa" target="_blank"><papertitle>Projective Lesson of Attention</papertitle></a>
-                  <p>A geometric lens on attention and controlled architecture experiments, including key-normalized variants and random/shuffled controls.</p>
-                </div>
-                <div class="exploration-item">
-                  <a href="https://antheali.notion.site/eses" target="_blank"><papertitle>ESES: Efficient and Stable Evolutionary RL for LLM Post-training</papertitle></a>
-                  <p>Explores sample-efficient evolutionary strategies for language-model post-training through low-rank parameter updates and quantization-aware variants.</p>
-                </div>
-                <div class="exploration-item">
-                  <a href="https://antheali.notion.site/varl" target="_blank"><papertitle>VARL: Reinforcing Video Autoregressive Generation</papertitle></a>
-                  <p>Studies rollout-efficient reinforcement learning for autoregressive video generation by densifying reward feedback over shorter generated blocks.</p>
-                </div>
               </div>
             </td>
           </tr>
@@ -188,15 +183,6 @@
         <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
           <tbody><tr><td style="padding:20px;width:100%;vertical-align:middle">
             <heading>Publication</heading>
-            <div class="tag-filters" style="margin-top:10px;">
-              <button class="tag-filter active" data-filter="all">all</button>
-              <button class="tag-filter" data-filter="multimodal">multimodal</button>
-              <button class="tag-filter" data-filter="video">video</button>
-              <button class="tag-filter" data-filter="rl">rl</button>
-              <button class="tag-filter" data-filter="physics">physics</button>
-              <button class="tag-filter" data-filter="robotics">robotics</button>
-              <button class="tag-filter" data-filter="other">other</button>
-            </div>
           </td></tr></tbody>
         </table>
 
@@ -215,7 +201,6 @@
               <a href="https://arxiv.org/abs/2509.25050" target="_blank">
                 <papertitle>Advantage Weighted Matching: Aligning RL with Pretraining in Diffusion Models</papertitle>
               </a>
-              <span class="pub-tag rl">rl</span>
               <br>
               Shuchen Xue,
               Chongjian Ge,
@@ -249,8 +234,6 @@
               <a href="https://arxiv.org/pdf/2510.02287?" target="_blank">
                 <papertitle>MultiModal Action Conditioned Video Generation</papertitle>
               </a>
-              <span class="pub-tag video">video</span>
-              <span class="pub-tag multimodal">multimodal</span>
               <br>
               <strong>Yichen Li</strong>,
               <a href="https://groups.csail.mit.edu/vision/torralbalab/" target="_blank">Antonio Torralba</a>
@@ -282,9 +265,6 @@
               <a href="https://people.csail.mit.edu/yichenl/projects/physwm/" target="_blank">
                 <papertitle>Generalized Dynamics Generation towards Physical World Model</papertitle>
               </a>
-              <span class="pub-tag physics">physics</span>
-              <span class="pub-tag video">video</span>
-              <span class="pub-tag robotics">robotics</span>
               <br>
               <strong>Yichen Li</strong>,
               Zhiyi Li,
@@ -295,6 +275,36 @@
               <br>
               <a href="https://arxiv.org/pdf/2510.15041" target="_blank">[paper]</a> &nbsp;
               <a href="https://people.csail.mit.edu/yichenl/projects/physwm/" target="_blank">[project page]</a>
+              <br>
+            </td>
+          </tr>
+
+          <!-- Fits like a Flex-Glove -->
+          <tr data-tags="multimodal">
+            <td style="padding:10px;width:32%;vertical-align:middle;">
+              <div class="one">
+                <img src="images/flexglove.png" width="240" alt="Fits like a Flex-Glove thumbnail">
+              </div>
+            </td>
+            <td style="padding:20px;width:68%;vertical-align:middle">
+              <br>
+              <a href="https://arxiv.org/abs/2503.06349" target="_blank">
+                <papertitle>Fits like a Flex-Glove: Automatic Design of Personalized FPCB-Based Tactile Sensing Gloves</papertitle>
+              </a>
+              <br>
+              Devin Murphy,
+              <strong>Yichen Li</strong>,
+              Crystal Owens,
+              Layla Stanton,
+              Paul Pu Liang,
+              Yiyue Luo,
+              <a href="https://groups.csail.mit.edu/vision/torralbalab/" target="_blank">Antonio Torralba</a>,
+              <a href="http://people.csail.mit.edu/wojciech/" target="_blank">Wojciech Matusik</a>
+              <br>
+              <em>CHI EA</em>, 2025
+              <br>
+              <a href="https://arxiv.org/abs/2503.06349" target="_blank">[paper]</a> &nbsp;
+              <a href="https://www.media.mit.edu/projects/fits-like-a-flex-glove/overview/" target="_blank">[project page]</a>
               <br>
             </td>
           </tr>
@@ -317,17 +327,18 @@
               <a href="https://sites.google.com/view/iclr-submission-force-vision/" target="_blank">
                 <papertitle>Learning to Jointly Understand Visual and Tactile Signals</papertitle>
               </a>
-              <span class="pub-tag multimodal">multimodal</span>
               <br>
               <strong>Yichen Li</strong>,
-              <a href="https://cs.stanford.edu/~kaichun/" target="_blank">Yilun Du</a>,
+              <a href="https://yilundu.github.io/" target="_blank">Yilun Du</a>,
               <a href="https://chaoliu.tech/" target="_blank">Chao Liu</a>,
               Chao Liu,
-              Mike Foshey,
               Francis Williams,
+              Mike Foshey,
+              Benjamin Eckart,
+              Jan Kautz,
               <a href="https://web.mit.edu/cocosci/josh.html" target="_blank">Joshua B. Tenenbaum</a>,
-              <a href="https://cdfg.csail.mit.edu/wojciech#biography" target="_blank">Wojciech Matusik</a>,
-              <a href="https://groups.csail.mit.edu/vision/torralbalab/" target="_blank">Antonio Torralba</a>
+              <a href="https://groups.csail.mit.edu/vision/torralbalab/" target="_blank">Antonio Torralba</a>,
+              <a href="https://cdfg.csail.mit.edu/wojciech#biography" target="_blank">Wojciech Matusik</a>
               <br>
               <em>ICLR</em>, 2024
               <br>
@@ -357,7 +368,6 @@
               <a href="https://people.csail.mit.edu/yichenl/projects/joint/" target="_blank">
                 <papertitle>Category-Level Multi-Part Multi-Joint 3D Shape Assembly</papertitle>
               </a>
-              <span class="pub-tag robotics">robotics</span>
               <br>
               <strong>Yichen Li</strong>,
               <a href="https://cs.stanford.edu/~kaichun/" target="_blank">Kaichun Mo</a>,
@@ -396,7 +406,6 @@
               <a href="https://people.csail.mit.edu/yichenl/projects/preconditioner/" target="_blank">
                 <papertitle>Learning Preconditioners for Conjugate Gradient PDE Solver</papertitle>
               </a>
-              <span class="pub-tag physics">physics</span>
               <br>
               <strong>Yichen Li</strong>,
               <a href="https://peterchencyc.com/">Peter Yichen Chen</a>,
@@ -431,7 +440,6 @@
               <a href="https://arxiv.org/pdf/1811.07212" target="_blank">
                 <papertitle>Revisiting Image-Language for Open-ended Phrase Detection</papertitle>
               </a>
-              <span class="pub-tag multimodal">multimodal</span>
               <br>
               <a href="http://bryanplummer.com/" target="_blank">Bryan Plummer</a>,
               <a href="http://scholar.google.com/citations?user=4x3DhzAAAAAJ&hl=en" target="_blank">Kevin Shih</a>,
@@ -467,7 +475,6 @@
               <a href="https://arxiv.org/pdf/2309.16909.pdf" target="_blank">
                 <papertitle>ASAP: Automated Sequence Planning for Complex Assembly with Physical Feasibility</papertitle>
               </a>
-              <span class="pub-tag robotics">robotics</span>
               <br>
               <a href="https://people.csail.mit.edu/yunsheng/" target="_blank">Yunsheng Tian</a>,
               <a href="https://www.karlddwillis.com/">Karl D.D. Willis</a>,
@@ -511,7 +518,6 @@
               <a href="https://people.csail.mit.edu/yunsheng/Assemble-Them-All/paper.pdf" target="_blank">
                 <papertitle>Assemble Them All: Physics-Based Planning for Generalizable Assembly by Disassembly</papertitle>
               </a>
-              <span class="pub-tag robotics">robotics</span>
               <br>
               <a href="https://people.csail.mit.edu/yunsheng/" target="_blank">Yunsheng Tian</a>,
               <a href="http://people.csail.mit.edu/jiex/">Jie Xu</a>,
@@ -549,7 +555,6 @@
               <a href="https://arxiv.org/abs/2003.09754" target="_blank">
                 <papertitle>3D Part Assembly from A Single Image</papertitle>
               </a>
-              <span class="pub-tag other">other</span>
               <br>
               <strong>Yichen Li*</strong>,
               <a href="https://cs.stanford.edu/~kaichun/" target="_blank">Kaichun Mo*</a>,
@@ -584,7 +589,6 @@
               <a href="https://arxiv.org/pdf/2007.09257.pdf" target="_blank">
                 <papertitle>Domain2Vec: Domain Embedding for Unsupervised Domain Adaptation</papertitle>
               </a>
-              <span class="pub-tag other">other</span>
               <br>
               <a href="https://cs-people.bu.edu/xpeng" target="_blank">Xingchao Peng*</a>,
               <strong>Yichen Li*</strong>,
@@ -609,16 +613,16 @@
               <heading>Professional Experience</heading>
 
               <div class="exp-item" style="margin-top:12px;">
+                <strong><a href="https://www.adobe.com/" target="_blank">Adobe Research</a></strong> &mdash; Summer 2025
+                <p>Built RL post-training systems for video diffusion models including zeroth-order evolutionary
+                optimization and dense per-frame reward methods.</p>
+              </div>
+
+              <div class="exp-item">
                 <strong><a href="https://www.nvidia.com/" target="_blank">NVIDIA Research</a></strong> &mdash; Summer 2024
                 <p>Built a unified physics simulation framework for soft, articulated, and rigid body dynamics.
                 Designed anisotropic Young's modulus learning across physics regimes.
                 51% error reduction over team baseline.</p>
-              </div>
-
-              <div class="exp-item">
-                <strong><a href="https://www.adobe.com/" target="_blank">Adobe Research</a></strong> &mdash; Summer 2025
-                <p>Built RL post-training systems for video diffusion models including zeroth-order evolutionary
-                optimization and dense per-frame reward methods.</p>
               </div>
 
               <div class="exp-item">
@@ -650,19 +654,6 @@
               Conference Reviewer: CVPR, <a href="http://iccv2021.thecvf.com/" target="_blank">ICCV</a>, ECCV, ICML, ICLR, NeurIPS, ACM SIGGRAPH
               <br>
               Journal Reviewer: ACM TOG, IEEE-TPAMI
-            </td>
-          </tr>
-        </tbody></table>
-        <br>
-
-        <!-- ════════ AWARDS ════════ -->
-        <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-          <tr>
-            <td style="padding:10px;width:100%;vertical-align:middle">
-              <heading>Random Thoughts</heading>
-              <ul>
-                <li><a href="https://weakriver.github.io/ruoshui/#/" target="_blank">弱水</a></li>
-              </ul>
             </td>
           </tr>
         </tbody></table>
@@ -709,12 +700,23 @@
         </tbody></table>
         <br>
 
-        </div><!-- end #toggle-content -->
+        <!-- ════════ RANDOM THOUGHTS ════════ -->
+        <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
+          <tr>
+            <td style="padding:10px;width:100%;vertical-align:middle">
+              <heading>Random Thoughts</heading>
+              <ul>
+                <li><a href="https://weakriver.github.io/ruoshui/#/" target="_blank">弱水</a></li>
+              </ul>
+            </td>
+          </tr>
+        </tbody></table>
+        <br>
+
 
       </td>
     </tr>
   </table>
 
-  <script src="toggle.js"></script>
 </body>
 </html>

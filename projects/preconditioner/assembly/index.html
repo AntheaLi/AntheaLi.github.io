@@ -1,0 +1,105 @@
+<html>
+<head>
+<title>Image-based 3D Part Assembly</title>
+<link rel="SHORTCUT ICON" href="favicon.ico"/>
+<link href='css/paperstyle.css' rel='stylesheet' type='text/css'>
+</head>
+
+<body>
+
+<div class="pageTitle">
+    Learning 3D Part Assembly from a Single Image
+  <br>
+  <br>
+  <span class = "Authors">
+      <a href="https://cs.stanford.edu/~liyichen" target="_blank">Yichen Li</a><sup>1*</sup> &nbsp; &nbsp;
+      <a href="http://cs.stanford.edu/~kaichun" target="_blank">Kaichun Mo</a><sup>1*</sup> &nbsp; &nbsp;
+      <a href="https://linsats.github.io/" target="_blank">Lin Shao</a><sup>1</sup> &nbsp; &nbsp;
+      <a href="https://mhsung.github.io/" target="_blank">Minhyuk Sung</a><sup>2</sup> &nbsp; &nbsp;
+      <a href="https://geometry.stanford.edu/member/guibas/" target="_blank">Leonidas J. Guibas</a><sup>1</sup> &nbsp; &nbsp;<br>
+      <i>(*: indicates joint first authors)</i><br><br>
+      <sup>1</sup><a href = "http://www.stanford.edu/" target="_blank"> Stanford University </a> &nbsp; &nbsp;
+      <sup>2</sup><a href = "https://research.adobe.com/" target="_blank"> Adobe Research </a> &nbsp; &nbsp;<br><br>
+      <a href="https://eccv2020.eu/" target="_blank"><i>European Conference on Computer Vision (ECCV) 2020</i></a>
+  </span>
+  </div>
+<br>
+<div class = "material">
+        <a href="https://arxiv.org/abs/2003.09754" target="_blank">[Paper]</a>
+        <a href="paper.bib" target="_blank">[BibTex]</a> 
+        <a href="https://github.com/AntheaLi/3DPartAssembly" target="_blank">[Code (Github)]</a>
+        <a href="slides.pdf" target="_blank">[Slides]</a><br>
+</div>
+
+<div class = "abstractTitle">
+  Abstract
+  </div>
+  <p class = "abstractText">
+  Autonomous assembly is a crucial capability for robots in many applications. For this task, several problems such as obstacle avoidance, motion planning, and actuator control have been extensively studied in robotics. However, when it comes to task specification, the space of possibilities remains underexplored. Towards this end, we introduce a novel problem, single-image-guided 3D part assembly, along with a learningbased solution. We study this problem in the setting of furniture assembly from a given complete set of parts and a single image depicting the entire assembled object. Multiple challenges exist in this setting, including handling ambiguity among parts (e.g., slats in a chair back and leg stretchers) and 3D pose prediction for parts and part subassemblies, whether visible or occluded. We address these issues by proposing a two-module pipeline that leverages strong 2D-3D correspondences and assembly-oriented graph message-passing to infer part relationships. In experiments with a PartNet-based synthetic benchmark, we demonstrate the effectiveness of our framework as compared with three baseline approaches.
+</p>
+
+<img class = "bannerImage" src="images/teaser.png", width="800"><br>
+<table width="800" align="center"><tr><td><p class = "figureTitleText">
+            Figure 1. <b>Single-Image-Based 3D Part Assembly Task.</b> Given as inputs an image and a set of part point clouds depicted in (a), the task is to predict 6D part poses in camera coordinates that assemble the parts to a 3D shape in the given image as shown in (b).
+</p></td></tr></table>
+
+
+<div class = "abstractTitle">
+  Long 8-min Video Presentation
+  </div>
+  <center>
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/gtaBaEAs22s" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  </center>
+
+
+<div class = "abstractTitle">
+  Short 1-min Video Presentation
+  </div>
+  <center>
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/TCME39wusek" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  </center>
+
+
+<div class="abstractTitle">
+    Network Architecture
+</div>
+  <img class = "bannerImage" src="images/network.png", width="800"><br>
+  <table width="800" align="center"><tr><td><p class = "figureTitleText">
+              Figure 2. <b>Network Architecture.</b> We propose a method that contains two network modules: (a) the part-instance image segmentation module, in which we predict 2D instance-level part masks on the image, and (b) the part pose prediction module, where we combine 2D mask information and 3D geometry feature for each part, push them through two phases of graph convolution, and finally predict 6D part poses.
+  </p></td></tr></table>
+
+<div class="abstractTitle">
+    Qualitative Results
+</div>
+  <img class = "bannerImage" src="images/result1.png", width="800"><br>
+  <table width="800" align="center"><tr><td><p class = "figureTitleText">
+              Figure 3. <b>Qualitative Results.</b> We show six examples of the three furniture categories, each in two different modalities. The upper and lower rows correspond to modality <i>Level-3</i> and <i>Level-mixed</i> respectively.
+  </p></td></tr></table>
+
+<div class="abstractTitle">
+    Quantitative Comparisons.
+</div>
+  <img class = "bannerImage" src="images/table1.png", width="800"><br>
+  <table width="800" align="center"><tr><td><p class = "figureTitleText">
+              Figure 4. <b>Quantitative Comparisons to Baseline Methods.</b> Our approach obtains the best performance across three baseline methods, under the <i>part accuracy</i> and <i>assembly chamfer sistance (CD)</i> metrics.
+  </p></td></tr></table>
+
+  <div class="abstractTitle">
+    Failure Cases
+</div>
+<img class = "bannerImage" src="images/failure.png", width="800"><br>
+  <table width="800" align="center"><tr><td><p class = "figureTitleText">
+              Figure 5. <b>Failure Cases.</b> We show two examples of failure cases. Case (a), the input image is not geometrically informative. Case (b), the chair has only one type of part geometry.
+  </p></td></tr></table>
+
+  <div class = "abstractTitle">
+  Acknowledgements
+  </div>
+  <p class = "abstractText">
+This research was supported by a Vannevar Bush Faculty Fellowship, grants from the Samsung GRO program and the Stanford SAIL Toyota Research Center, and gifts from Autodesk and Adobe.
+</p>
+
+
+
+</p></td></tr></table>
+</body></html>

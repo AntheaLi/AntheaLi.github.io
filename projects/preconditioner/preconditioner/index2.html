@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+
+    <meta name="description" content="Project website for EquiBot">
+    <meta name="author" content="Jingyun Yang, Zi-ang Cao">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="icons/robot_icon.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-LRVH8WKJNF"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-LRVH8WKJNF');
+    </script>
+    <title>EquiBot</title>
+  </head>
+
+  <style>
+    .grad_text {
+      background: -webkit-linear-gradient(right, #003f5c, #58508d, #bc5090, #ff6361, #ffa600);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+  </style>
+
+  <body>
+    <section>
+      <div class="relative items-center w-full px-5 pt-12 pb-2 mx-auto md:px-12 lg:px-16 max-w-7xl lg:pt-24 lg:pb-4">
+        <div class="flex w-full mx-auto text-left">
+          <div class="relative inline-flex items-center mx-auto align-middle">
+            <div class="text-center">
+              <h1 class="max-w-5xl text-3xl font-bold leading-none tracking-tighter text-black-600 md:text-5xl lg:text-5xl lg:max-w-7xl">
+                <span class="grad_text">EquiBot</span>: SIM(3)-Equivariant Diffusion Policy for Generalizable and Data Efficient Learning
+              </h1>
+              <div class="space-y-2">
+                <p class="max-w-6xl mx-auto mt-8 text-md md:text-xl lg:text-xl lg:text-xl leading-relaxed text-gray-600 space-x-5">
+                  <a href="https://yjy0625.github.io/" class="hover:text-gray-800">Jingyun Yang<sup>1</sup>*</a>
+                  <a href="https://zi-ang-cao.github.io" class="hover:text-gray-800">Zi-ang Cao<sup>1</sup>*</a>
+                  <a href="https://cs.stanford.edu/~congyue/" class="hover:text-gray-800">Congyue Deng<sup>1</sup></a>
+                  <a href="https://contactrika.github.io/" class="hover:text-gray-800">Rika Antonova<sup>1</sup></a>
+                  <a href="https://shurans.github.io/" class="hover:text-gray-800">Shuran Song<sup>1</sup></a>
+                  <a href="https://web.stanford.edu/~bohg/" class="hover:text-gray-800">Jeannette Bohg<sup>1</sup></a>
+                </p>
+                <p class="max-w-6xl mx-auto mt-8 text-md md:text-xl lg:text-xl lg:text-xl leading-relaxed text-gray-400 space-x-7">
+                  <span>*Equal Contribution</span>
+                  <span><sup>1</sup>Stanford University</span>
+                </p>
+                <p class="max-w-6xl mx-auto mt-8 text-md md:text-xl lg:text-xl lg:text-xl leading-relaxed text-gray-600 space-x-7">
+                  <span class="font-bold">CoRL 2024</span>
+                </p>
+              </div>
+              <div class="flex items-center justify-center w-full max-w-2xl gap-2 mx-auto mt-6">
+                <a href="./pdf/equibot.pdf" class="inline-flex items-center text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-3 mr-2 mb-2 dark:bg-gray-600 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800">
+                  <svg aria-hidden="true" class="w-5 h-5 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+                  </svg>
+                  <span>Paper</span>
+                </a>
+                <a href="https://arxiv.org/abs/2407.01479" class="inline-flex items-center text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-3 mr-2 mb-2 dark:bg-gray-600 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800">
+                  <svg aria-hidden="true" class="w-5 h-5 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5M10 11.25h4M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z" />
+                  </svg>
+                  <span>Arxiv</span>
+                </a>
+                <a href="https://youtu.be/FFrl_TEXrUw" class="inline-flex items-center text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-3 mr-2 mb-2 dark:bg-gray-600 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800">
+                  <svg aria-hidden="true" class="w-5 h-5 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15.91 11.672a.375.375 0 010 .656l-5.603 3.113a.375.375 0 01-.557-.328V8.887c0-.286.307-.466.557-.327l5.603 3.112z" />
+                  </svg>
+                  <span>Video</span>
+                </a>
+                <a href="https://github.com/yjy0625/equibot" class="inline-flex items-center text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-3 mr-2 mb-2 dark:bg-gray-600 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800">
+                  <svg aria-hidden="true" class="w-5 h-5 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M14.25 9.75L16.5 12l-2.25 2.25m-4.5 0L7.5 12l2.25-2.25M6 20.25h12A2.25 2.25 0 0020.25 18V6A2.25 2.25 0 0018 3.75H6A2.25 2.25 0 003.75 6v12A2.25 2.25 0 006 20.25z" />
+                  </svg>
+                  <span>Code</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="flex flex-col items-center justify-center pt-3 mx-auto rounded-lg pt-6 max-w-4xl">
+          <img src="./images/teaser.jpg" class="object-cover object-center">
+        </div>
+      </div>
+      <div class="flex flex-col items-center px-5 pt-8 pb-6 my-6 mx-auto max-w-5xl sm:px-6 lg:px-8">
+        <div class="flex flex-col w-full max-w-5xl mx-auto border-l-4 p-12 rounded-r-xl bg-gray-50 prose text-left text-gray-800 leading-7">
+          <h2 class="text-2xl font-bold pb-5"><span>Abstract</span></h2>
+          <p>
+            Building effective imitation learning methods that enable robots to learn from limited data and still generalize across diverse real-world environments is a long-standing problem in robot learning. We propose EquiBot, a robust, data-efficient, and generalizable approach for robot manipulation task learning. Our approach combines SIM(3)-equivariant neural network architectures with diffusion models. This ensures that our learned policies are invariant to changes in scale, rotation, and translation, enhancing their applicability to unseen environments while retaining the benefits of diffusion-based policy learning such as multi-modality and robustness. We show on a suite of 6 simulation tasks that our proposed method reduces the data requirements and improves generalization to novel scenarios. In the real world, with 10 variations of 6 mobile manipulation tasks, we show that our method can easily generalize to novel objects and scenes after learning from just 5 minutes of human demonstrations in each task.ations in each task.
+          </p>
+        </div>
+      </div>
+      <div class="flex flex-col items-center px-5 pt-6 pb-3 mx-auto max-w-6xl sm:px-6 lg:px-8">
+        <div class="flex flex-col w-full max-w-6xl mx-auto prose text-left text-gray-800">
+          <h2 class="text-2xl font-bold pb-5"><span class="grad_text">Video</span></h2>
+          <div>
+            <video height="auto" width="100%" controls="" style="border: 1px solid #000;">
+              <source src="./video/equibot.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+      </div>
+      <div class="flex flex-col items-center px-5 pt-6 pb-3 mx-auto max-w-6xl sm:px-6 lg:px-8">
+        <div class="flex flex-col w-full max-w-6xl mx-auto prose text-left text-gray-800">
+          <h2 class="text-2xl font-bold pb-5"><span class="grad_text">Method Overview</span></h2>
+          <p>
+            Given an input scene point cloud and robot proprioception, our method performs a series of diffusion steps to produce denoised actions with SIM(3)-equivariance (shown in the left figure). This means that when the inputs <strong>translate, rotate, and scale</strong>, the outputs are guaranteed to translate, rotate, and scale accordingly. Instead of relying on emergent properties from training, this equivariance is explicitly ensured by our model architecture (shown in the right figure). We demonstrate that this equivariance property enables our method to achieve zero-shot generalization to novel scenarios and objects in both simulation and real-world robot experiments.
+          </p>
+      
+          <!-- Add top margin for spacing and responsive flex classes -->
+          <div class="mt-2 flex flex-col md:flex-row items-center w-full h-auto">
+            <!-- First Image (38% Width) -->
+            <div class="w-full md:w-[38%] md:pr-2 mb-4 md:mb-0">
+              <img src="/images/method_overview_poster.png" class="w-full h-auto object-contain">
+            </div>
+      
+            <!-- Divider Line (2% Buffer) -->
+            <div class="hidden md:flex w-[2%] justify-center items-center">
+              <div class="w-[2px] bg-black h-full"></div>
+            </div>
+      
+            <!-- Second Image (60% Width) -->
+            <div class="w-full md:w-[60%] md:pl-2">
+              <img src="/images/model_architecture.png" class="w-full h-auto object-contain">
+            </div>
+          </div>
+        </div>
+      </div>      
+      <div class="flex flex-col items-center px-5 pt-6 pb-3 mx-auto max-w-6xl sm:px-6 lg:px-8">
+        <div class="flex flex-col w-full max-w-6xl mx-auto prose text-left text-gray-800">
+          <h2 class="text-2xl font-bold pb-5"><span class="grad_text">Real Robot Setup</span></h2>
+          <div>
+            <p class="font-bold pt-1 pb-2">Tasks</p>
+            <p>
+              In our real robot experiments, we show a series of experiments where we train mobile robots to perform everyday manipulation tasks from 5 minutes of single-view human demonstration videos. We select a suite of 6 tasks that involve diverse everyday objects, including rigid, articulated, and deformable objects (see Figure 6): (1) Push Chair: A robot pushes a chair towards a desk; (2) Luggage Packing: A robot picks up a pack of clothes and places it inside an open suitcase; (3) Luggage Closing: A robot closes an open suitcase on the floor; (4) Laundry Door Closing: A robot pushes the door of a laundry machine to close it; (5) Bimanual Folding: Two robots collaboratively fold a piece of cloth on a couch; (6) Bimanual Make Bed: Two robots unfold a comforter to make it cover the bed completely.
+            </p>
+            <div class="relative items-center w-full px-2 pt-1 pb-1 mx-auto max-w-6xl">
+              <div class="grid w-9/12 grid-cols-1 gap-3 mx-auto md:grid-cols-3 md:w-full">
+                <div class="p-2">
+                  <video height="auto" width="100%" style="border: 1px solid #000;" autoplay loop muted>
+                    <source src="./video/tasks/chair.mp4" type="video/mp4">
+                  </video>
+                </div>
+                <div class="p-2">
+                  <video height="auto" width="100%" style="border: 1px solid #000;" autoplay loop muted>
+                    <source src="./video/tasks/pack.mp4" type="video/mp4">
+                  </video>
+                </div>
+                <div class="p-2">
+                  <video height="auto" width="100%" style="border: 1px solid #000;" autoplay loop muted>
+                    <source src="./video/tasks/close.mp4" type="video/mp4">
+                  </video>
+                </div>
+              </div>
+              <div class="grid w-9/12 grid-cols-1 gap-3 mx-auto md:grid-cols-3 md:w-full">
+                <div class="p-2">
+                  <video height="auto" width="100%" style="border: 1px solid #000;" autoplay loop muted>
+                    <source src="./video/tasks/door.mp4" type="video/mp4">
+                  </video>
+                </div>
+                <div class="p-2">
+                  <video height="auto" width="100%" style="border: 1px solid #000;" autoplay loop muted>
+                    <source src="./video/tasks/fold.mp4" type="video/mp4">
+                  </video>
+                </div>
+                <div class="p-2">
+                  <video height="auto" width="100%" style="border: 1px solid #000;" autoplay loop muted>
+                    <source src="./video/tasks/bed.mp4" type="video/mp4">
+                  </video>
+                </div>
+              </div>
+            </div>
+            <p class="font-bold pt-4 pb-2">Data Collection</p>
+            <p>
+              We collect 15 human demonstration videos for each real robot task. We use a ZED 2 stereo camera to record the movement of a human operator using their fingers to manipulate the objects of interest at 15 Hz. After data collection, we use an off-the-shelf hand detection model, an object segmentation model, and a stereo-to-depth model to parse out the human hand poses and object point clouds in each frame of the collected demos. We then subsample this data to 3 Hz and convert it into a format supported by our policy training algorithm. Below, we show sample human demonstrations for each task. <strong>In each task, we only collect human demos on a single object.</strong>
+            </p>
+            <div class="relative items-center w-full px-2 pt-1 pb-1 mx-auto max-w-6xl">
+              <div class="grid w-9/12 grid-cols-1 gap-3 mx-auto md:grid-cols-3 md:w-full">
+                <div class="p-2">
+                  <video height="auto" width="100%" style="border: 1px solid #000;" autoplay loop muted>
+                    <source src="./video/demos/chair.mp4" type="video/mp4">
+                  </video>
+                </div>
+                <div class="p-2">
+                  <video height="auto" width="100%" style="border: 1px solid #000;" autoplay loop muted>
+                    <source src="./video/demos/pack.mp4" type="video/mp4">
+                  </video>
+                </div>
+                <div class="p-2">
+                  <video height="auto" width="100%" style="border: 1px solid #000;" autoplay loop muted>
+                    <source src="./video/demos/close.mp4" type="video/mp4">
+                  </video>
+                </div>
+              </div>
+              <div class="grid w-9/12 grid-cols-1 gap-3 mx-auto md:grid-cols-3 md:w-full">
+                <div class="p-2">
+                  <video height="auto" width="100%" style="border: 1px solid #000;" autoplay loop muted>
+                    <source src="./video/demos/door.mp4" type="video/mp4">
+                  </video>
+                </div>
+                <div class="p-2">
+                  <video height="auto" width="100%" style="border: 1px solid #000;" autoplay loop muted>
+                    <source src="./video/demos/fold.mp4" type="video/mp4">
+                  </video>
+                </div>
+                <div class="p-2">
+                  <video height="auto" width="100%" style="border: 1px solid #000;" autoplay loop muted>
+                    <source src="./video/demos/bed.mp4" type="video/mp4">
+                  </video>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div class="flex flex-col w-full max-w-6xl mx-auto prose text-left text-gray-800">
+      </div>
+      <div class="flex flex-col items-center px-5 pt-6 pb-3 mx-auto max-w-6xl sm:px-6 lg:px-8">
+        <div class="flex flex-col w-full max-w-6xl mx-auto prose text-left text-gray-800">
+          <h2 class="text-2xl font-bold pb-5"><span class="grad_text">Real Robot Results</span></h2>
+          <p>
+            We train all methods for 1,000 epochs. After training, we evaluate each method for 10 episodes and record the success rate of the method. We vary the evaluation scenarios from the training scenarios differently in each task. In Laundry Door Closing, we perform evaluations in-distribution. In Push Chair, Luggage Closing, and Bimanual Make Bed, we evaluate with novel objects to make the evaluation out-of-distribution to the training data. In Luggage Packing and Bimanual Folding, we not only switch to novel objects but also translate and rotate the layout of the scene. Below, we show quantitative results for these experiments.
+          </p>
+          <div class="flex flex-col items-center justify-center pt-3 mx-auto rounded-lg pt-6 max-w-4xl">
+            <img src="./images/real_scenarios_with_table.png" class="object-cover object-center">
+          </div>
+          <div>
+            <p class="font-bold pt-1 pb-2">Push Chair to Longer Desk</p>
+            <div class="relative items-center w-full px-2 pt-1 pb-1 mx-auto max-w-6xl">
+              <div class="grid w-9/12 grid-cols-1 gap-3 mx-auto md:grid-cols-3 md:w-full">
+                <div class="p-2">
+                  <video height="auto" width="100%" style="border: 1px solid #000;" autoplay loop muted>
+                    <source src="./video/results/chair_long_dp.mp4" type="video/mp4">
+                  </video>
+                  <p class="pt-1 text-center">DP</p>
+                </div>
+                <div class="p-2">
+                  <video height="auto" width="100%" style="border: 1px solid #000;" autoplay loop muted>
+                    <source src="./video/results/chair_long_dpaug.mp4" type="video/mp4">
+                  </video>
+                  <p class="pt-1 text-center">DP+Aug</p>
+                </div>
+                <div class="p-2">
+                  <video height="auto" width="100%" style="border: 1px solid #000;" autoplay loop muted>
+                    <source src="./video/results/chair_long_ours.mp4" type="video/mp4">
+                  </video>
+                  <p class="pt-1 text-center">Ours (EquiBot)</p>
+                </div>
+              </div>
+            </div>
+            <p class="font-bold pt-1 pb-2">Push Chair to Circular Desk</p>
+            <div class="relative items-center w-full px-2 pt-1 pb-1 mx-auto max-w-6xl">
+              <div class="grid w-9/12 grid-cols-1 gap-3 mx-auto md:grid-cols-3 md:w-full">
+                <div class="p-2">
+                  <video height="auto" width="100%" style="border: 1px solid #000;" autoplay loop muted>
+                    <source src="./video/results/chair_circular_dp.mp4" type="video/mp4">
+                  </video>
+                  <p class="pt-1 text-center">DP</p>
+                </div>
+                <div class="p-2">
+                  <video height="auto" width="100%" style="border: 1px solid #000;" autoplay loop muted>
+                    <source src="./video/results/chair_circular_dpaug.mp4" type="video/mp4">
+                  </video>
+                  <p class="pt-1 text-center">DP+Aug</p>
+                </div>
+                <div class="p-2">
+                  <video height="auto" width="100%" style="border: 1px solid #000;" autoplay loop muted>
+                    <source src="./video/results/chair_circular_ours.mp4" type="video/mp4">
+                  </video>
+                  <p class="pt-1 text-center">Ours (EquiBot)</p>
+                </div>
+              </div>
+            </div>
+            <p class="font-bold pt-1 pb-2">Close Luggage</p>
+            <div class="relative items-center w-full px-2 pt-1 pb-1 mx-auto max-w-6xl">
+              <div class="grid w-9/12 grid-cols-1 gap-3 mx-auto md:grid-cols-3 md:w-full">
+                <div class="p-2">
+                  <video height="auto" width="100%" style="border: 1px solid #000;" autoplay loop muted>
+                    <source src="./video/results/close_dp.mp4" type="video/mp4">
+                  </video>
+                  <p class="pt-1 text-center">DP</p>
+                </div>
+                <div class="p-2">
+                  <video height="auto" width="100%" style="border: 1px solid #000;" autoplay loop muted>
+                    <source src="./video/results/close_dpaug.mp4" type="video/mp4">
+                  </video>
+                  <p class="pt-1 text-center">DP+Aug</p>
+                </div>
+                <div class="p-2">
+                  <video height="auto" width="100%" style="border: 1px solid #000;" autoplay loop muted>
+                    <source src="./video/results/close_ours.mp4" type="video/mp4">
+                  </video>
+                  <p class="pt-1 text-center">Ours (EquiBot)</p>
+                </div>
+              </div>
+            </div>
+            <p class="font-bold pt-1 pb-2">Laundry Door Closing</p>
+            <div class="relative items-center w-full px-2 pt-1 pb-1 mx-auto max-w-6xl">
+              <div class="grid w-9/12 grid-cols-1 gap-3 mx-auto md:grid-cols-3 md:w-full">
+                <div class="p-2">
+                  <video height="auto" width="100%" style="border: 1px solid #000;" autoplay loop muted>
+                    <source src="./video/results/door_dp.mp4" type="video/mp4">
+                  </video>
+                  <p class="pt-1 text-center">DP</p>
+                </div>
+                <div class="p-2">
+                  <video height="auto" width="100%" style="border: 1px solid #000;" autoplay loop muted>
+                    <source src="./video/results/door_dpaug.mp4" type="video/mp4">
+                  </video>
+                  <p class="pt-1 text-center">DP+Aug</p>
+                </div>
+                <div class="p-2">
+                  <video height="auto" width="100%" style="border: 1px solid #000;" autoplay loop muted>
+                    <source src="./video/results/door_ours.mp4" type="video/mp4">
+                  </video>
+                  <p class="pt-1 text-center">Ours (EquiBot)</p>
+                </div>
+              </div>
+            </div>
+            <p class="font-bold pt-1 pb-2">Packing T-shirts</p>
+            <div class="relative items-center w-full px-2 pt-1 pb-1 mx-auto max-w-6xl">
+              <div class="grid w-9/12 grid-cols-1 gap-3 mx-auto md:grid-cols-2 md:w-full">
+                <div class="p-2">
+                  <video height="auto" width="100%" style="border: 1px solid #000;" autoplay loop muted>
+                    <source src="./video/results/pack_tshirt_dp.mp4" type="video/mp4">
+                  </video>
+                  <p class="pt-1 text-center">DP</p>
+                </div>
+                <div class="p-2">
+                  <video height="auto" width="100%" style="border: 1px solid #000;" autoplay loop muted>
+                    <source src="./video/results/pack_tshirt_ours.mp4" type="video/mp4">
+                  </video>
+                  <p class="pt-1 text-center">Ours (EquiBot)</p>
+                </div>
+              </div>
+            </div>
+            <p class="font-bold pt-1 pb-2">Packing Towel</p>
+            <div class="relative items-center w-full px-2 pt-1 pb-1 mx-auto max-w-6xl">
+              <div class="grid w-9/12 grid-cols-1 gap-3 mx-auto md:grid-cols-2 md:w-full">
+                <div class="p-2">
+                  <video height="auto" width="100%" style="border: 1px solid #000;" autoplay loop muted>
+                    <source src="./video/results/pack_towel_dp.mp4" type="video/mp4">
+                  </video>
+                  <p class="pt-1 text-center">DP</p>
+                </div>
+                <div class="p-2">
+                  <video height="auto" width="100%" style="border: 1px solid #000;" autoplay loop muted>
+                    <source src="./video/results/pack_towel_ours.mp4" type="video/mp4">
+                  </video>
+                  <p class="pt-1 text-center">Ours (EquiBot)</p>
+                </div>
+              </div>
+            </div>
+            <p class="font-bold pt-1 pb-2">Packing Cap</p>
+            <div class="relative items-center w-full px-2 pt-1 pb-1 mx-auto max-w-6xl">
+              <div class="grid w-9/12 grid-cols-1 gap-3 mx-auto md:grid-cols-2 md:w-full">
+                <div class="p-2">
+                  <video height="auto" width="100%" style="border: 1px solid #000;" autoplay loop muted>
+                    <source src="./video/results/pack_cap_dp.mp4" type="video/mp4">
+                  </video>
+                  <p class="pt-1 text-center">DP</p>
+                </div>
+                <div class="p-2">
+                  <video height="auto" width="100%" style="border: 1px solid #000;" autoplay loop muted>
+                    <source src="./video/results/pack_cap_ours.mp4" type="video/mp4">
+                  </video>
+                  <p class="pt-1 text-center">Ours (EquiBot)</p>
+                </div>
+              </div>
+            </div>
+            <p class="font-bold pt-1 pb-2">Packing Shorts</p>
+            <div class="relative items-center w-full px-2 pt-1 pb-1 mx-auto max-w-6xl">
+              <div class="grid w-9/12 grid-cols-1 gap-3 mx-auto md:grid-cols-2 md:w-full">
+                <div class="p-2">
+                  <video height="auto" width="100%" style="border: 1px solid #000;" autoplay loop muted>
+                    <source src="./video/results/pack_shorts_dp.mp4" type="video/mp4">
+                  </video>
+                  <p class="pt-1 text-center">DP</p>
+                </div>
+                <div class="p-2">
+                  <video height="auto" width="100%" style="border: 1px solid #000;" autoplay loop muted>
+                    <source src="./video/results/pack_shorts_ours.mp4" type="video/mp4">
+                  </video>
+                  <p class="pt-1 text-center">Ours (EquiBot)</p>
+                </div>
+              </div>
+            </div>
+            <p class="font-bold pt-1 pb-2">Bimanual Fold</p>
+            <div class="relative items-center w-full px-2 pt-1 pb-1 mx-auto max-w-6xl">
+              <div class="grid w-9/12 grid-cols-1 gap-3 mx-auto md:grid-cols-2 md:w-full">
+                <div class="p-2">
+                  <video height="auto" width="100%" style="border: 1px solid #000;" autoplay loop muted>
+                    <source src="./video/results/fold_dp.mp4" type="video/mp4">
+                  </video>
+                  <p class="pt-1 text-center">DP</p>
+                </div>
+                <div class="p-2">
+                  <video height="auto" width="100%" style="border: 1px solid #000;" autoplay loop muted>
+                    <source src="./video/results/fold_ours.mp4" type="video/mp4">
+                  </video>
+                  <p class="pt-1 text-center">Ours (EquiBot)</p>
+                </div>
+              </div>
+            </div>
+            <p class="font-bold pt-1 pb-2">Bimanual Make Bed</p>
+            <div class="relative items-center w-full px-2 pt-1 pb-1 mx-auto max-w-6xl">
+              <div class="grid w-9/12 grid-cols-1 gap-3 mx-auto md:grid-cols-2 md:w-full">
+                <div class="p-2">
+                  <video height="auto" width="100%" style="border: 1px solid #000;" autoplay loop muted>
+                    <source src="./video/results/bed_dp.mp4" type="video/mp4">
+                  </video>
+                  <p class="pt-1 text-center">DP</p>
+                </div>
+                <div class="p-2">
+                  <video height="auto" width="100%" style="border: 1px solid #000;" autoplay loop muted>
+                    <source src="./video/results/bed_ours.mp4" type="video/mp4">
+                  </video>
+                  <p class="pt-1 text-center">Ours (EquiBot)</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="flex flex-col items-center px-5 pt-0 pb-12 mx-auto max-w-6xl sm:px-6 lg:px-8">
+        <div class="flex flex-col w-full max-w-6xl mx-auto prose text-left text-gray-800">
+          <h2 class="text-2xl font-bold pb-5"><span class="grad_text">BibTeX</span></h2>
+          <pre><code class="language-plaintext text-sm sm:text-base inline-flex text-left items-center space-x-4 bg-gray-800 text-white rounded-lg p-4 pl-6">@inproceedings{yang2024equibot,
+  title={EquiBot: SIM(3)-Equivariant Diffusion Policy for Generalizable and Data Efficient Learning},
+  author={Yang, Jingyun and Cao, Zi-ang and Deng, Congyue and Antonova, Rika and Song, Shuran and Bohg, Jeannette},
+  booktitle={8th Annual Conference on Robot Learning},
+  year={2024},
+}</code></pre>
+        </div>
+      </div>
+    </section>
+    <footer class="bg-white mt-4" aria-labelledby="footer-heading">
+      <h2 id="footer-heading" class="sr-only">Footer</h2>
+      <div class="px-4 py-8 mx-auto bg-gray-50 w-full sm:px-6 lg:px-16">
+        <div class="flex flex-wrap items-baseline lg:justify-center">
+          <span class="text-sm text-center font-light text-gray-600">
+            If you have any questions, please contact Jingyun Yang (jingyuny "at" stanford "dot" edu).
+            <br/>
+            Toyota Research Institute provided funds to support this work.
+          </span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="description" content="MultiModal Action Conditioned Video Generation - Generating multi-sensory videos with vision, audio, and tactile modalities">
+    <meta name="author" content="Yichen Li, Antonio Torralba">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RW1J13JRY6"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-RW1J13JRY6');
+    </script>
+    <title>MultiModal Video Generation</title>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              'display': ['Sora', 'sans-serif'],
+              'body': ['Crimson Pro', 'serif'],
+              'mono': ['JetBrains Mono', 'monospace'],
+            },
+            colors: {
+              'deep': '#0a0a0f',
+              'surface': '#12121a',
+              'accent': {
+                'rose': '#f43f5e',
+                'amber': '#f59e0b',
+                'cyan': '#06b6d4',
+                'violet': '#8b5cf6',
+              }
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+      body {
+        background: linear-gradient(135deg, #fafafa 0%, #f0f4f8 50%, #fafafa 100%);
+        min-height: 100vh;
+      }
+      
+      .gradient-text {
+        background: linear-gradient(135deg, #e11d48 0%, #d97706 25%, #0891b2 50%, #7c3aed 75%, #e11d48 100%);
+        background-size: 200% auto;
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: shimmer 4s linear infinite;
+      }
+      
+      @keyframes shimmer {
+        to { background-position: 200% center; }
+      }
+      
+      .glow-border {
+        position: relative;
+      }
+      
+      .glow-border::before {
+        content: '';
+        position: absolute;
+        inset: -2px;
+        background: linear-gradient(135deg, #e11d48, #d97706, #0891b2, #7c3aed);
+        border-radius: inherit;
+        z-index: -1;
+        opacity: 0.4;
+        filter: blur(8px);
+      }
+      
+      .card-glass {
+        background: rgba(255, 255, 255, 0.9);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+      }
+      
+      .modality-icon {
+        transition: all 0.3s ease;
+      }
+      
+      .modality-icon:hover {
+        transform: scale(1.1) translateY(-4px);
+      }
+      
+      .btn-glow {
+        position: relative;
+        overflow: hidden;
+        transition: all 0.3s ease;
+      }
+      
+      .btn-glow::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(135deg, rgba(225, 29, 72, 0.1), rgba(124, 58, 237, 0.1));
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+      
+      .btn-glow:hover::before {
+        opacity: 1;
+      }
+      
+      .section-divider {
+        height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(0,0,0,0.1), transparent);
+      }
+
+      .floating-orb {
+        position: fixed;
+        border-radius: 50%;
+        filter: blur(100px);
+        opacity: 0.25;
+        pointer-events: none;
+        z-index: 0;
+      }
+    </style>
+  </head>
+
+  <body class="text-gray-800 font-body">
+    <!-- Background Orbs -->
+    <div class="floating-orb w-96 h-96 bg-rose-300 top-20 -left-48"></div>
+    <div class="floating-orb w-80 h-80 bg-cyan-300 top-1/2 -right-40"></div>
+    <div class="floating-orb w-72 h-72 bg-violet-300 bottom-20 left-1/4"></div>
+    
+    <main class="relative z-10">
+      <!-- Hero Section -->
+      <section class="relative pt-16 pb-8 lg:pt-24 lg:pb-12">
+        <div class="max-w-6xl mx-auto px-6">
+          <div class="text-center">
+            <!-- Modality Icons -->
+            <div class="flex justify-center items-center gap-6 mb-8">
+              <div class="modality-icon p-4 rounded-2xl card-glass">
+                <svg class="w-8 h-8 text-rose-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                </svg>
+              </div>
+              <div class="modality-icon p-4 rounded-2xl card-glass">
+                <svg class="w-8 h-8 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
+                </svg>
+              </div>
+              <div class="modality-icon p-4 rounded-2xl card-glass">
+                <svg class="w-8 h-8 text-cyan-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 11.5V14m0-2.5v-6a1.5 1.5 0 113 0m-3 6a1.5 1.5 0 00-3 0v2a7.5 7.5 0 0015 0v-5a1.5 1.5 0 00-3 0m-6-3V11m0-5.5v-1a1.5 1.5 0 013 0v1m0 0V11m0-5.5a1.5 1.5 0 013 0v3m0 0V11" />
+                </svg>
+              </div>
+              <div class="modality-icon p-4 rounded-2xl card-glass">
+                <svg class="w-8 h-8 text-violet-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                </svg>
+              </div>
+            </div>
+            
+            <!-- Title -->
+            <h1 class="font-display text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6">
+              <span class="gradient-text">MultiModal</span>
+              <span class="text-gray-800"> Action Conditioned</span>
+              <br class="hidden md:block" />
+              <span class="text-gray-800">Video Generation</span>
+            </h1>
+            
+            <!-- Authors -->
+            <div class="flex flex-wrap justify-center gap-x-8 gap-y-2 mt-8 text-lg text-gray-600">
+              <a href="https://people.csail.mit.edu/yichenl/" target="_blank" class="hover:text-rose-600 transition-colors">
+                Yichen Li<sup class="text-rose-600">1</sup>
+              </a>
+              <a href="https://web.mit.edu/torralba/www/" target="_blank" class="hover:text-cyan-600 transition-colors">
+                Antonio Torralba<sup class="text-cyan-600">1</sup>
+              </a>
+            </div>
+            
+            <!-- Affiliation -->
+            <div class="mt-4 text-gray-500">
+              <span><sup>1</sup><a href="http://csail.mit.edu/" target="_blank" class="hover:text-gray-700 transition-colors">MIT CSAIL</a></span>
+            </div>
+            
+            <!-- Conference Badge -->
+            <div class="mt-6">
+              <span class="inline-block px-5 py-2 rounded-full text-sm font-display font-semibold bg-gradient-to-r from-rose-100 to-violet-100 border border-rose-200 text-gray-700">
+                ICCV 2025
+              </span>
+            </div>
+            
+            <!-- Action Buttons -->
+            <div class="flex flex-wrap justify-center gap-4 mt-10">
+              <a href="./2510.02287v1.pdf" class="btn-glow inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gray-800 border border-gray-700 text-white font-display font-medium hover:bg-gray-700 transition-all">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+                Paper
+              </a>
+              <a href="https://arxiv.org/abs/2510.02287" target="_blank" class="btn-glow inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gray-800 border border-gray-700 text-white font-display font-medium hover:bg-gray-700 transition-all">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4" />
+                </svg>
+                arXiv
+              </a>
+              <a href="https://github.com/yichenl/multimodalvideo" target="_blank" class="btn-glow inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gray-800 border border-gray-700 text-white font-display font-medium hover:bg-gray-700 transition-all">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                </svg>
+                Code
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Teaser Image Section -->
+      <section class="py-8">
+        <div class="max-w-5xl mx-auto px-6">
+          <div class="glow-border rounded-2xl overflow-hidden">
+            <div class="card-glass p-2 rounded-2xl">
+              <img src="./images/teaser.png" alt="MultiModal Video Generation Teaser" class="w-full rounded-xl" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'flex items-center justify-center h-64 text-gray-500\'>Teaser image coming soon</div>'">
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider max-w-4xl mx-auto my-8"></div>
+
+      <!-- Abstract Section -->
+      <section class="py-12">
+        <div class="max-w-4xl mx-auto px-6">
+          <div class="card-glass rounded-3xl p-8 md:p-12">
+            <h2 class="font-display text-2xl font-bold mb-6 flex items-center gap-3 text-gray-800">
+              <span class="w-8 h-1 bg-gradient-to-r from-rose-500 to-amber-500 rounded-full"></span>
+              Abstract
+            </h2>
+            <p class="text-lg leading-relaxed text-gray-600">
+              We present a framework for generating multi-sensory videos that capture realistic visual, auditory, and tactile signals from physical interactions. Our approach learns a unified multimodal representation that enables action-conditioned video generation across different sensory modalities. By training on paired multi-sensory data, our model learns to synthesize coherent videos where the visual content, accompanying sounds, and tactile feedback are temporally aligned and physically plausible. We demonstrate that our multimodal representation effectively captures the correlations between different sensory modalities, enabling applications such as cross-modal generation, sensory completion, and action-conditioned simulation of multi-sensory experiences.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider max-w-4xl mx-auto my-4"></div>
+
+      <!-- Method Overview Section -->
+      <section class="py-12">
+        <div class="max-w-5xl mx-auto px-6">
+          <h2 class="font-display text-2xl md:text-3xl font-bold mb-8 text-center">
+            <span class="gradient-text">Method Overview</span>
+          </h2>
+          
+          <div class="card-glass rounded-3xl p-6 md:p-10">
+            <p class="text-gray-600 leading-relaxed mb-8 text-center max-w-3xl mx-auto">
+              Our framework learns a shared latent space for multiple sensory modalities, enabling coherent multi-sensory video generation conditioned on actions. The model captures temporal dynamics and cross-modal correlations to produce physically plausible multi-sensory outputs.
+            </p>
+            
+            <!-- Method Figure -->
+            <div class="rounded-2xl overflow-hidden bg-gray-100 p-4">
+              <img src="./images/method.png" alt="Method Overview" class="w-full rounded-xl" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'flex items-center justify-center h-48 text-gray-500\'>Method figure coming soon</div>'">
+            </div>
+            
+            <!-- Key Components -->
+            <div class="grid md:grid-cols-3 gap-6 mt-10">
+              <div class="p-6 rounded-2xl bg-gradient-to-br from-rose-50 to-transparent border border-rose-200">
+                <div class="w-12 h-12 rounded-xl bg-rose-100 flex items-center justify-center mb-4">
+                  <svg class="w-6 h-6 text-rose-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                  </svg>
+                </div>
+                <h3 class="font-display font-semibold text-gray-800 mb-2">Visual Encoder</h3>
+                <p class="text-sm text-gray-500">Extracts rich visual features from video frames capturing appearance and motion.</p>
+              </div>
+              
+              <div class="p-6 rounded-2xl bg-gradient-to-br from-amber-50 to-transparent border border-amber-200">
+                <div class="w-12 h-12 rounded-xl bg-amber-100 flex items-center justify-center mb-4">
+                  <svg class="w-6 h-6 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
+                  </svg>
+                </div>
+                <h3 class="font-display font-semibold text-gray-800 mb-2">Audio Encoder</h3>
+                <p class="text-sm text-gray-500">Processes audio spectrograms to capture sound characteristics and temporal patterns.</p>
+              </div>
+              
+              <div class="p-6 rounded-2xl bg-gradient-to-br from-cyan-50 to-transparent border border-cyan-200">
+                <div class="w-12 h-12 rounded-xl bg-cyan-100 flex items-center justify-center mb-4">
+                  <svg class="w-6 h-6 text-cyan-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 11.5V14m0-2.5v-6a1.5 1.5 0 113 0m-3 6a1.5 1.5 0 00-3 0v2a7.5 7.5 0 0015 0v-5a1.5 1.5 0 00-3 0m-6-3V11m0-5.5v-1a1.5 1.5 0 013 0v1m0 0V11m0-5.5a1.5 1.5 0 013 0v3m0 0V11" />
+                  </svg>
+                </div>
+                <h3 class="font-display font-semibold text-gray-800 mb-2">Tactile Encoder</h3>
+                <p class="text-sm text-gray-500">Encodes tactile sensor readings to represent touch and physical interactions.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider max-w-4xl mx-auto my-4"></div>
+
+      <!-- Unified Multimodal Representation Section -->
+      <section class="py-12">
+        <div class="max-w-5xl mx-auto px-6">
+          <h2 class="font-display text-2xl md:text-3xl font-bold mb-8 text-center">
+            <span class="gradient-text">Unified Multimodal Representation</span>
+          </h2>
+          
+          <div class="card-glass rounded-3xl p-6 md:p-10">
+            <!-- Representation Figure -->
+            <div class="rounded-2xl overflow-hidden bg-gray-100 p-4 mb-8">
+              <img src="./images/representation.png" alt="Multimodal Representation" class="w-full rounded-xl" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'flex items-center justify-center h-48 text-gray-500\'>Representation figure coming soon</div>'">
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+              <div>
+                <h3 class="font-display text-xl font-semibold text-gray-800 mb-4 flex items-center gap-2">
+                  <span class="w-2 h-2 rounded-full bg-violet-500"></span>
+                  Cross-Modal Alignment
+                </h3>
+                <p class="text-gray-600 leading-relaxed mb-4">
+                  Our representation learning approach aligns features from different sensory modalities into a shared embedding space. This enables the model to understand the inherent correlations between what we see, hear, and feel during physical interactions.
+                </p>
+                <ul class="space-y-2 text-gray-500 text-sm">
+                  <li class="flex items-start gap-2">
+                    <svg class="w-4 h-4 text-rose-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                    </svg>
+                    Contrastive learning aligns paired multi-sensory data
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <svg class="w-4 h-4 text-rose-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                    </svg>
+                    Temporal synchronization preserves event timing
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <svg class="w-4 h-4 text-rose-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                    </svg>
+                    Physics-aware constraints ensure plausibility
+                  </li>
+                </ul>
+              </div>
+              
+              <div>
+                <h3 class="font-display text-xl font-semibold text-gray-800 mb-4 flex items-center gap-2">
+                  <span class="w-2 h-2 rounded-full bg-cyan-500"></span>
+                  Semantic Binding
+                </h3>
+                <p class="text-gray-600 leading-relaxed mb-4">
+                  The learned representation captures semantic relationships between modalities—understanding that a hammer striking wood produces both a specific visual deformation and a characteristic impact sound, along with corresponding tactile vibrations.
+                </p>
+                <ul class="space-y-2 text-gray-500 text-sm">
+                  <li class="flex items-start gap-2">
+                    <svg class="w-4 h-4 text-cyan-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                    </svg>
+                    Object-centric representations bind modalities
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <svg class="w-4 h-4 text-cyan-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                    </svg>
+                    Material properties influence all modalities
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <svg class="w-4 h-4 text-cyan-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                    </svg>
+                    Action context shapes expected sensory outputs
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider max-w-4xl mx-auto my-4"></div>
+
+      <!-- Action-Conditioned Generation Section -->
+      <section class="py-12">
+        <div class="max-w-5xl mx-auto px-6">
+          <h2 class="font-display text-2xl md:text-3xl font-bold mb-8 text-center">
+            <span class="gradient-text">Action-Conditioned Generation</span>
+          </h2>
+          
+          <div class="card-glass rounded-3xl p-6 md:p-10">
+            <div class="grid md:grid-cols-2 gap-8 items-center mb-10">
+              <div>
+                <h3 class="font-display text-xl font-semibold text-gray-800 mb-4">Diffusion-Based Video Synthesis</h3>
+                <p class="text-gray-600 leading-relaxed mb-4">
+                  We employ a latent diffusion model that operates in the unified multimodal space, enabling generation of coherent multi-sensory videos. The model is conditioned on actions to simulate realistic physical interactions.
+                </p>
+                <p class="text-gray-600 leading-relaxed">
+                  Given an initial state and action sequence, our model iteratively denoises latent representations to produce temporally consistent video frames, synchronized audio waveforms, and corresponding tactile signals.
+                </p>
+              </div>
+              <div class="rounded-2xl overflow-hidden bg-gray-100 p-4">
+                <img src="./images/diffusion.png" alt="Diffusion Process" class="w-full rounded-xl" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'flex items-center justify-center h-40 text-gray-500\'>Diffusion figure coming soon</div>'">
+              </div>
+            </div>
+            
+            <!-- Pipeline Steps -->
+            <div class="relative">
+              <div class="absolute top-8 left-0 right-0 h-0.5 bg-gradient-to-r from-rose-400 via-amber-400 via-cyan-400 to-violet-400 hidden md:block"></div>
+              
+              <div class="grid md:grid-cols-4 gap-6">
+                <div class="relative">
+                  <div class="w-16 h-16 rounded-full bg-gradient-to-br from-rose-500 to-rose-400 flex items-center justify-center mx-auto mb-4 relative z-10 shadow-lg">
+                    <span class="font-display font-bold text-xl text-white">1</span>
+                  </div>
+                  <h4 class="font-display font-semibold text-gray-800 text-center mb-2">Encode Initial State</h4>
+                  <p class="text-sm text-gray-500 text-center">Extract multimodal features from the initial observation frame</p>
+                </div>
+                
+                <div class="relative">
+                  <div class="w-16 h-16 rounded-full bg-gradient-to-br from-amber-500 to-amber-400 flex items-center justify-center mx-auto mb-4 relative z-10 shadow-lg">
+                    <span class="font-display font-bold text-xl text-white">2</span>
+                  </div>
+                  <h4 class="font-display font-semibold text-gray-800 text-center mb-2">Action Conditioning</h4>
+                  <p class="text-sm text-gray-500 text-center">Inject action embeddings to guide the generation process</p>
+                </div>
+                
+                <div class="relative">
+                  <div class="w-16 h-16 rounded-full bg-gradient-to-br from-cyan-500 to-cyan-400 flex items-center justify-center mx-auto mb-4 relative z-10 shadow-lg">
+                    <span class="font-display font-bold text-xl text-white">3</span>
+                  </div>
+                  <h4 class="font-display font-semibold text-gray-800 text-center mb-2">Iterative Denoising</h4>
+                  <p class="text-sm text-gray-500 text-center">Progressively refine latent codes across all modalities</p>
+                </div>
+                
+                <div class="relative">
+                  <div class="w-16 h-16 rounded-full bg-gradient-to-br from-violet-500 to-violet-400 flex items-center justify-center mx-auto mb-4 relative z-10 shadow-lg">
+                    <span class="font-display font-bold text-xl text-white">4</span>
+                  </div>
+                  <h4 class="font-display font-semibold text-gray-800 text-center mb-2">Decode Outputs</h4>
+                  <p class="text-sm text-gray-500 text-center">Generate synchronized video, audio, and tactile signals</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider max-w-4xl mx-auto my-4"></div>
+
+      <!-- Training Section -->
+      <section class="py-12">
+        <div class="max-w-5xl mx-auto px-6">
+          <h2 class="font-display text-2xl md:text-3xl font-bold mb-8 text-center">
+            <span class="gradient-text">Training Pipeline</span>
+          </h2>
+          
+          <div class="card-glass rounded-3xl p-6 md:p-10">
+            <div class="grid md:grid-cols-2 gap-8 mb-8">
+              <!-- Stage 1 -->
+              <div class="p-6 rounded-2xl bg-gradient-to-br from-rose-50 to-transparent border border-rose-200">
+                <div class="flex items-center gap-3 mb-4">
+                  <div class="w-10 h-10 rounded-lg bg-rose-100 flex items-center justify-center">
+                    <span class="font-display font-bold text-rose-600">I</span>
+                  </div>
+                  <h3 class="font-display font-semibold text-gray-800">Stage 1: Representation Learning</h3>
+                </div>
+                <p class="text-gray-600 leading-relaxed mb-4">
+                  Train modality-specific encoders with contrastive objectives to align representations across vision, audio, and tactile modalities in a shared embedding space.
+                </p>
+                <div class="flex flex-wrap gap-2">
+                  <span class="px-3 py-1 rounded-full text-xs bg-rose-100 text-rose-700 border border-rose-200">Contrastive Loss</span>
+                  <span class="px-3 py-1 rounded-full text-xs bg-rose-100 text-rose-700 border border-rose-200">Cross-Modal</span>
+                  <span class="px-3 py-1 rounded-full text-xs bg-rose-100 text-rose-700 border border-rose-200">Self-Supervised</span>
+                </div>
+              </div>
+              
+              <!-- Stage 2 -->
+              <div class="p-6 rounded-2xl bg-gradient-to-br from-cyan-50 to-transparent border border-cyan-200">
+                <div class="flex items-center gap-3 mb-4">
+                  <div class="w-10 h-10 rounded-lg bg-cyan-100 flex items-center justify-center">
+                    <span class="font-display font-bold text-cyan-600">II</span>
+                  </div>
+                  <h3 class="font-display font-semibold text-gray-800">Stage 2: Generative Training</h3>
+                </div>
+                <p class="text-gray-600 leading-relaxed mb-4">
+                  Train the diffusion model to generate multi-sensory outputs conditioned on actions, leveraging the pre-trained multimodal representations for coherent synthesis.
+                </p>
+                <div class="flex flex-wrap gap-2">
+                  <span class="px-3 py-1 rounded-full text-xs bg-cyan-100 text-cyan-700 border border-cyan-200">Diffusion Loss</span>
+                  <span class="px-3 py-1 rounded-full text-xs bg-cyan-100 text-cyan-700 border border-cyan-200">Action-Conditioned</span>
+                  <span class="px-3 py-1 rounded-full text-xs bg-cyan-100 text-cyan-700 border border-cyan-200">Temporal</span>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Loss Functions -->
+            <div class="p-6 rounded-2xl bg-gray-50">
+              <h3 class="font-display font-semibold text-gray-800 mb-4 flex items-center gap-2">
+                <svg class="w-5 h-5 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/>
+                </svg>
+                Training Objectives
+              </h3>
+              <div class="grid md:grid-cols-3 gap-4">
+                <div class="p-4 rounded-xl bg-white border border-gray-100">
+                  <p class="font-mono text-sm text-rose-600 mb-2">ℒ<sub>align</sub></p>
+                  <p class="text-xs text-gray-500">Cross-modal contrastive alignment loss for representation learning</p>
+                </div>
+                <div class="p-4 rounded-xl bg-white border border-gray-100">
+                  <p class="font-mono text-sm text-amber-600 mb-2">ℒ<sub>diffusion</sub></p>
+                  <p class="text-xs text-gray-500">Denoising score matching loss for video generation</p>
+                </div>
+                <div class="p-4 rounded-xl bg-white border border-gray-100">
+                  <p class="font-mono text-sm text-cyan-600 mb-2">ℒ<sub>sync</sub></p>
+                  <p class="text-xs text-gray-500">Temporal synchronization loss across modalities</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider max-w-4xl mx-auto my-4"></div>
+
+      <!-- Applications Section -->
+      <section class="py-12">
+        <div class="max-w-5xl mx-auto px-6">
+          <h2 class="font-display text-2xl md:text-3xl font-bold mb-8 text-center">
+            <span class="gradient-text">Applications</span>
+          </h2>
+          
+          <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="card-glass rounded-2xl p-6 hover:border-rose-300 transition-colors">
+              <div class="w-12 h-12 rounded-xl bg-rose-100 flex items-center justify-center mb-4">
+                <svg class="w-6 h-6 text-rose-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/>
+                </svg>
+              </div>
+              <h3 class="font-display font-semibold text-gray-800 mb-2">Cross-Modal Generation</h3>
+              <p class="text-sm text-gray-500">Generate missing modalities from available ones—produce audio from silent video or tactile from visual.</p>
+            </div>
+            
+            <div class="card-glass rounded-2xl p-6 hover:border-amber-300 transition-colors">
+              <div class="w-12 h-12 rounded-xl bg-amber-100 flex items-center justify-center mb-4">
+                <svg class="w-6 h-6 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+              </div>
+              <h3 class="font-display font-semibold text-gray-800 mb-2">Action Simulation</h3>
+              <p class="text-sm text-gray-500">Simulate multi-sensory outcomes of actions for robotics training and interactive applications.</p>
+            </div>
+            
+            <div class="card-glass rounded-2xl p-6 hover:border-cyan-300 transition-colors">
+              <div class="w-12 h-12 rounded-xl bg-cyan-100 flex items-center justify-center mb-4">
+                <svg class="w-6 h-6 text-cyan-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                </svg>
+              </div>
+              <h3 class="font-display font-semibold text-gray-800 mb-2">Video Prediction</h3>
+              <p class="text-sm text-gray-500">Predict future frames with associated audio and tactile signals given past observations.</p>
+            </div>
+            
+            <div class="card-glass rounded-2xl p-6 hover:border-violet-300 transition-colors">
+              <div class="w-12 h-12 rounded-xl bg-violet-100 flex items-center justify-center mb-4">
+                <svg class="w-6 h-6 text-violet-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                </svg>
+              </div>
+              <h3 class="font-display font-semibold text-gray-800 mb-2">VR/AR Content</h3>
+              <p class="text-sm text-gray-500">Create immersive multi-sensory experiences for virtual and augmented reality applications.</p>
+            </div>
+            
+            <div class="card-glass rounded-2xl p-6 hover:border-rose-300 transition-colors">
+              <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-rose-100 to-amber-100 flex items-center justify-center mb-4">
+                <svg class="w-6 h-6 text-rose-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"/>
+                </svg>
+              </div>
+              <h3 class="font-display font-semibold text-gray-800 mb-2">Robot Learning</h3>
+              <p class="text-sm text-gray-500">Train robots with simulated multi-sensory feedback for manipulation and interaction tasks.</p>
+            </div>
+            
+            <div class="card-glass rounded-2xl p-6 hover:border-cyan-300 transition-colors">
+              <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-cyan-100 to-violet-100 flex items-center justify-center mb-4">
+                <svg class="w-6 h-6 text-cyan-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/>
+                </svg>
+              </div>
+              <h3 class="font-display font-semibold text-gray-800 mb-2">Material Understanding</h3>
+              <p class="text-sm text-gray-500">Infer material properties from multi-sensory observations for physics-based reasoning.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider max-w-4xl mx-auto my-4"></div>
+
+      <!-- Results Section -->
+      <section class="py-12">
+        <div class="max-w-5xl mx-auto px-6">
+          <h2 class="font-display text-2xl md:text-3xl font-bold mb-8 text-center">
+            <span class="gradient-text">Results</span>
+          </h2>
+          
+          <div class="card-glass rounded-3xl p-6 md:p-10">
+            <p class="text-gray-600 leading-relaxed mb-8 text-center max-w-3xl mx-auto">
+              Our model generates coherent multi-sensory videos with aligned visual, audio, and tactile modalities. Below we show qualitative results demonstrating cross-modal generation capabilities.
+            </p>
+            
+            <!-- Results Video -->
+            <div class="max-w-3xl mx-auto">
+              <div class="rounded-2xl overflow-hidden bg-gray-100 p-4">
+                <video class="w-full rounded-xl" controls autoplay loop muted playsinline preload="auto">
+                  <source src="./images/results_simple.mp4" type="video/mp4">
+                  <source src="./images/results_simple.mov" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video>
+                <p class="text-sm text-gray-500 text-center mt-3">Action → Multi-Sensory Generation</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider max-w-4xl mx-auto my-4"></div>
+
+      <!-- BibTeX Section -->
+      <section class="py-12 pb-20">
+        <div class="max-w-4xl mx-auto px-6">
+          <h2 class="font-display text-2xl md:text-3xl font-bold mb-8 text-center">
+            <span class="gradient-text">BibTeX</span>
+          </h2>
+          
+          <div class="rounded-2xl p-6 overflow-x-auto bg-gray-800">
+            <pre class="font-mono text-sm text-gray-300 leading-relaxed"><code>@inproceedings{li2025multimodal,
+  title={MultiModal Action Conditioned Video Generation},
+  author={Li, Yichen and Torralba, Antonio},
+  booktitle={International Conference on Computer Vision (ICCV)},
+  year={2025}
+}</code></pre>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="relative z-10 border-t border-gray-200 bg-white/50">
+      <div class="max-w-4xl mx-auto px-6 py-8">
+        <p class="text-center text-sm text-gray-600">
+          Questions? Contact <a href="mailto:yichenl@mit.edu" class="text-rose-600 hover:underline">yichenl@mit.edu</a>
+        </p>
+        <p class="text-center text-xs text-gray-500 mt-2">
+          © 2025 MIT CSAIL. All rights reserved.
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>
